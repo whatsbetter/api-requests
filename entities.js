@@ -7,7 +7,7 @@ import { getConditions } from './_util';
  * @returns {String}
  */
 export function findAll(params) {    
-    params.limit = 10;
+    params.limit = params.limit || 10;
     params.typeOfSerp = "rating";
     
     let conditions = getConditions(params);
