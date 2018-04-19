@@ -2,8 +2,7 @@ import {getConditions} from './_util';
 
 export function save(params) {
     let conditions = getConditions(params);
-    console.log(`mutation {createScore ${conditions} {value, user {id, name, main_image}, comment {text, id}}}`)
-    return `mutation {createScore ${conditions} {value, user {id, name, main_image}, comment {text, id}}}`;
+    return `mutation {createScore ${conditions} {id, value, user {id, name, main_image}, comment {text, id}}}`;
 }
 
 
