@@ -32,6 +32,7 @@ export function create(params) {
     if (!('alias' in params)) {
 	params.alias = "";
     }
+    params.title = params.title.replace(/\\([\s\S])|(")/g,"\\$1$2");
     
     let conditions = getConditions(params);    
     return `mutation {createPost ${conditions} {id}}`;
@@ -44,6 +45,8 @@ export function create(params) {
  * @returns {String}
  */
 export function update(params) {
+    params.title = params.title.replace(/\\([\s\S])|(")/g,"\\$1$2");
+    
     let conditions = getConditions(params);
     return `mutation {updatePost ${conditions} {id, title}}`;
 }
