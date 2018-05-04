@@ -10,7 +10,6 @@ const request = (query, params = {}) => {
     
     if (token) {
 	client.setHeaders({"X-Token" : token});
-	
     }
     if (me) {
 	params.me = me;
@@ -24,8 +23,8 @@ const request = (query, params = {}) => {
     }
 
     return client
-	    .request(queryString)
-	    .then(body => camelize(body));
+	.request(queryString)
+	.then(body => camelize(body));
 };
 
 
