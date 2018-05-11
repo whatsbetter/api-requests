@@ -8,7 +8,7 @@ import { getConditions } from './_util';
  */
 export function findAll(params) {  
     let conditions = getConditions(params);  
-    return `{posts ${conditions} {id, title, alias, published, sphere{label, name, id}, author{name, main_image}}}`;
+    return `{posts ${conditions} {id, title, alias, published, preamble, sphere{label, name, id}, author{name, main_image}, created_at}}`;
 }
 
 /**
