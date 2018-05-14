@@ -8,7 +8,7 @@ import { getConditions } from './_util';
  */
 export function findAll(params) {  
     let conditions = getConditions(params);  
-    return `{posts ${conditions} {id, title, alias, published, preamble, sphere{label, name, id}, author{name, main_image}, created_at}}`;
+    return `{posts ${conditions} {id, title, alias, published, preamble, preamble_images{hash}, sphere{label, name, id}, author{name, main_image}, created_at}}`;
 }
 
 /**
@@ -19,7 +19,7 @@ export function findAll(params) {
  */
 export function findByAlias(params) {        
     let conditions = getConditions(params);   
-    return `{post ${conditions} {id, alias, title, content, published, preamble, metadata {scores {id, criterion {id, label}, entity {id, label, main_image}, value, user{name, main_image}}} author{id, name, main_image}}}`;
+    return `{post ${conditions} {id, alias, title, content, published, preamble, metadata{scores {id, criterion{id, label}, entity{id, label, main_image}, value, user{name, main_image}}} author{id, name, main_image}}}`;
 }
 
 /**
