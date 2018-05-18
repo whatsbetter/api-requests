@@ -12,6 +12,10 @@ export function getConditions(params) {
 	let value;
 	let type = typeof params[key];
 	
+	if (["updatedAt", "createdAt"].includes(key)) {
+	    continue;
+	}
+	
 	if (type === 'object') {
 	    continue;
 	}
