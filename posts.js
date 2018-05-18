@@ -19,7 +19,7 @@ export function findAll(params) {
  */
 export function findByAlias(params) {        
     let conditions = getConditions(params);   
-    return `{post ${conditions} {id, alias, title, content, published, preamble, metadata{scores {id, criterion{id, label}, entity{id, label, main_image}, value, user{name, main_image}}} author{id, name, main_image}}}`;
+    return `{post ${conditions} {id, alias, title, updated_at, content, published, preamble, metadata{scores {id, criterion{id, label}, entity{id, label, main_image}, value, user{name, main_image}}} author{id, name, main_image}}}`;
 }
 
 /**
