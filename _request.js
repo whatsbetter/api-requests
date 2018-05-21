@@ -21,7 +21,8 @@ const request = (query, params = {}) => {
     else if (typeof query === "string") {
 	queryString = query;
     }
-
+    
+    console.log(queryString)
     return client
 	.request(queryString)
 	.then(body => camelize(body));

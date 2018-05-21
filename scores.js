@@ -1,4 +1,4 @@
-import {getConditions} from './_util';
+import { getConditions } from './_util';
 
 export function save(params) {
     let conditions = getConditions(params);

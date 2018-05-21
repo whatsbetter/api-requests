@@ -1,7 +1,9 @@
+import { getConditions } from './_util';
 
 
-export function findAll() {
-    return `{spheres{name,id,label}}`;
+export function findAll(params) {
+    let conditions = getConditions(params);
+    return `{spheres ${conditions} {name,id,label}}`;
 }
 
 export function findById(params) {
