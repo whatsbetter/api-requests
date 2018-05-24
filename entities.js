@@ -1,10 +1,11 @@
 import { getConditions } from './_util';
+import request from './_request';
 
 /**
  * Ранжирование объектов
  * 
- * @param {type} params
- * @returns {String}
+ * @param {Object} params
+ * @returns {Function}
  */
 export function findAll(params) {    
     params.limit = params.limit || 10;
@@ -17,7 +18,6 @@ export function findAll(params) {
     }
 
     let conditions = getConditions(params);
-    
-    
-    return `{entities ${conditions} {id, name, main_image, label, avg, avg_scores {value, criteria_id}, current_user_scores {criteria_id, comment, value}}}`;
+    let query = `{entities ${conditions} {id, name, main_image, label, avg, avg_scores {value, criteria_id}, current_user_scores {criteria_id, comment, value}}}`;
+    return request(query);
 }

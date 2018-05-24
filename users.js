@@ -1,5 +1,25 @@
+import { getConditions } from './_util';
+import request from './_request';
 
-
+/**
+ * Найти текущего пользователя по токену
+ * 
+ * @param {Object} params
+ * @returns {Function} 
+ */
 export function findMe(params) {
-    return `{user (token: "${params.token}"){id,name,first_name,second_name,main_image}}`
+    let query =`{user (token: "${params.token}"){id,name,first_name,second_name,main_image}}`;
+    return request(query);
+}
+
+/**
+ * Поиск друзей
+ * 
+ * @param {Object} params
+ * @returns {Function} 
+ */
+export function findFriends(params) {
+    let conditions = getConditions(params); 
+    let query = `{friends ${conditions} {id,name,first_name,second_name,main_image}}`;
+    return request(query);
 }

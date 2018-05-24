@@ -3,28 +3,16 @@ import camelize from 'camelize';
 
 const client = new GraphQLClient('https://api2.toprater.com/graphql');
 
-const request = (query, params = {}) => {
-    let queryString;
+const request = (query) => {
     let token = getCookie("token");
-    let me = getCookie("me");
-    
+
     if (token) {
 	client.setHeaders({"X-Token" : token});
     }
-    if (me) {
-	params.me = me;
-    }
-    
-    if (typeof query === "function") {
-	queryString = query(params);
-    }
-    else if (typeof query === "string") {
-	queryString = query;
-    }
-    
-    console.log(queryString)
+
+    console.log(query);
     return client
-	.request(queryString)
+	.request(query)
 	.then(body => camelize(body));
 };
 
