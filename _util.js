@@ -6,6 +6,10 @@ export function shakeCase(str) {
 }
 
 export function getConditions(params) {
+    if (params === undefined) {
+	return '';
+    }
+    
     let query = [];
     
     for (let key of Object.keys(params)) {
