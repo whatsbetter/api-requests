@@ -2,6 +2,22 @@ import { getConditions } from './_util';
 import request from './_request';
 
 /**
+ * Поиск объектов по имени
+ * 
+ * @param {Object} params
+ * @returns {Function}
+ */
+export function search(params) {
+    params.type = 'entities';
+    
+    let conditions = getConditions(params);
+    let query = `{search${conditions}{id,data,text}}`;
+    
+    return request(query);
+}
+
+
+/**
  * Ранжирование объектов
  * 
  * @param {Object} params
@@ -9,9 +25,12 @@ import request from './_request';
  */
 export function findAll(params) {    
     params.limit = params.limit || 10;
-    params.typeOfSerp = "rating";
     
-    if ("filter" in params) {
+    if ('criteria' in params) {
+	params.typeOfSerp = "rating";
+    }
+
+    if ('filter' in params) {
 	if (Object.keys(params.filter).length > 0) {
 	    params.filter = JSON.stringify(params.filter).replace(/"/g, "'");  
 	}

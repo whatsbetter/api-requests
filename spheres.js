@@ -8,7 +8,7 @@ import request from './_request';
  * @returns {Function}
  */
 export function search(params) {
-    let query = `{search (text: "${params.text}", type: "spheres"){id,data,text}}`;
+    let query = `{search(text:"${params.text}",type:"spheres"){id,data,text}}`;
     return request(query);
 }
 
