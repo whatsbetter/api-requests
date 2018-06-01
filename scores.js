@@ -7,9 +7,12 @@ import request from './_request';
  * @param {Object} params
  * @returns {Function}
  */
+
+const score = `{id,value,user{id,name,main_image,karma},comment{text,id,useful,useless,updated_at}}`;
+
 export function save(params) {
     let conditions = getConditions(params);
-    let query = `mutation {createScore${conditions}{id, value, user {id, name, main_image}, comment {text, id}}}`;
+    let query = `mutation {createScore${conditions}${score}}`;
     return request(query);
 }
 
@@ -19,9 +22,9 @@ export function save(params) {
  * @param {Object} params
  * @returns {Function}
  */
-export function findByObjectCriterion(params) {
+export function find(params) {
     let conditions = getConditions(params);
-    let query =  `{scores${conditions}{value, user{id,name,main_image}, comment {text,id}}}`; 
+    let query =  `{scores${conditions}${score}}`; 
     return request(query);
 }
 

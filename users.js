@@ -19,7 +19,7 @@ export function search(params) {
  * @returns {Function} 
  */
 export function findMe(params) {
-    let query =`{user (token: "${params.token}"){id,name,first_name,second_name,main_image}}`;
+    let query =`{user (token: "${params.token}"){id,name,first_name,second_name,main_image,karma}}`;
     return request(query);
 }
 
