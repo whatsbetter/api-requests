@@ -30,6 +30,9 @@ export function findMe(params) {
  * @returns {Function} 
  */
 export function findFriends(params) {
+    if (!('limit' in params)) {
+	params.limit = 10;
+    }
     let conditions = getConditions(params); 
     let query = `{friends ${conditions} {id,name,first_name,second_name,main_image}}`;
     return request(query);
