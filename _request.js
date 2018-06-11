@@ -4,6 +4,15 @@ const client = new GraphQLClient('https://api2.toprater.com/graphql');
 
 const getCookie = (name) => {
     let matches;
+    
+    if (typeof navigator === 'undefined') {
+	return;
+    }    
+    
+    if (navigator.product === 'ReactNative') {
+	return;
+    }
+
     matches = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)'));
     
     if (matches) {
