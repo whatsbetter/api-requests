@@ -20,7 +20,7 @@ export function search(params) {
  */
 export function findAll(params) {
     let conditions = getConditions(params);
-    let query = `{spheres${conditions}{name,id,label}}`;
+    let query = `{spheres${conditions}{name,id,label,count_scores,count_criteria,count_entities}}`;
     return request(query);
 }
 
