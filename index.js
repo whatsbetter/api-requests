@@ -2,6 +2,7 @@ module.exports = {
     chats	    : require("./chats"),
     criteria	    : require("./criteria"),
     entities	    : require("./entities"),
+    messages	    : require("./messages"),
     posts	    : require("./posts"),
     properties	    : require("./properties"),
     scores	    : require("./scores"),

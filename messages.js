@@ -9,7 +9,7 @@ import request from './_request';
  */
 export function findAll(params) {  
     let conditions = getConditions(params);  
-    let query = `{chats ${conditions} {id, label}}`;
+    let query = `{messages ${conditions} {id, text}}`;
     return request(query);
 }
 
@@ -21,6 +21,6 @@ export function findAll(params) {
  */
 export function create(params) {
     let conditions = getConditions(params);
-    let query = `mutation {createChat${conditions}{id}}`;
+    let query = `mutation {sendMessage${conditions}{id}}`;
     return request(query);
 }
