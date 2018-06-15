@@ -19,8 +19,11 @@ export function search(params) {
  * @returns {Function}
  */
 export function findAll(params) {
+    if (!('limit' in params)) {
+	params.limit = 20;
+    }
     let conditions = getConditions(params);
-    let query = `{spheres${conditions}{name,id,label}}`;
+    let query = `{spheres${conditions}{name,id,label,count_scores,count_criteria,count_entities}}`;
     return request(query);
 }
 
