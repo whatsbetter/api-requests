@@ -35,8 +35,9 @@ export function findAll(params) {
 	    params.filter = JSON.stringify(params.filter).replace(/"/g, "'");  
 	}
     }
+ 
 
     let conditions = getConditions(params);
-    let query = `{entities${conditions}{id,name,main_image,label,avg,count_scores,avg_scores{value, criteria_id}, current_user_scores {criteria_id, comment, value}}}`;
+    let query = `{entities${conditions}{id,name,main_image,label,avg,properties{kind,value,property_id}count_scores,avg_scores{value,criteria_id},current_user_scores{criteria_id,comment,value}}}`;
     return request(query);
 }

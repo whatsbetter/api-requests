@@ -8,7 +8,8 @@ import request from './_request';
  * @returns {Function}
  */
 export function findAll(params) {
+    params.limit = 100;
     let conditions = getConditions(params);
-    let query = `{properties ${conditions} {id, name, label, kind, items{name, id}}}`;
+    let query = `{properties${conditions}{id,name,label,kind,items{name,id}}}`;
     return request(query);
 }
