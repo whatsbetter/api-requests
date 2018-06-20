@@ -1,3 +1,4 @@
+
 import { GraphQLClient } from 'graphql-request'
 import camelize from 'camelize';
 const client = new GraphQLClient('https://api2.toprater.com/graphql');
@@ -29,7 +30,7 @@ if (token) {
 }
 
 const request = (query) => {
-    console.log(query);
+    console.log("API | ", query);
     return client
 	.request(query)
 	.then(body => camelize(body));
