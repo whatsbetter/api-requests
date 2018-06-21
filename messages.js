@@ -21,6 +21,6 @@ export function findAll(params) {
  */
 export function create(params) {
     let conditions = getConditions(params);
-    let query = `mutation {sendMessage${conditions}{id}}`;
+    let query = `mutation {sendMessage${conditions}{id, text}}`;
     return request(query);
 }
