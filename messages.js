@@ -9,7 +9,7 @@ import request from './_request';
  */
 export function findAll(params) {  
     let conditions = getConditions(params);  
-    let query = `{messages ${conditions} {id, text}}`;
+    let query = `{messages ${conditions}{id,text,created_at}}`;
     return request(query);
 }
 
