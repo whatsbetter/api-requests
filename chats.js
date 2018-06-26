@@ -9,7 +9,7 @@ import request from './_request';
  */
 export function findAll(params) {  
     let conditions = getConditions(params);  
-    let query = `{chats${conditions}{id,label}}`;
+    let query = `{chats${conditions}{id,label,main_image,users(limit: 4){id,name},last_message{text,user{id,name,main_image}}}}`;
     return request(query);
 }
 
