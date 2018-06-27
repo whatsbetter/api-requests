@@ -7,9 +7,11 @@ import request from './_request';
  * @param {Object} params
  * @returns {Function}
  */
+const chat = '{id,label,main_image,users(limit: 4){id,name},last_message{text,user{id,name,main_image}}}';
+
 export function findAll(params) {  
     let conditions = getConditions(params);  
-    let query = `{chats${conditions}{id,label,main_image,users(limit: 4){id,name},last_message{text,user{id,name,main_image}}}}`;
+    let query = `{chats${conditions}${chat}}`;
     return request(query);
 }
 
@@ -21,6 +23,6 @@ export function findAll(params) {
  */
 export function create(params) {
     let conditions = getConditions(params);
-    let query = `mutation {createChat${conditions}{id}}`;
+    let query = `mutation {createChat${conditions}${chat}}`;
     return request(query);
 }
