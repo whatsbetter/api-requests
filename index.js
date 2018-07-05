@@ -1,5 +1,6 @@
 module.exports = {
     chats	    : require("./chats"),
+    comments	    : require("./comments"),
     criteria	    : require("./criteria"),
     entities	    : require("./entities"),
     messages	    : require("./messages"),
