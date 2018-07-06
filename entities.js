@@ -38,6 +38,6 @@ export function findAll(params) {
  
 
     let conditions = getConditions(params);
-    let query = `{entities${conditions}{id,name,main_image,label,avg,properties{kind,value,property_id}count_scores,avg_scores{value,criteria_id},current_user_scores{criteria_id,comment,value}}}`;
+    let query = `{entities${conditions}{id,name,main_image,label,avg,properties{kind,value,property_id}count_scores,avg_scores{value,count_scores,criteria_id},current_user_scores{criteria_id,comment,value}}}`;
     return request(query);
 }
