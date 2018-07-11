@@ -1,6 +1,8 @@
 import { getConditions } from './_util';
 import request from './_request';
 
+const entity = `{id,name,main_image,label,avg,properties{kind,value,property_id}count_scores,avg_scores{value,count_scores,criteria_id},current_user_scores{criteria_id,comment,value}}`;
+
 /**
  * Поиск объектов по имени
  * 
@@ -36,8 +38,25 @@ export function findAll(params) {
 	}
     }
  
-
     let conditions = getConditions(params);
-    let query = `{entities${conditions}{id,name,main_image,label,avg,properties{kind,value,property_id}count_scores,avg_scores{value,count_scores,criteria_id},current_user_scores{criteria_id,comment,value}}}`;
+    let query = `{entities${conditions}${entity}}`;
+    return request(query);
+}
+
+/**
+ * Получение одного объекта по идентификатору
+ * 
+ * @param {Object} params
+ * @returns {Function}
+ */
+export function findById(params) {    
+    if ('filter' in params) {
+	if (Object.keys(params.filter).length > 0) {
+	    params.filter = JSON.stringify(params.filter).replace(/"/g, "'");  
+	}
+    }
+ 
+    let conditions = getConditions(params);
+    let query = `{entity${conditions}${entity}}`;
     return request(query);
 }
