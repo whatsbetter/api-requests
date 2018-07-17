@@ -28,3 +28,27 @@ export function findAll(params) {
     let query = `{criteria${conditions}{id,name,label}}`;
     return request(query);
 }
+
+/**
+ * Создание критерия
+ * 
+ * @param {Object} params
+ * @returns {Function}
+ */
+export function create(params) {
+    let conditions = getConditions(params);
+    let query = `mutation {createCriteria${conditions}{id,name,label}}`;
+    return request(query);
+}
+
+/**
+ * Обновление критерия
+ * 
+ * @param {Object} params
+ * @returns {Function}
+ */
+export function update(params) {
+    let conditions = getConditions(params);
+    let query = `mutation {updateCriteria${conditions}{id,name,label}}`;
+    return request(query);
+}

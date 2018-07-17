@@ -37,3 +37,28 @@ export function findById(params) {
     let query = `{sphere(id: "${params.id}"){name,id,label,count_criteria,count_entities,popular_criteria{name,id,label}}}`;
     return request(query);
 }
+
+
+/**
+ * Создание сферы
+ * 
+ * @param {Object} params
+ * @returns {Function}
+ */
+export function create(params) {
+    let conditions = getConditions(params);
+    let query = `mutation {createSphere${conditions}{id,name,label}}`;
+    return request(query);
+}
+
+/**
+ * Обновление сферы
+ * 
+ * @param {Object} params
+ * @returns {Function}
+ */
+export function update(params) {
+    let conditions = getConditions(params);
+    let query = `mutation {updateSphere${conditions}{id,name,label}}`;
+    return request(query);
+}

@@ -60,3 +60,27 @@ export function findById(params) {
     let query = `{entity${conditions}${entity}}`;
     return request(query);
 }
+
+/**
+ * Создание объекта
+ * 
+ * @param {Object} params
+ * @returns {Function}
+ */
+export function create(params) {
+    let conditions = getConditions(params);
+    let query = `mutation {createEntity${conditions}{id,name,label}}`;
+    return request(query);
+}
+
+/**
+ * Обновление объекта
+ * 
+ * @param {Object} params
+ * @returns {Function}
+ */
+export function update(params) {
+    let conditions = getConditions(params);
+    let query = `mutation {updateEntity${conditions}{id,name,label}}`;
+    return request(query);
+}
