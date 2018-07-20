@@ -11,9 +11,12 @@ import request from './_request';
 const score = `{id,value,user{id,name,main_image,karma},comment{text,id,useful,useless,updated_at}}`;
 
 export function save(params) {
-    let comment = params.comment.replace(/(?:\r\n|\r|\n)/g, '\n');
-    params.comment = `""${comment}""`;
-    
+   
+    if ("comment" in params) {
+	let comment = params.comment.replace(/(?:\r\n|\r|\n)/g, '\n');
+	params.comment = `""${comment}""`;
+    }   
+
     let conditions = getConditions(params);
     let query = `mutation {createScore${conditions}${score}}`;
     return request(query);
