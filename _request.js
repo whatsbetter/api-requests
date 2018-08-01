@@ -1,7 +1,7 @@
 
 import { GraphQLClient } from 'graphql-request'
 import camelize from 'camelize';
-const client = new GraphQLClient('https://api2.toprater.com/graphql');
+const client = new GraphQLClient('http://api-v2m.whatsbetter.me/graphql');
 
 const getCookie = (name) => {
     let matches;
