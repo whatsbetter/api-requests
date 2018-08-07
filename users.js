@@ -31,10 +31,21 @@ export function findMe(params) {
  */
 export function subscriptionToSpheres(params) {
     let conditions = getConditions(params);
-    let query =`mutation {addSubscriptionForSpheres${conditions}{id}}`;
+    let query =`mutation {addSubscriptionForSpheres${conditions}{id,name,label}}`;
     return request(query);
 }
 
+/**
+ * Подписаться на сферы
+ * 
+ * @param {Object} params
+ * @returns {Function} 
+ */
+export function findSubscriptionSpheres(params) {
+    let conditions = getConditions(params);
+    let query =`{subscription_spheres${conditions}{id,name,label,count_scores,count_criteria,count_entities}}`;
+    return request(query);
+}
 
 
 /**
@@ -48,6 +59,6 @@ export function findFriends(params) {
 	params.limit = 20;
     }
     let conditions = getConditions(params); 
-    let query = `{friends ${conditions} {id,name,first_name,second_name,main_image}}`;
+    let query = `{friends${conditions}{id,name,first_name,second_name,main_image}}`;
     return request(query);
 }
