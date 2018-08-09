@@ -19,7 +19,7 @@ export function search(params) {
  * @returns {Function} 
  */
 export function findMe(params) {
-    let query =`{user (token: "${params.token}"){id,name,first_name,second_name,main_image,karma,providers{type},subscription_spheres{id,label,name}}}`;
+    let query =`{user (token: "${params.token}"){id,name,first_name,second_name,main_image,karma,providers{type}}}`;
     return request(query);
 }
 
@@ -38,12 +38,10 @@ export function subscriptionToSpheres(params) {
 /**
  * Подписаться на сферы
  * 
- * @param {Object} params
  * @returns {Function} 
  */
-export function findSubscriptionSpheres(params) {
-    let conditions = getConditions(params);
-    let query =`{subscription_spheres${conditions}{id,name,label,count_scores,count_criteria,count_entities}}`;
+export function findSubscriptionSpheres() {
+    let query =`{subscription_spheres{id,name,label,count_scores,count_criteria,count_entities}}`;
     return request(query);
 }
 
