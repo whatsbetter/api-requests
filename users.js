@@ -24,7 +24,7 @@ export function findMe(params) {
 }
 
 /**
- * Подписаться на сферы
+ * Добавить подписку на сферу
  * 
  * @param {Object} params
  * @returns {Function} 
@@ -35,6 +35,12 @@ export function addSubscriptionToSphere(params) {
     return request(query);
 }
 
+/**
+ * Удалить подписку на сферу
+ * 
+ * @param {Object} params
+ * @returns {Function} 
+ */
 export function removeSubscriptionToSphere(params) {
     let conditions = getConditions(params);
     let query =`mutation {removeSubscriptionForSpheres${conditions}{id}}`;
@@ -42,12 +48,14 @@ export function removeSubscriptionToSphere(params) {
 }
 
 /**
- * Подписаться на сферы
+ * Получить сферы на которые подписан
  * 
+ * @param {Object} params
  * @returns {Function} 
  */
-export function findSubscriptionSpheres() {
-    let query =`{subscription_spheres{id,name,label,count_scores,count_criteria,count_entities}}`;
+export function findSubscriptionSpheres(params) {
+    let conditions = getConditions(params);
+    let query =`{subscription_spheres${conditions}{id,name,label,count_scores,count_criteria,count_entities}}`;
     return request(query);
 }
 
