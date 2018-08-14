@@ -29,9 +29,15 @@ export function findMe(params) {
  * @param {Object} params
  * @returns {Function} 
  */
-export function subscriptionToSpheres(params) {
+export function addSubscriptionToSphere(params) {
     let conditions = getConditions(params);
-    let query =`mutation {addSubscriptionForSpheres${conditions}{id}}`;
+    let query =`mutation {addSubscriptionForSpheres${conditions}{id,name,label}}`;
+    return request(query);
+}
+
+export function removeSubscriptionToSphere(params) {
+    let conditions = getConditions(params);
+    let query =`mutation {removeSubscriptionForSpheres${conditions}{id}}`;
     return request(query);
 }
 
