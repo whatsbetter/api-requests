@@ -34,7 +34,7 @@ export function findAll(params) {
  * @returns {Function}
  */
 export function findById(params) {
-    let query = `{sphere(id: "${params.id}"){name,id,label,count_criteria,count_entities,popular_criteria{name,id,label}}}`;
+    let query = `{sphere(id: "${params.id}"){name,id,description,label,count_criteria,count_entities,popular_criteria{name,id,label}}}`;
     return request(query);
 }
 
