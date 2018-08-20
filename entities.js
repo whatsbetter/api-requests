@@ -1,7 +1,7 @@
 import { getConditions } from './_util';
 import request from './_request';
 
-const entity = `{id,name,main_image,label,avg,properties_json,count_scores,avg_scores{value,count_scores,criteria_id},current_user_scores{criteria_id,comment,value}}`;
+const entity = `{id,name,main_image,label,avg,properties{id,kind,popular,value,label},count_scores,avg_scores{value,count_scores,criteria_id},lng,lat,current_user_scores{criteria_id,comment,value}}`;
 
 /**
  * Поиск объектов по имени
