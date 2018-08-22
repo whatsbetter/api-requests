@@ -22,6 +22,8 @@ export function findAll(params) {
     if (!('limit' in params)) {
 	params.limit = 20;
     }
+    params.hide = false;
+    
     let conditions = getConditions(params);
     let query = `{spheres${conditions}{name,id,label,have_child,count_scores,count_criteria,count_entities}}`;
     return request(query);

@@ -10,7 +10,7 @@ import request from './_request';
 export function findAll(params) {
     params.limit = 100;
     let conditions = getConditions(params);
-    let query = `{properties${conditions}{id,name,label,kind,filterable,hide_on_entity,items{name,id}}}`;
+    let query = `{properties${conditions}{id,name,label,kind,filterable,hide_on_entity,items{id,label,name}}}`;
     return request(query);
 }
 

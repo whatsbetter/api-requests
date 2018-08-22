@@ -24,6 +24,7 @@ export function search(params) {
  * @returns {Function} 
  */
 export function findAll(params) {
+    params.hide = false;
     let conditions = getConditions(params);
     let query = `{criteria${conditions}{id,name,label}}`;
     return request(query);
