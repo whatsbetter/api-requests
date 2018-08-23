@@ -31,6 +31,34 @@ export function findAll(params) {
 }
 
 /**
+ * Найти все группы
+ * 
+ * @param {Object} params
+ * @returns {Function} 
+ */
+export function findGroups(params) {
+    let conditions = getConditions(params);
+    let query = `{criteria_groups${conditions}{id,name,label}}`;
+    return request(query);
+}
+
+/**
+ * Найти все критерии группы
+ * 
+ * @param {Object} params
+ * @returns {Function} 
+ */
+export function findFromGroups(params) {
+    let conditions = getConditions(params);
+    let query = `{criteria_group${conditions}{id,name,label,criteria{id,name,label} }}`;
+    return request(query);
+}
+
+
+
+
+
+/**
  * Создание критерия
  * 
  * @param {Object} params
