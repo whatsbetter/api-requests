@@ -29,7 +29,7 @@ export function findAll(params) {
     }
 
     let conditions = getConditions(params);
-    let query = `{spheres${conditions}{name,id,label,have_child,count_scores,count_criteria,subscribed,count_entities}}`;
+    let query = `{spheres${conditions}{name,id,icon,label,have_child,count_scores,count_criteria,subscribed,count_entities}}`;
     return request(query);
 }
 
