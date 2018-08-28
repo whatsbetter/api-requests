@@ -24,8 +24,12 @@ export function findAll(params) {
     }
     params.hide = false;
     
+    if (!('parent' in params) && !('type' in params)) {
+	params.orderBy = "popular";
+    }
+
     let conditions = getConditions(params);
-    let query = `{spheres${conditions}{name,id,label,have_child,count_scores,count_criteria,count_entities}}`;
+    let query = `{spheres${conditions}{name,id,label,have_child,count_scores,count_criteria,subscribed,count_entities}}`;
     return request(query);
 }
 
