@@ -55,7 +55,7 @@ export function removeSubscriptionToSphere(params) {
  */
 export function findSubscriptionSpheres(params) {
     let conditions = getConditions(params);
-    let query =`{subscription_spheres${conditions}{id,name,label,count_scores,count_criteria,count_entities}}`;
+    let query =`{subscription_spheres${conditions}{id,name,icon,label,count_scores,count_criteria,count_entities}}`;
     return request(query);
 }
 
