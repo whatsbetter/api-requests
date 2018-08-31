@@ -1,6 +1,23 @@
 import { getConditions } from './_util';
 import request from './_request';
 
+
+/**
+ * Поиск пользователей
+ * 
+ * @param {Object} params
+ * @returns {Function} 
+ */
+export function findAll(params) {
+    if (!('limit' in params)) {
+	params.limit = 20;
+    }
+    let conditions = getConditions(params); 
+    let query = `{users${conditions}{id,name,main_image}}`;
+    return request(query);
+}
+
+
 /**
  * Поиск пользователей по имени
  * 
