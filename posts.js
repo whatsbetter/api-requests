@@ -8,7 +8,8 @@ import request from './_request';
  * @returns {Function}
  */
 export function findAll(params) {  
-    let conditions = getConditions(params);  
+    params.preset = false;
+    let conditions = getConditions(params); 
     let query = `{posts ${conditions} {id, title, alias, published, preamble, preamble_images{hash}, sphere{label, name, id}, author{name, main_image}, created_at}}`;
     return request(query);
 }
