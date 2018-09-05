@@ -29,6 +29,9 @@ export function save(params) {
  * @returns {Function}
  */
 export function find(params) {
+    if (!('limit' in params)) {
+	params.limit = 10;
+    }
     let conditions = getConditions(params);
     let query =  `{scores${conditions}${score}}`; 
     return request(query);
