@@ -47,9 +47,9 @@ export function findPresets(params) {
  */
 export function create(params) {
     if (!('alias' in params)) {
-	params.alias = "";
+        params.alias = '';
     }
-    params.title = params.title.replace(/\\([\s\S])|(")/g,"\\$1$2");
+    params.title = params.title.replace(/\\([\s\S])|(")/g,'\\$1$2');
     
     let conditions = getConditions(params);    
     let query = `mutation {createPost ${conditions} {id}}`;
@@ -63,7 +63,7 @@ export function create(params) {
  * @returns {Function}
  */
 export function update(params) {
-    params.title = params.title.replace(/\\([\s\S])|(")/g,"\\$1$2");
+    params.title = params.title.replace(/\\([\s\S])|(")/g,'\\$1$2');
     let conditions = getConditions(params);
     let query = `mutation {updatePost ${conditions} {id, title}}`;
     return request(query);

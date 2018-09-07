@@ -8,13 +8,13 @@ import request from './_request';
  * @returns {Function}
  */
 
-const score = `{id,value,user{id,name,main_image,karma},comment{text,id,useful,useless,updated_at}}`;
+const score = '{id,value,user{id,name,main_image,karma},comment{text,id,useful,useless,updated_at}}';
 
 export function save(params) {
    
-    if ("comment" in params) {
-	let comment = params.comment.replace(/(?:\r\n|\r|\n)/g, '\n');
-	params.comment = `""${comment}""`;
+    if ('comment' in params) {
+        let comment = params.comment.replace(/(?:\r\n|\r|\n)/g, '\n');
+        params.comment = `""${comment}""`;
     }   
 
     let conditions = getConditions(params);
@@ -30,7 +30,7 @@ export function save(params) {
  */
 export function find(params) {
     if (!('limit' in params)) {
-	params.limit = 10;
+        params.limit = 10;
     }
     let conditions = getConditions(params);
     let query =  `{scores${conditions}${score}}`; 

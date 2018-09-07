@@ -1,4 +1,3 @@
-import { getConditions } from './_util';
 import request from './_request';
 
 /**

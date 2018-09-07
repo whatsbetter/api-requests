@@ -14,7 +14,7 @@ export function changeUseful(params, options) {
     let _type = 'usefulComment';
     
     if (options.type === 'minus') {
-	_type = 'uselessComment';
+        _type = 'uselessComment';
     }
 
     let query = `mutation {${_type}${conditions}{id,useful,useless}}`;

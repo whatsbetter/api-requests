@@ -20,12 +20,12 @@ export function search(params) {
  */
 export function findAll(params) {
     if (!('limit' in params)) {
-	params.limit = 20;
+        params.limit = 20;
     }
     params.hide = false;
     
     if (!('parent' in params) && !('type' in params)) {
-	params.orderBy = "popular";
+        params.orderBy = 'popular';
     }
 
     let conditions = getConditions(params);

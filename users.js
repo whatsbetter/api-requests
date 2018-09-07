@@ -10,7 +10,7 @@ import request from './_request';
  */
 export function findAll(params) {
     if (!('limit' in params)) {
-	params.limit = 20;
+        params.limit = 20;
     }
     let conditions = getConditions(params); 
     let query = `{users${conditions}{id,name,main_image}}`;
@@ -85,7 +85,7 @@ export function findSubscriptionSpheres(params) {
  */
 export function findFriends(params) {
     if (!('limit' in params)) {
-	params.limit = 20;
+        params.limit = 20;
     }
     let conditions = getConditions(params); 
     let query = `{friends${conditions}{id,name,first_name,second_name,main_image}}`;
