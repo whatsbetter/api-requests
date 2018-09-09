@@ -35,7 +35,7 @@ export function findByAlias(params) {
 export function findPresets(params) { 
     params.preset = true;
     let conditions = getConditions(params);  
-    let query = `{posts ${conditions} {id, title, preamble, preamble_images{hash}, metadata{criteria {id,label}, rating{id,name,main_image,label,avg,avg_scores{value,count_scores,criteria_id} }}}}`;
+    let query = `{posts ${conditions} {id, title, preamble, preamble_images{hash}, metadata{criteria {id,label}, rating{id,name,main_image,label,avg,,video{url},avg_scores{value,count_scores,criteria_id} }}}}`;
     return request(query);
 }
 
