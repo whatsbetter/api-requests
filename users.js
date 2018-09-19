@@ -1,6 +1,20 @@
 import { getConditions } from './_util';
 import request from './_request';
 
+const user = '{id,name,first_name,second_name,main_image,karma,providers{type}}}';
+
+/**
+ * Найти текущего пользователя по токену
+ * 
+ * @param {Object} params
+ * @returns {Function} 
+ */
+export function findById(params) {
+    let conditions = getConditions(params); 
+    let query =`{user${conditions}${user}`;
+    return request(query);
+}
+
 
 /**
  * Поиск пользователей
@@ -36,7 +50,7 @@ export function search(params) {
  * @returns {Function} 
  */
 export function findMe(params) {
-    let query =`{user (token: "${params.token}"){id,name,first_name,second_name,main_image,karma,providers{type}}}`;
+    let query =`{user (token: "${params.token}")${user}`;
     return request(query);
 }
 
