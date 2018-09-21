@@ -8,7 +8,7 @@ import request from './_request';
  * @returns {Function}
  */
 
-const score = '{id,value,user{id,name,main_image,karma},comment{text,id,useful,useless,updated_at}}';
+const score = '{id,value,user{id,name,main_image,karma},count_sub_comments, comment{text,id,useful,useless,updated_at}}';
 
 export function save(params) {
    
@@ -19,8 +19,10 @@ export function save(params) {
 
     let conditions = getConditions(params);
     let query = `mutation {createScore${conditions}${score}}`;
+    
     return request(query);
 }
+
 
 /**
  * Получение оценок

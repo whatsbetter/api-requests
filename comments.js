@@ -1,6 +1,21 @@
 import { getConditions } from './_util';
 import request from './_request';
 
+export function create(params) {
+    let conditions = getConditions(params);
+    let query = `mutation {createComment${conditions}{id, text, autor{id,name,main_image}}}`;
+    
+    return request(query);
+}
+
+export function getByScore(params) {
+    let conditions = getConditions(params);
+    let query = `{comments${conditions}{id, text, autor{id,name,main_image}}}`;
+    
+    return request(query);
+}
+
+
 /**
  *  Изменить полезность
  * 
