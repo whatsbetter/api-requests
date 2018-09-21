@@ -2,6 +2,10 @@ import { getConditions } from './_util';
 import request from './_request';
 
 export function create(params) {
+
+    let text = params.text.replace(/(?:\r\n|\r|\n)/g, '\n');
+    params.text = `""${text}""`;
+    console.log(params)
     let conditions = getConditions(params);
     let query = `mutation {createComment${conditions}{id, text, autor{id,name,main_image}}}`;
     
