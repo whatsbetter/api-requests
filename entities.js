@@ -1,7 +1,7 @@
 import { getConditions } from './_util';
 import request from './_request';
 
-const entity = '{id,name,main_image,label,avg,properties{id,kind,popular,value,label},medals{place,value,criteria{id, label},start_date,end_date},count_scores,video{url},avg_scores{value,count_scores,criteria_id},lng,lat,current_user_scores{criteria_id,value}}';
+const entity = '{id,name,description,main_image,label,avg,properties{id,kind,popular,value,label},medals{place,value,criteria{id, label},start_date,end_date},count_scores,video{url},avg_scores{value,count_scores,criteria_id},lng,lat,current_user_scores{criteria_id,value}}';
 
 /**
  * Поиск объектов по имени
