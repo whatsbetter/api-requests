@@ -3,6 +3,9 @@ import request from './_request';
 
 const user = '{id,name,first_name,second_name,main_image,karma,providers{type}}}';
 
+const user_page = '{id,name,first_name,second_name,main_image,karma,providers{type},' +
+    'karma_details{sphere{id,label,name},value,count_scores,count_useless,count_useful}}}';
+
 /**
  * Найти текущего пользователя по токену
  * 
@@ -11,7 +14,7 @@ const user = '{id,name,first_name,second_name,main_image,karma,providers{type}}}
  */
 export function findById(params) {
     let conditions = getConditions(params); 
-    let query =`{user${conditions}${user}`;
+    let query =`{user${conditions}${user_page}`;
     return request(query);
 }
 
