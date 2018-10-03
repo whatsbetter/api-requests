@@ -36,6 +36,22 @@ export function findAll(params) {
 
 
 /**
+ * Поиск пользователей статистика НАДО ПЕРЕНЕСТИ В АДМИНКУ НО Я НЕ ЗНАЮ КАК
+ *
+ * @param {Object} params
+ * @returns {Function}
+ */
+export function findAllPage(params) {
+    if (!('limit' in params)) {
+        params.limit = 20;
+    }
+    let conditions = getConditions(params);
+    let query = `{users${conditions}{id,name,first_name,second_name,main_image,karma,created_at,providers{type,p_id}}}`;
+    return request(query);
+}
+
+
+/**
  * Поиск пользователей по имени
  * 
  * @param {Object} params
