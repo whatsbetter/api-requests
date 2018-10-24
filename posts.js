@@ -22,7 +22,7 @@ export function findAll(params) {
  */
 export function findByAlias(params) {        
     let conditions = getConditions(params);     
-    let query = `{post ${conditions} {id, alias, title, content, published, preamble, preamble_images{hash}, metadata{scores {id, criterion{id, label}, entity{id, label, main_image}, value, user{name, main_image}}} author{id, name, main_image}, updated_at}}`;
+    let query = `{post ${conditions} {id, alias, title, content, published, preamble,  preamble_images{hash}, sphere{id,label}, metadata{criteria {id,label}, scores {id,criterion{id,label}, entity{id, label, main_image}, value, user{name, main_image}}} author{id, name, main_image}, updated_at}}`;
     return request(query);
 }
 
@@ -35,7 +35,7 @@ export function findByAlias(params) {
 export function findPresets(params) { 
     params.preset = true;
     let conditions = getConditions(params);  
-    let query = `{posts ${conditions} {id, title, preamble, preamble_images{hash}, metadata{criteria {id,label}, rating{id,name,main_image,label,avg,,video{url},avg_scores{value,count_scores,criteria_id} }}}}`;
+    let query = `{posts ${conditions} {id, title, preamble, preamble_images{hash}, metadata{criteria {id,label}, rating{id,name,main_image,label,avg,video{url},avg_scores{value,count_scores,criteria_id} }}}}`;
     return request(query);
 }
 
