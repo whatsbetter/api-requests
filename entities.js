@@ -13,7 +13,7 @@ export function search(params) {
     params.type = 'entities';
     
     let conditions = getConditions(params);
-    let query = `{search${conditions}{id,data,text}}`;
+    let query = `{search${conditions}{id,data,text,subtitle}}`;
     
     return request(query);
 }
