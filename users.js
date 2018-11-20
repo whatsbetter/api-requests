@@ -1,7 +1,7 @@
 import { getConditions } from './_util';
 import request from './_request';
 
-const user = '{id,name,first_name,second_name,main_image,karma,providers{type}}}';
+const user = '{id,name,main_image,karma,providers{type}}}';
 
 const user_page = '{id,name,first_name,second_name,main_image,karma,providers{type},' +
     'karma_details{sphere{id,label,name},value,count_scores,count_useless,count_useful}}}';
