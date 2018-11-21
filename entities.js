@@ -25,7 +25,7 @@ export function search(params) {
  * @param {Object} params
  * @returns {Function}
  */
-export function findAll(params) {    
+export function findAll(params, headers = null) {    
     params.limit = params.limit || 10;
     
     if (params.limit > 50) {
@@ -44,7 +44,7 @@ export function findAll(params) {
  
     let conditions = getConditions(params);
     let query = `{entities${conditions}${entity}}`;
-    return request(query);
+    return request(query, headers);
 }
 
 /**
