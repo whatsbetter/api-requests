@@ -10,6 +10,6 @@ import request from './_request';
 
 export function get(params) {  
     let conditions = getConditions(params);  
-    let query = `{feed {created_at,end,start,scores{criterion{id,label},comment{id,text},entity{id,label,main_image},value},user{name,main_image,karma}}}`;
+    let query = `{feed {created_at,end,start,scores{criterion{id,label},comment{id,text},entity{id,label,main_image},value},user{id,name,main_image,karma}}}`;
     return request(query);
 }
