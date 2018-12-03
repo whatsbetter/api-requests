@@ -26,3 +26,12 @@ export function findByEntity(params) {
     let query = `{properties_value${conditions}{property_id,kind,enriched,value}}`;
     return request(query);
 }
+
+export function findByType(type, params) {
+    let conditions = getConditions(params);
+    let query = `{property_${type}${conditions}{id,name,label}}`;
+    return request(query);
+}
+
+
+

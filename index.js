@@ -8,6 +8,7 @@ module.exports = {
     posts: require('./posts'),
     properties: require('./properties'),
     scores: require('./scores'),
+    search: require('./search'),
     spheres: require('./spheres'),
     spheresReleases: require('./spheresReleases'),
     users: require('./users')
