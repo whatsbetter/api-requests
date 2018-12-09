@@ -7,14 +7,14 @@ export function create(params) {
     params.text = `""${text}""`;
     console.log(params)
     let conditions = getConditions(params);
-    let query = `mutation {createComment${conditions}{id, text, autor{id,name,main_image}}}`;
+    let query = `mutation {createComment${conditions}{id, text, autor{id,name,main_image, karma}}}`;
     
     return request(query);
 }
 
 export function getByScore(params) {
     let conditions = getConditions(params);
-    let query = `{comments${conditions}{id, text, autor{id,name,main_image}}}`;
+    let query = `{comments${conditions}{id, text, autor{id,name,main_image,karma}}}`;
     
     return request(query);
 }
