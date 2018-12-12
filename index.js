@@ -5,6 +5,7 @@ module.exports = {
     entities: require('./entities'),
     feed: require('./feed'),
     messages: require('./messages'),
+    notifications: require('./notifications'),
     posts: require('./posts'),
     properties: require('./properties'),
     scores: require('./scores'),
