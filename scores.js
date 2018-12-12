@@ -8,7 +8,7 @@ import request from './_request';
  * @returns {Function}
  */
 
-const score = '{id,value,user{id,name,main_image,karma},count_sub_comments, comment{text,id,useful,useless,updated_at}}';
+const score = '{id,value,sphere_id,criterion{id,label},entity{id,label,main_image},user{id,name,main_image,karma},replies{text,autor{id,name,main_image,karma}},count_sub_comments,comment{text,id,useful,useless,updated_at}}';
 
 export function save(params) {
    
@@ -36,6 +36,13 @@ export function find(params) {
     }
     let conditions = getConditions(params);
     let query =  `{scores${conditions}${score}}`; 
+    return request(query);
+}
+
+
+export function findById(params) {
+    let conditions = getConditions(params);
+    let query =  `{score${conditions}${score}}`; 
     return request(query);
 }
 
