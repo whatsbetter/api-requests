@@ -18,3 +18,10 @@ export function getCount() {
     let query = `{notifications_count(status: "new")}`;
     return request(query);
 }
+
+export function setStatus(params) {  
+    params.status = 'read';
+    let conditions = getConditions(params);  
+    let query = `mutation{updateNotification${conditions}}`;
+    return request(query);
+}
