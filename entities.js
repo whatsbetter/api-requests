@@ -1,7 +1,59 @@
 import { getConditions } from './_util';
 import request from './_request';
 
-const entity = '{id,name,description,main_image,label,avg,properties{id,kind,popular,value,label},medals{place,value,criteria{id, label},start_date,end_date},count_scores,video{url},avg_scores{value,count_scores,criteria_id},lng,lat,current_user_scores{criteria_id,value}city{name,label,path,path_label}}';
+const entityQL = (criterion) => {
+    return `{
+        id,
+        name,
+        description,
+        main_image,
+        label,
+        avg,
+        avg_scores{
+            value,
+            count_scores,
+            ${criterion}
+        },
+        properties {
+            id,
+            kind,
+            popular,
+            value,
+            label
+        },
+        medals{
+            place,
+            value,
+            criteria{
+                id, 
+                label
+            },
+            start_date,
+            end_date
+        },
+        count_scores,
+        video {
+            url
+        },
+        lng,
+        lat,
+        current_user_scores{
+            criteria_id,
+            value
+        }
+        city {
+            name,
+            label,
+            path,
+            path_label
+        }
+    }`;
+};
+
+
+const rating = entityQL(`criteria_id`);
+const entity = entityQL(`criteria{id,label}`);
+
 
 /**
  * Поиск объектов по имени
@@ -43,7 +95,7 @@ export function findAll(params, headers = null) {
     }
  
     let conditions = getConditions(params);
-    let query = `{entities${conditions}${entity}}`;
+    let query = `{entities${conditions}${rating}}`;
     return request(query, headers);
 }
 
