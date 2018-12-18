@@ -108,7 +108,7 @@ export function findAll(params, headers = null) {
  * @param {Object} params
  * @returns {Function}
  */
-export function findById(params) {    
+export function findById(params, headers) {    
     if ('filter' in params) {
         if (Object.keys(params.filter).length > 0) {
             params.filter = JSON.stringify(params.filter).replace(/"/g, '\'');  
@@ -117,7 +117,7 @@ export function findById(params) {
  
     let conditions = getConditions(params);
     let query = `{entity${conditions}${entity}}`;
-    return request(query);
+    return request(query, headers);
 }
 
 /**
