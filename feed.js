@@ -1,5 +1,5 @@
 import request from './_request';
-import { getConditions } from './_util';
+import { getConditions as gc } from './_util';
 
 /**
  * Получить поток
@@ -8,11 +8,9 @@ import { getConditions } from './_util';
  * @returns {Function}
  * 
  */
-
 export function get(params) {        
-    let conditions = getConditions(params);
     let query = `{
-        feed ${conditions}{
+        feed ${gc(params)}{
             created_at,
             end,
             start,

@@ -1,7 +1,7 @@
 import { getConditions } from './_util';
 import request from './_request';
 
-const entityQL = (criterion) => {
+const entityQL = (criterion, extra) => {
     return `{
         id,
         name,
@@ -14,6 +14,7 @@ const entityQL = (criterion) => {
             count_scores,
             ${criterion}
         },
+        ${extra}
         properties {
             id,
             kind,
@@ -51,8 +52,10 @@ const entityQL = (criterion) => {
 };
 
 
+	
+
 const rating = entityQL(`criteria_id`);
-const entity = entityQL(`criteria{id,label}`);
+const entity = entityQL(`criteria{id,label}`, 'top_avg_scores(limit: 3) {value,criteria {name,label}},bottom_avg_scores(limit: 3) {value,criteria {name,label}},');
 
 
 /**
