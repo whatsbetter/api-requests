@@ -1,7 +1,7 @@
-import { getConditions } from './_util';
+import { getConditions as gc } from './_util';
 import request from './_request';
 
-const entityQL = (criterion, extra) => {
+const entityQL = (extra = []) => {
     return `{
         id,
         name,
@@ -9,12 +9,6 @@ const entityQL = (criterion, extra) => {
         main_image,
         label,
         avg,
-        avg_scores{
-            value,
-            count_scores,
-            ${criterion}
-        },
-        ${extra}
         properties {
             id,
             kind,
@@ -48,14 +42,14 @@ const entityQL = (criterion, extra) => {
             path,
             path_label
         }
+        ${extra.join(',')}
     }`;
 };
 
-
-	
-
-const rating = entityQL(`criteria_id`);
-const entity = entityQL(`criteria{id,label}`, 'top_avg_scores(limit: 3) {value,criteria {name,label}},bottom_avg_scores(limit: 3) {value,criteria {name,label}},');
+const topAvgScores = 'top_avg_scores(limit: 3) {value, criteria {name,label}}';
+const bottomAvgScores = 'bottom_avg_scores(limit: 3) {value, criteria {name,label}}';
+const avgScores = 'avg_scores{value, count_scores, criteria_id}';
+const avgEnrichScores = 'avg_scores{value, count_scores, criteria{id,label}}';
 
 
 /**
@@ -67,8 +61,7 @@ const entity = entityQL(`criteria{id,label}`, 'top_avg_scores(limit: 3) {value,c
 export function search(params) {
     params.type = 'entities';
     
-    let conditions = getConditions(params);
-    let query = `{search${conditions}{id,data,text,subtitle}}`;
+    let query = `{search${gc(params)}{id,data,text,subtitle}}`;
     
     return request(query);
 }
@@ -97,8 +90,8 @@ export function findAll(params, headers = null) {
         }
     }
  
-    let conditions = getConditions(params);
-    let query = `{entities${conditions}${rating}}`;
+    let entity = entityQL([avgScores]);
+    let query = `{entities${gc(params)}${entity}}`;
     return request(query, headers);
 }
 
@@ -108,15 +101,23 @@ export function findAll(params, headers = null) {
  * @param {Object} params
  * @returns {Function}
  */
-export function findById(params, headers) {    
+export function findById(params, options, headers) {   
+    let entity;
+    
     if ('filter' in params) {
         if (Object.keys(params.filter).length > 0) {
             params.filter = JSON.stringify(params.filter).replace(/"/g, '\'');  
         }
     }
- 
-    let conditions = getConditions(params);
-    let query = `{entity${conditions}${entity}}`;
+    
+    if (options.type === 'rating') {
+        entity = entityQL([avgScores]); 
+    }
+    else if (options.type === 'detailed') {
+        entity = entityQL([avgEnrichScores, topAvgScores, bottomAvgScores]); 
+    }
+    
+    let query = `{entity${gc(params)}${entity}}`;
     return request(query, headers);
 }
 
@@ -127,8 +128,7 @@ export function findById(params, headers) {
  * @returns {Function}
  */
 export function create(params) {
-    let conditions = getConditions(params);
-    let query = `mutation {createEntity${conditions}{id,name,label}}`;
+    let query = `mutation {createEntity${gc(params)}{id,name,label}}`;
     return request(query);
 }
 
@@ -139,7 +139,6 @@ export function create(params) {
  * @returns {Function}
  */
 export function update(params) {
-    let conditions = getConditions(params);
-    let query = `mutation {updateEntity${conditions}{id,name,label}}`;
+    let query = `mutation {updateEntity${gc(params)}{id,name,label}}`;
     return request(query);
 }
