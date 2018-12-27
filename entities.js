@@ -76,10 +76,6 @@ export function search(params) {
 export function findAll(params, headers = null) {    
     params.limit = params.limit || 10;
     
-    if (params.limit > 50) {
-        params.limit = 50;
-    }
-    
     if ('criteria' in params) {
         params.typeOfSerp = 'rating';
     }
