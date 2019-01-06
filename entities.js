@@ -51,6 +51,24 @@ const bottomAvgScores = 'bottom_avg_scores(limit: 3) {value, criteria {name,labe
 const avgScores = 'avg_scores{value, count_scores, criteria_id}';
 const avgEnrichScores = 'avg_scores{value, count_scores, criteria{id,label}}';
 
+const specialMedals = `
+    special_medals{
+        criteria{
+            id,
+            label
+        }
+        place,
+        value,
+        property{
+            name,
+            label
+        }
+        property_value{
+            name, 
+            label
+        }
+  }`;
+
 
 /**
  * Поиск объектов по имени
