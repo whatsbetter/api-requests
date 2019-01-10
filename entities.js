@@ -1,74 +1,6 @@
 import { getConditions as gc } from './_util';
 import request from './_request';
 
-const entityQL = (extra = []) => {
-    return `{
-        id,
-        name,
-        description,
-        main_image,
-        label,
-        avg,
-        properties {
-            id,
-            kind,
-            popular,
-            value,
-            label
-        },
-        medals{
-            place,
-            value,
-            criteria{
-                id, 
-                label
-            },
-            start_date,
-            end_date
-        },
-        count_scores,
-        video {
-            url
-        },
-        lng,
-        lat,
-        current_user_scores{
-            criteria_id,
-            value
-        }
-        city {
-            name,
-            label,
-            path,
-            path_label
-        }
-        ${extra.join(',')}
-    }`;
-};
-
-const topAvgScores = 'top_avg_scores(limit: 3) {value, criteria {name,label}}';
-const bottomAvgScores = 'bottom_avg_scores(limit: 3) {value, criteria {name,label}}';
-const avgScores = 'avg_scores{value, count_scores, criteria_id}';
-const avgEnrichScores = 'avg_scores{value, count_scores, criteria{id,label}}';
-
-const specialMedals = `
-    special_medals{
-        criteria{
-            id,
-            label
-        }
-        place,
-        value,
-        property{
-            name,
-            label
-        }
-        property_value{
-            name, 
-            label
-        }
-  }`;
-
 
 /**
  * Поиск объектов по имени
@@ -104,8 +36,9 @@ export function findAll(params, headers = null) {
         }
     }
  
-    let entity = entityQL([avgScores]);
-    let query = `{entities${gc(params)}${entity}}`;
+    let fields = entityQL(['avgScores', 'properties', 'medals']);
+    let query = `{entities${gc(params)}${fields}}`;
+    
     return request(query, headers);
 }
 
@@ -113,25 +46,20 @@ export function findAll(params, headers = null) {
  * Получение одного объекта по идентификатору
  * 
  * @param {Object} params
+ * @param {Object} options
+ * @param {Object} headers
  * @returns {Function}
  */
-export function findById(params, options, headers) {   
-    let entity;
-    
+export function findById(params, options, headers) {       
     if ('filter' in params) {
         if (Object.keys(params.filter).length > 0) {
             params.filter = JSON.stringify(params.filter).replace(/"/g, '\'');  
         }
     }
+
+    let fields = entityQL(options.sections); 
+    let query = `{entity${gc(params)}${fields}}`;
     
-    if (options.type === 'rating') {
-        entity = entityQL([avgScores]); 
-    }
-    else if (options.type === 'detailed') {
-        entity = entityQL([avgEnrichScores, topAvgScores, bottomAvgScores]); 
-    }
-    
-    let query = `{entity${gc(params)}${entity}}`;
     return request(query, headers);
 }
 
@@ -156,3 +84,115 @@ export function update(params) {
     let query = `mutation {updateEntity${gc(params)}{id,name,label}}`;
     return request(query);
 }
+
+const entityQL = (extra = []) => {
+    return `{
+        id,
+        name,
+        description,
+        main_image,
+        label,
+        avg,
+        count_scores,
+        video {
+            url
+        },
+        lng,
+        lat,
+        current_user_scores{
+            criteria_id,
+            value
+        }
+        city {
+            name,
+            label,
+            path,
+            path_label
+        }
+        ${extra.map(key=>entity[key]).join(',')}
+    }`;
+};
+
+
+const entity = {};
+
+/** Свойства */
+entity.properties = `
+    properties {
+        id,
+        kind,
+        popular,
+        value,
+        label
+    }`;
+
+/** Награды */
+entity.medals = `
+    medals{
+        place,
+        value,
+        criteria{
+            id, 
+            label
+        },
+        start_date,
+        end_date
+    }`;
+
+/** Лучшие оценки */
+entity.topAvgScores = `
+    top_avg_scores(limit: 3) {
+        value, 
+        criteria {
+            name,
+            label
+        }
+    }`;
+
+/** Худшие оценки */
+entity.bottomAvgScores = `
+    bottom_avg_scores(limit: 3) {
+        value, 
+        criteria {
+            name,
+            label
+        }
+    }`;
+
+/** Средние оценки */
+entity.avgScores = `
+    avg_scores{
+        value, 
+        count_scores, 
+        criteria_id
+    }`;
+
+/** Средние оценки с детализацией по критериям  */
+entity.avgEnrichScores = `
+    avg_scores {
+        value, 
+        count_scores, 
+        criteria{
+            id,
+            label
+        }
+    }`;
+
+/** Медали по свойствам */
+entity.specialMedals = `
+    special_medals{
+        criteria{
+            id,
+            label
+        }
+        place,
+        value,
+        property{
+            name,
+            label
+        }
+        property_value{
+            name, 
+            label
+        }
+  }`;
