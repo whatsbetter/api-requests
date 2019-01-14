@@ -23,12 +23,8 @@ export function search(params) {
  * @param {Object} params
  * @returns {Function}
  */
-export function findAll(params, headers = null) {    
+export function findAll(params, options, headers = null) {    
     params.limit = params.limit || 10;
-    
-    if ('criteria' in params) {
-        params.typeOfSerp = 'rating';
-    }
 
     if ('filter' in params) {
         if (Object.keys(params.filter).length > 0) {
@@ -36,7 +32,7 @@ export function findAll(params, headers = null) {
         }
     }
  
-    let fields = entityQL(['avgScores', 'properties', 'medals']);
+    let fields = entityQL(options.sections);
     let query = `{entities${gc(params)}${fields}}`;
     
     return request(query, headers);
@@ -168,7 +164,7 @@ entity.avgScores = `
     }`;
 
 /** Средние оценки с детализацией по критериям  */
-entity.avgEnrichScores = `
+entity.avgEnrichedScores = `
     avg_scores {
         value, 
         count_scores, 
