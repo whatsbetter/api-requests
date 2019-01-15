@@ -23,7 +23,13 @@ export function search(params) {
  * @param {Object} params
  * @returns {Function}
  */
-export function findAll(params, options, headers = null) {    
+export function findAll(params, options, headers = null) {   
+    if (!options) {
+        options = {
+            section: null
+        };
+    }
+    
     params.limit = params.limit || 10;
 
     if ('filter' in params) {
