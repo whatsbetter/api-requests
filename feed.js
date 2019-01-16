@@ -29,6 +29,12 @@ export function get(params) {
                 comment {
                     id,
                     text,
+                    gallery{
+                        id, 
+                        items{
+                            hash
+                        }
+                    }
                     updated_at,
                     useful,
                     useless
