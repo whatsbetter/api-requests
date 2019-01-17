@@ -45,6 +45,7 @@ const score = `{
         gallery{
             id, 
             items{
+                id,
                 hash
             }
         }
@@ -57,9 +58,7 @@ export function save(params) {
         let comment = params.comment.replace(/(?:\r\n|\r|\n)/g, '\n');
         params.comment = `""${comment}""`;
     }   
-    
-    params.gallery = '417993276095135745';
-    
+        
     let query = `mutation {createScore${gc(params)}${score}}`;
     
     return request(query);

@@ -4,6 +4,7 @@ module.exports = {
     criteria: require('./criteria'),
     entities: require('./entities'),
     feed: require('./feed'),
+    gallery: require('./gallery'),
     messages: require('./messages'),
     notifications: require('./notifications'),
     posts: require('./posts'),

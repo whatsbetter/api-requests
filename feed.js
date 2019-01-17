@@ -31,7 +31,8 @@ export function get(params) {
                     text,
                     gallery{
                         id, 
-                        items{
+                        items {
+                            id,
                             hash
                         }
                     }
