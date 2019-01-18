@@ -92,6 +92,13 @@ const entityQL = (extra = []) => {
         id,
         name,
         description,
+        gallery{
+            id,
+            items(limit: 3){
+                id,
+                hash
+            }
+        }
         main_image,
         label,
         avg,

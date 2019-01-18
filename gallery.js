@@ -10,6 +10,11 @@ import request from './_request';
 
 const gallery = '{id}';
 
+export function get(params) {   
+    let query = `{gallery${gc(params)}{id,items(limit: 100){id,hash}}}`;
+    return request(query);
+}
+
 export function create(params) {   
     let query = `mutation {createGallery${gc(params)}${gallery}}`;
     return request(query);
