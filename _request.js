@@ -9,7 +9,7 @@ const request = (query, headers) => {
             client.setHeader(key, headers[key]);
         });
     }
-    console.log(client)
+
     return client
         .request(query)
         .then(body => camelize(body));
