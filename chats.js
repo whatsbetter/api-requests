@@ -10,6 +10,8 @@ import request from './_request';
 const chat = '{id,label,main_image,status,users(limit: 4){id,name,main_image},last_message{text,user{id,name,main_image}}}';
 
 export function findAll(params) {  
+    params.limit = params.limit || 20;
+    
     let conditions = getConditions(params);  
     let query = `{chats${conditions}${chat}}`;
     return request(query);
