@@ -8,7 +8,26 @@ import request from './_request';
  * @returns {Function}
  */
 
-const message = '{id,text,user{id,name,main_image},created_at}}';
+const message = `{
+    id,
+    text,
+    user {
+        id,
+        name,
+        main_image
+    }, 
+    score {
+        id, 
+        value, 
+        entity { 
+            id, 
+            label, 
+            main_image
+        }
+    }, 
+    created_at
+}}`;
+
 
 export function findAll(params) {  
     let conditions = getConditions(params);  
