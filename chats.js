@@ -7,7 +7,7 @@ import request from './_request';
  * @param {Object} params
  * @returns {Function}
  */
-const chat = '{id,label,main_image,sphere{id,name},status,users(limit: 4){id,name,main_image},last_message{text,user{id,name,main_image}}}';
+const chat = '{id,label,main_image,criteria{id, label},sphere{id,name},status,users(limit: 4){id,name,main_image},last_message{text,user{id,name,main_image}}}';
 
 export function findAll(params) {  
     params.limit = params.limit || 20;
