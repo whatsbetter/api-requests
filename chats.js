@@ -7,7 +7,7 @@ import request from './_request';
  * @param {Object} params
  * @returns {Function}
  */
-const chat = '{id,label,main_image,criteria{id, label},sphere{id,name},status,users(limit: 4){id,name,main_image},last_message{text,user{id,name,main_image}}}';
+const chat = '{id,label,main_image,read,criteria{id, label},sphere{id,name},status,users(limit: 4){id,name,main_image},last_message{text,user{id,name,main_image}}}';
 
 export function findAll(params) {  
     params.limit = params.limit || 20;
@@ -28,3 +28,18 @@ export function create(params) {
     let query = `mutation {createChat${conditions}${chat}}`;
     return request(query);
 }
+
+/**
+ * Создать чат
+ * 
+ * @param {Object} params
+ * @returns {Function} 
+ */
+export function setRead(params) {
+    let conditions = getConditions(params);
+    let query = `mutation {readChat${conditions}{id}}`;
+    return request(query);
+}
+
+
+ 
