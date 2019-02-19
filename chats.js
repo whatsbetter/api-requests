@@ -37,7 +37,7 @@ export function create(params) {
  */
 export function setRead(params) {
     let conditions = getConditions(params);
-    let query = `mutation {readChat${conditions}{id}}`;
+    let query = `mutation {readChat${conditions}}`;
     return request(query);
 }
 
