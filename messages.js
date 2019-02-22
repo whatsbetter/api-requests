@@ -16,13 +16,19 @@ const message = `{
         name,
         main_image
     }, 
-    score {
-        id, 
-        value, 
-        entity { 
-            id, 
-            label, 
-            main_image
+    rating{
+        id,
+        label,
+        name,
+        avg,
+        main_image,
+        avg_scores {
+            value,
+            count_scores,
+            criteria {
+                label,
+                id
+            }
         }
     }, 
     created_at
