@@ -121,6 +121,6 @@ export function findFriends(params) {
         params.limit = 20;
     }
     let conditions = getConditions(params); 
-    let query = `{friends${conditions}{id,name,first_name,second_name,main_image}}`;
+    let query = `{friends${conditions}{id,name,phone,first_name,second_name,main_image}}`;
     return request(query);
 }
