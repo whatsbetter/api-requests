@@ -14,7 +14,7 @@ const score = `{
     sphere_id,
     criterion{
         id,
-    label
+        label
     },
     entity{
         id,
