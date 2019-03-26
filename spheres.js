@@ -1,5 +1,4 @@
 import { getConditions } from './_util';
-import request from './_request';
 
 /**
  * Поиск сфер по имени
@@ -8,8 +7,7 @@ import request from './_request';
  * @returns {Function}
  */
 export function search(params) {
-    let query = `{search(text:"${params.text}",type:"spheres"){id,data,text,subtitle}}`;
-    return request(query);
+    return `{search(text:"${params.text}",type:"spheres"){id,data,text,subtitle}}`;
 }
 
 /**
@@ -29,8 +27,7 @@ export function findAll(params) {
     }
 
     let conditions = getConditions(params);
-    let query = `{spheres${conditions}{name,id,icon,label,have_child,count_scores,count_criteria,subscribed,count_entities}}`;
-    return request(query);
+    return `{spheres${conditions}{name,id,icon,label,have_child,count_scores,count_criteria,subscribed,count_entities}}`;
 }
 
 /**
@@ -40,8 +37,7 @@ export function findAll(params) {
  * @returns {Function}
  */
 export function findById(params) {
-    let query = `{sphere(id: "${params.id}"){name,id,description,label,count_criteria,count_entities,have_map,sharing_description,count_scores,popular_criteria{name,id,label}}}`;
-    return request(query);
+    return `{sphere(id: "${params.id}"){name,id,description,label,count_criteria,count_entities,have_map,sharing_description,count_scores,popular_criteria{name,id,label}}}`;
 }
 
 
@@ -53,8 +49,7 @@ export function findById(params) {
  */
 export function create(params) {
     let conditions = getConditions(params);
-    let query = `mutation {createSphere${conditions}{id,name,label}}`;
-    return request(query);
+    return `mutation {createSphere${conditions}{id,name,label}}`;
 }
 
 /**
@@ -65,6 +60,5 @@ export function create(params) {
  */
 export function update(params) {
     let conditions = getConditions(params);
-    let query = `mutation {updateSphere${conditions}{id,name,label}}`;
-    return request(query);
+    return `mutation {updateSphere${conditions}{id,name,label}}`;
 }

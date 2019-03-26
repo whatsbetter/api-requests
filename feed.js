@@ -1,4 +1,3 @@
-import request from './_request';
 import { getConditions as gc } from './_util';
 
 /**
@@ -9,7 +8,7 @@ import { getConditions as gc } from './_util';
  * 
  */
 export function get(params) {        
-    let query = `{
+    return `{
         feed ${gc(params)}{
             created_at,
             end,
@@ -55,6 +54,4 @@ export function get(params) {
             }
         }
     }`;
-    
-    return request(query);
 }

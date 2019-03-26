@@ -1,22 +1,17 @@
 import { getConditions } from './_util';
-import request from './_request';
+
 
 export function create(params) {
-
     let text = params.text.replace(/(?:\r\n|\r|\n)/g, '\n');
     params.text = `""${text}""`;
-    console.log(params)
     let conditions = getConditions(params);
-    let query = `mutation {createComment${conditions}{id, text, autor{id,name,main_image, karma}}}`;
-    
-    return request(query);
+    return `mutation {createComment${conditions}{id, text, autor{id,name,main_image, karma}}}`;
+
 }
 
 export function getByScore(params) {
     let conditions = getConditions(params);
-    let query = `{comments${conditions}{id, text, autor{id,name,main_image,karma}}}`;
-    
-    return request(query);
+    return`{comments${conditions}{id, text, autor{id,name,main_image,karma}}}`;
 }
 
 
@@ -36,6 +31,5 @@ export function changeUseful(params, options) {
         _type = 'uselessComment';
     }
 
-    let query = `mutation {${_type}${conditions}{id,useful,useless}}`;
-    return request(query);
+    return `mutation {${_type}${conditions}{id,useful,useless}}`;
 }

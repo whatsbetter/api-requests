@@ -59,9 +59,7 @@ export function save(params) {
         params.comment = `""${comment}""`;
     }   
         
-    let query = `mutation {createScore${gc(params)}${score}}`;
-    
-    return request(query);
+    return `mutation {createScore${gc(params)}${score}}`;
 }
 
 
@@ -75,14 +73,12 @@ export function find(params) {
     if (!('limit' in params)) {
         params.limit = 10;
     }
-    let query =  `{scores${gc(params)}${score}}`; 
-    return request(query);
+    return `{scores${gc(params)}${score}}`; 
 }
 
 
 export function findById(params) {
-    let query = `{score${gc(params)}${score}}`; 
-    return request(query);
+    return `{score${gc(params)}${score}}`; 
 }
 
 

@@ -1,5 +1,4 @@
 import { getConditions as gc } from './_util';
-import request from './_request';
 
 
 /**
@@ -11,9 +10,7 @@ import request from './_request';
 export function search(params) {
     params.type = 'entities';
     
-    let query = `{search${gc(params)}{id,data,text,subtitle}}`;
-    
-    return request(query);
+    return `{search${gc(params)}{id,data,text,subtitle}}`;
 }
 
 
@@ -37,11 +34,9 @@ export function findAll(params, options, headers = null) {
             params.filter = JSON.stringify(params.filter).replace(/"/g, '\'');  
         }
     }
- 
+
     let fields = entityQL(options.sections);
-    let query = `{entities${gc(params)}${fields}}`;
-    
-    return request(query, headers);
+    return `{entities${gc(params)}${fields}}`;
 }
 
 /**
@@ -60,9 +55,7 @@ export function findById(params, options, headers) {
     }
 
     let fields = entityQL(options.sections); 
-    let query = `{entity${gc(params)}${fields}}`;
-    
-    return request(query, headers);
+    return `{entity${gc(params)}${fields}}`;
 }
 
 /**
@@ -72,8 +65,7 @@ export function findById(params, options, headers) {
  * @returns {Function}
  */
 export function create(params) {
-    let query = `mutation {createEntity${gc(params)}{id,name,label}}`;
-    return request(query);
+    return `mutation {createEntity${gc(params)}{id,name,label}}`;
 }
 
 /**
@@ -83,8 +75,7 @@ export function create(params) {
  * @returns {Function}
  */
 export function update(params) {
-    let query = `mutation {updateEntity${gc(params)}{id,name,label}}`;
-    return request(query);
+    return `mutation {updateEntity${gc(params)}{id,name,label}}`;
 }
 
 const entityQL = (extra = []) => {
@@ -118,7 +109,7 @@ const entityQL = (extra = []) => {
             path,
             path_label
         }
-        ${extra.map(key=>entity[key]).join(',')}
+        ${extra.map(key => entity[key]).join(',')}
     }`;
 };
 

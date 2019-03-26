@@ -1,5 +1,4 @@
 import { getConditions } from './_util';
-import request from './_request';
 
 /**
  * Получение всех чатов
@@ -37,8 +36,7 @@ const message = `{
 
 export function findAll(params) {  
     let conditions = getConditions(params);  
-    let query = `{messages${conditions}${message}`;
-    return request(query);
+    return `{messages${conditions}${message}`;
 }
 
 /**
@@ -49,6 +47,5 @@ export function findAll(params) {
  */
 export function create(params) {
     let conditions = getConditions(params);
-    let query = `mutation {sendMessage${conditions}${message}`;
-    return request(query);
+    return `mutation {sendMessage${conditions}${message}`;
 }

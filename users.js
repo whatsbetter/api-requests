@@ -1,5 +1,4 @@
 import { getConditions } from './_util';
-import request from './_request';
 
 const user = '{id,name,main_image,karma,providers{type}}}';
 
@@ -14,8 +13,7 @@ const user_page = '{id,name,first_name,second_name,main_image,karma,providers{ty
  */
 export function findById(params) {
     let conditions = getConditions(params); 
-    let query =`{user${conditions}${user_page}`;
-    return request(query);
+    return `{user${conditions}${user_page}`;
 }
 
 
@@ -30,8 +28,7 @@ export function findAll(params) {
         params.limit = 20;
     }
     let conditions = getConditions(params); 
-    let query = `{users${conditions}{id,name,main_image}}`;
-    return request(query);
+    return `{users${conditions}{id,name,main_image}}`;
 }
 
 
@@ -46,8 +43,7 @@ export function findAllPage(params) {
         params.limit = 20;
     }
     let conditions = getConditions(params);
-    let query = `{users${conditions}{id,name,first_name,second_name,main_image,karma,created_at,providers{type,p_id}}}`;
-    return request(query);
+    return `{users${conditions}{id,name,first_name,second_name,main_image,karma,created_at,providers{type,p_id}}}`;
 }
 
 
@@ -58,8 +54,7 @@ export function findAllPage(params) {
  * @returns {Function}
  */
 export function search(params) {
-    let query = `{search(text:"${params.text}",type:"users"){id,data,text}}`;
-    return request(query);
+    return `{search(text:"${params.text}",type:"users"){id,data,text}}`;
 }
 
 /**
@@ -69,8 +64,7 @@ export function search(params) {
  * @returns {Function} 
  */
 export function findMe(params) {
-    let query =`{user (token: "${params.token}")${user}`;
-    return request(query);
+    return `{user (token: "${params.token}")${user}`;
 }
 
 /**
@@ -93,8 +87,7 @@ export function addSubscriptionToSphere(params) {
  */
 export function removeSubscriptionToSphere(params) {
     let conditions = getConditions(params);
-    let query =`mutation {removeSubscriptionForSpheres${conditions}{id}}`;
-    return request(query);
+    return `mutation {removeSubscriptionForSpheres${conditions}{id}}`;
 }
 
 /**
@@ -105,8 +98,7 @@ export function removeSubscriptionToSphere(params) {
  */
 export function findSubscriptionSpheres(params) {
     let conditions = getConditions(params);
-    let query =`{subscription_spheres${conditions}{id,name,icon,label,count_scores,count_criteria,count_entities}}`;
-    return request(query);
+    return `{subscription_spheres${conditions}{id,name,icon,label,count_scores,count_criteria,count_entities}}`;
 }
 
 
@@ -121,6 +113,5 @@ export function findFriends(params) {
         params.limit = 20;
     }
     let conditions = getConditions(params); 
-    let query = `{friends${conditions}{id,name,phone,first_name,second_name,main_image}}`;
-    return request(query);
+    return `{friends${conditions}{id,name,phone,first_name,second_name,main_image}}`;
 }

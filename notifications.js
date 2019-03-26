@@ -1,5 +1,4 @@
 import { getConditions } from './_util';
-import request from './_request';
 
 /**
  * Получить поток
@@ -10,18 +9,15 @@ import request from './_request';
 
 export function get(params) {  
     let conditions = getConditions(params);  
-    let query = `{notifications${conditions}{status,comment {parent_score{id, comment{text,updated_at}, value},text,entity{id,label,main_image},autor{id,name,main_image,karma}, criteria{id,label}, sphere{id,name,label}}, routing_key, kind}}`;
-    return request(query);
+    return `{notifications${conditions}{status,comment {parent_score{id, comment{text,updated_at}, value},text,entity{id,label,main_image},autor{id,name,main_image,karma}, criteria{id,label}, sphere{id,name,label}}, routing_key, kind}}`;
 }
 
 export function getCount() {   
-    let query = `{notifications_count(status: "new")}`;
-    return request(query);
+    return `{notifications_count(status: "new")}`;
 }
 
 export function setStatus(params) {  
     params.status = 'read';
     let conditions = getConditions(params);  
-    let query = `mutation{updateNotification${conditions}}`;
-    return request(query);
+    return `mutation{updateNotification${conditions}}`;
 }

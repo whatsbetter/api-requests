@@ -1,5 +1,4 @@
 import { getConditions } from './_util';
-import request from './_request';
 
 /**
  * Поиск критериев по имени критерии
@@ -11,9 +10,7 @@ export function search(params) {
     params.type = 'criteria';
     
     let conditions = getConditions(params);
-    let query = `{search${conditions}{id,data,text}}`;
-    
-    return request(query);
+    return `{search${conditions}{id,data,text}}`;
 }
 
 
@@ -26,8 +23,7 @@ export function search(params) {
 export function findAll(params) {
     params.hide = false;
     let conditions = getConditions(params);
-    let query = `{criteria${conditions}{id,name,label}}`;
-    return request(query);
+    return `{criteria${conditions}{id,name,label,criteria_group{id,name,label}}}`;
 }
 
 /**
@@ -38,8 +34,7 @@ export function findAll(params) {
  */
 export function findGroups(params) {
     let conditions = getConditions(params);
-    let query = `{criteria_groups${conditions}{id,name,label}}`;
-    return request(query);
+    return `{criteria_groups${conditions}{id,name,label,}}`;
 }
 
 /**
@@ -50,8 +45,7 @@ export function findGroups(params) {
  */
 export function findFromGroups(params) {
     let conditions = getConditions(params);
-    let query = `{criteria_group${conditions}{id,name,label,criteria{id,name,label} }}`;
-    return request(query);
+    return `{criteria_group${conditions}{id,name,label,criteria{id,name,label} }}`;
 }
 
 

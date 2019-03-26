@@ -1,5 +1,4 @@
 import { getConditions as gc } from './_util';
-import request from './_request';
 
 /**
  * Создать галлерею
@@ -11,13 +10,11 @@ import request from './_request';
 const gallery = '{id}';
 
 export function get(params) {   
-    let query = `{gallery${gc(params)}{id,items(limit: 100){id,hash}}}`;
-    return request(query);
+    return `{gallery${gc(params)}{id,items(limit: 100){id,hash}}}`;
 }
 
 export function create(params) {   
-    let query = `mutation {createGallery${gc(params)}${gallery}}`;
-    return request(query);
+    return `mutation {createGallery${gc(params)}${gallery}}`;
 }
 
 /**
@@ -27,8 +24,7 @@ export function create(params) {
  * @returns {Function} 
  */
 export function update(params) {
-    let query = `mutation {updateGallery${gc(params)}${gallery}}`;
-    return request(query);
+    return `mutation {updateGallery${gc(params)}${gallery}}`;
 }
 
 /**
@@ -38,8 +34,7 @@ export function update(params) {
  * @returns {Function} 
  */
 export function addMedia(params) {
-    let query = `mutation {addMediaToGallery${gc(params)}${gallery}}`;
-    return request(query);
+    return `mutation {addMediaToGallery${gc(params)}${gallery}}`;
 }
 
 /**
@@ -49,6 +44,5 @@ export function addMedia(params) {
  * @returns {Function} 
  */
 export function removeMedia(params) {
-    let query = `mutation {removeMediaFromGallery${gc(params)}${gallery}}`;
-    return request(query);
+    return `mutation {removeMediaFromGallery${gc(params)}${gallery}}`;
 }
