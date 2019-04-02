@@ -18,10 +18,12 @@ export function findAll(params) {
  * Найти чат
  * 
  * @param {Object} params
+ * @param {Object} options
  * @returns {Function} 
  */
-export function findById(params) {   
-    return `{chat${gc(params)}{id, users(limit:20){id,name,main_image}}}`;
+export function findById(params, options = {}) {   
+    let usersLimit = 'usersLimit' in options ? options.usersLimit : 20;
+    return `{chat${gc(params)}{id, label, users(limit:${usersLimit}){id,name,main_image},sphere{id, name, label},criteria{id,label},}}`;
 }
 
 
