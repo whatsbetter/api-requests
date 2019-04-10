@@ -114,3 +114,8 @@ export function findFriends(params) {
     let conditions = getConditions(params); 
     return `{friends${conditions}{id,name,phone,first_name,second_name,main_image}}`;
 }
+
+export function getPartners() {
+    return `{get_partners_users{id,name,phone,main_image}}`;
+}
+
