@@ -78,6 +78,30 @@ export function update(params) {
     return `mutation {updateEntity${gc(params)}{id,name,label}}`;
 }
 
+export function compare(params, options) {
+    let extra = [];
+    if (options.types.includes('properties')) {
+        extra.push(`properties(group_property_id: "${params.groupPropertyId}") {name,label,value,id}`);
+    };
+    
+    if (options.types.includes('criteria')) {
+        extra.push(`avg_scores(criteria: "${options.criteria}"){criteria{id,label},value}`);
+    };
+    
+    params.typeCompare = "properties";
+
+    return `{
+        compare_entities${gc(params)}{
+            id,
+            label,
+            main_image,
+            ${extra.join(',')}
+        }
+    }`;
+}
+
+
+
 const entityQL = (extra = []) => {
     return `{
         id,
