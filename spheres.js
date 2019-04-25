@@ -34,10 +34,49 @@ export function findAll(params) {
  * Получение сферы по идентификатору
  * 
  * @param {Object} params
+ * @param {Object} options
  * @returns {Function}
  */
-export function findById(params) {
-    return `{sphere(id: "${params.id}"){name,id,description,label,count_criteria,count_entities,have_map,sharing_description,count_scores,popular_criteria{name,id,label}}}`;
+export function findById(params, options = {}) {
+
+    let sphere = {};
+    
+    sphere.accociatedProperties = `
+        accociated_properties{
+            label,
+            id,
+            sphere{
+                id,
+                name,
+                label,
+                description,
+                icon,
+                popular_criteria{
+                   id
+                   label
+                }
+            }
+        }`;
+    return `
+        {sphere(id: "${params.id}"){
+            name,
+            id,
+            description,
+            label,
+            count_criteria,
+            count_entities,
+            have_map,
+            sharing_description,
+            count_scores,
+            popular_criteria{
+                name,
+                id,
+                label
+            },
+            ${'sections' in options ? options.sections.map(key => sphere[key]).join(',') : ''}      
+        }
+    }
+`;
 }
 
 
