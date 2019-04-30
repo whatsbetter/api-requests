@@ -29,5 +29,12 @@ export function findByType(type, params) {
     return `{property_${type}${conditions}{id,name,label}}`;
 }
 
+export function getGroups(params) {
+    let conditions = getConditions(params);
+    return `{groups_properties${conditions}{name,label,id}}`;
+}
+
+
+
 
 
