@@ -1,9 +1,43 @@
-import { getConditions } from './_util';
+import { getConditions as t } from './_util';
 
-const user = '{id,name,main_image,karma,providers{type}}}';
 
-const user_page = '{id,name,first_name,second_name,main_image,karma,providers{type},' +
-    'karma_details{sphere{id,label,name},value,count_scores,count_useless,count_useful}}}';
+const fragments = {
+    
+    user: `{
+        id,
+        name,
+        main_image,
+        karma,
+        providers{
+            type
+        }
+    }`,
+    
+    userDetailed: `{
+        id,
+        name,
+        first_name,
+        second_name,
+        main_image,
+        karma,
+        providers{
+            type
+        }, 
+        karma_details {
+            sphere{
+                id,
+                label,
+                name
+            },
+            value,
+            count_scores,
+            count_useless,
+            count_useful
+        }
+    }`
+};
+
+
 
 /**
  * Найти текущего пользователя по токену
@@ -12,8 +46,10 @@ const user_page = '{id,name,first_name,second_name,main_image,karma,providers{ty
  * @returns {Function} 
  */
 export function findById(params) {
-    let conditions = getConditions(params); 
-    return `{user${conditions}${user_page}`;
+    return `
+        {user ${ t(params)} 
+            ${fragments.userDetailed}
+        }`;
 }
 
 
@@ -24,26 +60,15 @@ export function findById(params) {
  * @returns {Function} 
  */
 export function findAll(params) {
-    if (!('limit' in params)) {
-        params.limit = 20;
-    }
-    let conditions = getConditions(params); 
-    return `{users${conditions}{id,name,main_image}}`;
-}
-
-
-/**
- * Поиск пользователей статистика НАДО ПЕРЕНЕСТИ В АДМИНКУ НО Я НЕ ЗНАЮ КАК
- *
- * @param {Object} params
- * @returns {Function}
- */
-export function findAllPage(params) {
-    if (!('limit' in params)) {
-        params.limit = 20;
-    }
-    let conditions = getConditions(params);
-    return `{users${conditions}{id,name,first_name,second_name,main_image,karma,created_at,providers{type,p_id}}}`;
+    params.limit = params.limit || 20;
+    
+    return `
+        {users ${ t(params) } {
+            id,
+            name,
+            main_image
+        }
+    }`;
 }
 
 
@@ -54,7 +79,13 @@ export function findAllPage(params) {
  * @returns {Function}
  */
 export function search(params) {
-    return `{search(text:"${params.text}",type:"users"){id,data,text}}`;
+    return `
+        {search (text:"${params.text}", type:"users") {
+            id,
+            data,
+            text
+        }
+    }`;
 }
 
 /**
@@ -64,7 +95,11 @@ export function search(params) {
  * @returns {Function} 
  */
 export function findMe(params) {
-    return `{user (token: "${params.token}")${user}`;
+    return `
+        {user (token: "${params.token}")
+            ${fragments.user}
+        }
+    `;
 }
 
 /**
@@ -74,8 +109,14 @@ export function findMe(params) {
  * @returns {Function} 
  */
 export function addSubscriptionToSphere(params) {
-    let conditions = getConditions(params);
-    return `mutation {addSubscriptionForSpheres${conditions}{id,name,label,icon}}`;
+    return `
+        mutation {addSubscriptionForSpheres ${ t(params) } {
+            id,
+            name,
+            label,
+            icon
+        }
+    }`;
 }
 
 /**
@@ -85,19 +126,31 @@ export function addSubscriptionToSphere(params) {
  * @returns {Function} 
  */
 export function removeSubscriptionToSphere(params) {
-    let conditions = getConditions(params);
-    return `mutation {removeSubscriptionForSpheres${conditions}{id}}`;
+    return `
+        mutation {removeSubscriptionForSpheres ${ t(params) } {
+            id
+        }
+    }`;
 }
 
 /**
- * Получить сферы на которые подписан
+ * Получить сферы, на которые подписан пользователь
  * 
  * @param {Object} params
  * @returns {Function} 
  */
 export function findSubscriptionSpheres(params) {
-    let conditions = getConditions(params);
-    return `{subscription_spheres${conditions}{id,name,icon,label,count_scores,count_criteria,count_entities}}`;
+    return `
+        {subscription_spheres ${ t(params) } {
+            id,
+            name,
+            icon,
+            label,
+            count_scores,
+            count_criteria,
+            count_entities
+        }
+    }`;
 }
 
 
@@ -107,15 +160,29 @@ export function findSubscriptionSpheres(params) {
  * @param {Object} params
  * @returns {Function} 
  */
-export function findFriends(params) {
-    if (!('limit' in params)) {
-        params.limit = 20;
-    }
-    let conditions = getConditions(params); 
-    return `{friends${conditions}{id,name,phone,first_name,second_name,main_image}}`;
+export function findFriends(params) {    
+    params.limit = params.limit || 20;
+
+    return `
+        {friends ${ t(params) } {
+            id,
+            name,
+            phone,
+            first_name,
+            second_name,
+            main_image
+        }
+    }`;
 }
 
 export function getPartners() {
-    return `{get_partners_users{id,name,phone,main_image}}`;
+    return `
+        {get_partners_users {
+            id,
+            name,
+            phone,
+            main_image
+        }
+    }`;
 }
 

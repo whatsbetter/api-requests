@@ -1,16 +1,22 @@
-import { getConditions } from './_util';
+import { getConditions as t } from './_util';
+
 
 /**
- * Поиск критериев по имени критерии
+ * Поиск критериев по имени 
  * 
  * @param {Object} params
- * @returns {Function} 
+ * @returns {String} 
  */
 export function search(params) {
     params.type = 'criteria';
-    
-    let conditions = getConditions(params);
-    return `{search${conditions}{id,data,text}}`;
+
+    return `{
+        search ${ t(params) } {
+            id,
+            data,
+            text
+        }
+    }`;
 }
 
 
@@ -18,60 +24,94 @@ export function search(params) {
  * Найти все критерии
  * 
  * @param {Object} params
- * @returns {Function} 
+ * @returns {String} 
  */
 export function findAll(params) {
     params.hide = false;
-    let conditions = getConditions(params);
-    return `{criteria${conditions}{id,name,label,criteria_group{id,name,label}}}`;
+    
+    return `
+        {criteria ${ t(params) } {
+            id,
+            name,
+            label,
+            criteria_group {
+                id,
+                name,
+                label
+            }
+        }
+    }`;
 }
+
 
 /**
  * Найти все группы
  * 
  * @param {Object} params
- * @returns {Function} 
+ * @returns {String} 
  */
-export function findGroups(params) {
-    let conditions = getConditions(params);
-    return `{criteria_groups${conditions}{id,name,label,}}`;
+export function findGroups (params) {
+    return `
+        {criteria_groups ${ t(params) } {
+            id,
+            name,
+            label
+        }
+    }`;
 }
+
 
 /**
  * Найти все критерии группы
  * 
  * @param {Object} params
- * @returns {Function} 
+ * @returns {String} 
  */
 export function findFromGroups(params) {
-    let conditions = getConditions(params);
-    return `{criteria_group${conditions}{id,name,label,criteria{id,name,label} }}`;
+    return `
+        {criteria_group ${ t(params) } {
+            id,
+            name,
+            label,
+            criteria{
+                id,
+                name,
+                label
+            } 
+        }
+    }`;
 }
-
-
-
 
 
 /**
  * Создание критерия
  * 
  * @param {Object} params
- * @returns {Function}
+ * @returns {String} 
  */
 export function create(params) {
-    let conditions = getConditions(params);
-    let query = `mutation {createCriteria${conditions}{id,name,label}}`;
-    return request(query);
+    return  `
+        mutation {createCriteria ${ t(params) } {
+            id,
+            name,
+            label
+        }
+    }`;
 }
+
 
 /**
  * Обновление критерия
  * 
  * @param {Object} params
- * @returns {Function}
+ * @returns {String} 
  */
 export function update(params) {
-    let conditions = getConditions(params);
-    let query = `mutation {updateCriteria${conditions}{id,name,label}}`;
-    return request(query);
+    return `
+        mutation {updateCriteria ${ t(params) } {
+            id,
+            name,
+            label
+        }
+    }`;
 }

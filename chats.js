@@ -1,17 +1,50 @@
-import { getConditions as gc } from './_util';
+import { getConditions as t } from './_util';
+
+const fragments = {
+    chat: `{
+        id,
+        label,
+        main_image,
+        read,
+        criteria {
+            id, 
+            label
+        },
+        sphere{
+            id,
+            name
+        },
+        status,
+        users (limit: 4) {
+            id,
+            name,
+            main_image
+        },
+        last_message {
+            text,
+            user {
+                id,
+                name,
+                main_image
+            }
+        }
+    }`
+};
+
 
 /**
  * Получение всех чатов
  * 
  * @param {Object} params
- * @returns {Function}
+ * @returns {Stting}
  */
-const chat = '{id,label,main_image,read,criteria{id, label},sphere{id,name},status,users(limit: 4){id,name,main_image},last_message{text,user{id,name,main_image}}}';
-
 export function findAll(params) {  
     params.limit = params.limit || 20;
     
-    return `{chats${gc(params)}${chat}}`;
+    return `
+        {chats ${ t(params) }
+            ${fragments.chat}
+    }`;
 }
 
 /**
@@ -23,7 +56,27 @@ export function findAll(params) {
  */
 export function findById(params, options = {}) {   
     let usersLimit = 'usersLimit' in options ? options.usersLimit : 20;
-    return `{chat${gc(params)}{id, label, users(limit:${usersLimit}){id,name,main_image},sphere{id, name, label},criteria{id,label},}}`;
+    
+    return `
+        {chat ${t(params)} {
+            id, 
+            label, 
+            users(limit: ${ usersLimit }){
+                id,
+                name,
+                main_image
+            },
+            sphere{
+                id, 
+                name, 
+                label
+            },
+            criteria{
+                id,
+                label
+            }
+        }
+    }`;
 }
 
 
@@ -34,7 +87,10 @@ export function findById(params, options = {}) {
  * @returns {Function} 
  */
 export function create(params) {
-    return `mutation {createChat${gc(params)}${chat}}`;
+    return `
+        mutation {createChat ${ t(params) }
+                ${fragments.chat}
+        }`;
 }
 
 /**
@@ -44,8 +100,5 @@ export function create(params) {
  * @returns {Function} 
  */
 export function setRead(params) {
-    return `mutation {readChat${gc(params)}}`;
+    return `mutation {readChat ${ t(params) }}`;
 }
-
-
- 

@@ -1,17 +1,50 @@
-import { getConditions } from './_util';
+import { getConditions as t } from './_util';
 
-
+/**
+ *  Создать комментарий
+ * 
+ * @param {Object} params
+ * @returns {String}
+ */
 export function create(params) {
     let text = params.text.replace(/(?:\r\n|\r|\n)/g, '\n');
     params.text = `""${text}""`;
-    let conditions = getConditions(params);
-    return `mutation {createComment${conditions}{id, text, autor{id,name,main_image, karma}}}`;
+    
+    return `
+        mutation {createComment ${ t(params) } {
+            id, 
+            text, 
+            autor {
+                id,
+                name, 
+                main_image, 
+                karma
+            }
+        }
+    }`;
 
 }
 
+
+/**
+ *  Получить все аргументы оценки
+ * 
+ * @param {Object} params
+ * @returns {String}
+ */
 export function getByScore(params) {
-    let conditions = getConditions(params);
-    return`{comments${conditions}{id, text, autor{id,name,main_image,karma}}}`;
+    return `
+        {comments ${ t(params) } {
+            id,
+            text,
+            autor {
+                id,
+                name,
+                main_image,
+                karma
+            }
+        }
+    }`;
 }
 
 
@@ -20,16 +53,16 @@ export function getByScore(params) {
  * 
  * @param {Object} params
  * @param {Object} options
- * @returns {Function}
+ * @returns {String}
  */
-export function changeUseful(params, options) {
-    let conditions = getConditions(params);
-    
-    let _type = 'usefulComment';
-    
-    if (options.type === 'minus') {
-        _type = 'uselessComment';
-    }
+export function changeUseful(params, options) {    
+    let type = options.type === 'minus' ? 'uselessComment' : 'usefulComment';
 
-    return `mutation {${_type}${conditions}{id,useful,useless}}`;
+    return `
+        mutation {${type} ${ t(params) } {
+            id,
+            useful,
+            useless
+        }
+    }`;
 }
