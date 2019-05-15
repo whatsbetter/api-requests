@@ -1,15 +1,16 @@
-import { getConditions as gc } from './_util';
+import { getConditions as t } from './_util';
+
 
 /**
  * Получить поток
  * 
  * @param {Object} params
- * @returns {Function}
+ * @returns {String}
  * 
  */
 export function get(params) {        
     return `{
-        feed ${gc(params)}{
+        feed ${ t(params) }{
             created_at,
             end,
             start,

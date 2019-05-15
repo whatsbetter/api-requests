@@ -1,35 +1,29 @@
-import { getConditions as gc } from './_util';
-import request from './_request';
+import { getConditions as t } from './_util';
+const fragments = {};
 
-/**
- * Сохранение оценки
- * 
- * @param {Object} params
- * @returns {Function}
- */
 
-const score = `{
+fragments.score = `{
     id,
     value,
     sphere_id,
-    criterion{
+    criterion {
         id,
         label
     },
-    entity{
+    entity {
         id,
         label,
         main_image
     },
-    user{
+    user {
         id,
         name,
         main_image,
         karma
     },
-    replies{
+    replies {
         text,
-        autor{
+        autor {
             id,
             name,
             main_image,
@@ -37,14 +31,14 @@ const score = `{
         }
     },
     count_sub_comments,
-    comment{
+    comment {
         text,
         id,
         useful,
         useless,
-        gallery{
+        gallery {
             id, 
-            items{
+            items {
                 id,
                 hash
             }
@@ -53,13 +47,22 @@ const score = `{
     }
 }`;
 
+/**
+ * Сохранение оценки
+ * 
+ * @param {Object} params
+ * @returns {String}
+ */
 export function save(params) {
     if ('comment' in params) {
         let comment = params.comment.replace(/(?:\r\n|\r|\n)/g, '\n');
         params.comment = `""${comment}""`;
     }   
         
-    return `mutation {createScore${gc(params)}${score}}`;
+    return `
+        mutation {createScore ${ t(params) } 
+            ${fragments.score}
+        }`;
 }
 
 
@@ -67,18 +70,29 @@ export function save(params) {
  * Получение оценок
  * 
  * @param {Object} params
- * @returns {Function}
+ * @returns {String}
  */
 export function find(params) {
-    if (!('limit' in params)) {
-        params.limit = 10;
-    }
-    return `{scores${gc(params)}${score}}`; 
+    params.limit = params.limit || 10;
+    
+    return `
+        {scores ${ t(params) }
+            ${fragments.score}
+        }`; 
 }
 
 
+/**
+ * Получение оценки по идентификатору
+ * 
+ * @param {Object} params
+ * @returns {String}
+ */
 export function findById(params) {
-    return `{score${gc(params)}${score}}`; 
+    return `
+        {score ${ t(params) } 
+            ${fragments.score}
+        }`; 
 }
 
 

@@ -1,48 +1,78 @@
-import { getConditions as gc } from './_util';
+import { getConditions as t } from './_util';
+const fragments = {};
+
+
+fragments.gallery = `{
+    id
+}`;
+
+
+/**
+ * Получить галлерею
+ * 
+ * @param {Object} params
+ * @returns {String}
+ */
+export function get(params) {   
+    return `
+        {gallery ${ t(params) } { 
+            id,
+            items(limit: 100) {
+                id,
+                hash
+            }
+        }
+    }`;
+}
 
 /**
  * Создать галлерею
  * 
  * @param {Object} params
- * @returns {Function}
+ * @returns {String}
  */
-
-const gallery = '{id}';
-
-export function get(params) {   
-    return `{gallery${gc(params)}{id,items(limit: 100){id,hash}}}`;
-}
-
 export function create(params) {   
-    return `mutation {createGallery${gc(params)}${gallery}}`;
+    return `
+        mutation {createGallery ${ t(params) } 
+            ${ fragments.gallery }
+        }`;
 }
 
 /**
  * Обновить галлерею
  * 
  * @param {Object} params
- * @returns {Function} 
+ * @returns {String} 
  */
 export function update(params) {
-    return `mutation {updateGallery${gc(params)}${gallery}}`;
+    return `
+        mutation {updateGallery ${ t(params) } 
+            ${ fragments.gallery }
+        }`;
 }
 
 /**
  * Добавить элемент в галерею
  * 
  * @param {Object} params
- * @returns {Function} 
+ * @returns {String} 
  */
 export function addMedia(params) {
-    return `mutation {addMediaToGallery${gc(params)}${gallery}}`;
+    return `
+        mutation {addMediaToGallery ${ t(params) } 
+            ${ fragments.gallery }
+        }`;
 }
 
 /**
  * Удалить элемент из галереи
  * 
  * @param {Object} params
- * @returns {Function} 
+ * @returns {String} 
  */
 export function removeMedia(params) {
-    return `mutation {removeMediaFromGallery${gc(params)}${gallery}}`;
+    return `
+        mutation {removeMediaFromGallery ${ t(params) } 
+            ${ fragments.gallery }
+        }`;
 }

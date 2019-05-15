@@ -1,54 +1,51 @@
 import { getConditions as t } from './_util';
+const fragments = {};
 
 
-const fragments = {
+fragments.user =  `{
+    id,
+    name,
+    main_image,
+    karma,
+    providers{
+        type
+    }
+}`,
     
-    user: `{
-        id,
-        name,
-        main_image,
-        karma,
-        providers{
-            type
-        }
-    }`,
-    
-    userDetailed: `{
-        id,
-        name,
-        first_name,
-        second_name,
-        main_image,
-        karma,
-        providers{
-            type
-        }, 
-        karma_details {
-            sphere{
-                id,
-                label,
-                name
-            },
-            value,
-            count_scores,
-            count_useless,
-            count_useful
-        }
-    }`
-};
-
+fragments.userDetailed = `{
+    id,
+    name,
+    first_name,
+    second_name,
+    main_image,
+    karma,
+    providers{
+        type
+    }, 
+    karma_details {
+        sphere{
+            id,
+            label,
+            name
+        },
+        value,
+        count_scores,
+        count_useless,
+        count_useful
+    }
+}`;
 
 
 /**
  * Найти текущего пользователя по токену
  * 
  * @param {Object} params
- * @returns {Function} 
+ * @returns {String} 
  */
 export function findById(params) {
     return `
         {user ${ t(params)} 
-            ${fragments.userDetailed}
+            ${ fragments.userDetailed }
         }`;
 }
 
@@ -57,7 +54,7 @@ export function findById(params) {
  * Поиск пользователей
  * 
  * @param {Object} params
- * @returns {Function} 
+ * @returns {String} 
  */
 export function findAll(params) {
     params.limit = params.limit || 20;
@@ -76,7 +73,7 @@ export function findAll(params) {
  * Поиск пользователей по имени
  * 
  * @param {Object} params
- * @returns {Function}
+ * @returns {String}
  */
 export function search(params) {
     return `
@@ -92,7 +89,7 @@ export function search(params) {
  * Найти текущего пользователя по токену
  * 
  * @param {Object} params
- * @returns {Function} 
+ * @returns {String} 
  */
 export function findMe(params) {
     return `
@@ -106,7 +103,7 @@ export function findMe(params) {
  * Добавить подписку на сферу
  * 
  * @param {Object} params
- * @returns {Function} 
+ * @returns {String} 
  */
 export function addSubscriptionToSphere(params) {
     return `
@@ -123,7 +120,7 @@ export function addSubscriptionToSphere(params) {
  * Удалить подписку на сферу
  * 
  * @param {Object} params
- * @returns {Function} 
+ * @returns {String} 
  */
 export function removeSubscriptionToSphere(params) {
     return `
@@ -137,7 +134,7 @@ export function removeSubscriptionToSphere(params) {
  * Получить сферы, на которые подписан пользователь
  * 
  * @param {Object} params
- * @returns {Function} 
+ * @returns {String} 
  */
 export function findSubscriptionSpheres(params) {
     return `
@@ -158,7 +155,7 @@ export function findSubscriptionSpheres(params) {
  * Поиск друзей
  * 
  * @param {Object} params
- * @returns {Function} 
+ * @returns {String} 
  */
 export function findFriends(params) {    
     params.limit = params.limit || 20;

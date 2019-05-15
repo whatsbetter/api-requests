@@ -1,35 +1,35 @@
 import { getConditions as t } from './_util';
+const fragments = {};
 
-const fragments = {
-    chat: `{
+
+fragments.chat = `{
+    id,
+    label,
+    main_image,
+    read,
+    criteria {
+        id, 
+        label
+    },
+    sphere{
         id,
-        label,
-        main_image,
-        read,
-        criteria {
-            id, 
-            label
-        },
-        sphere{
-            id,
-            name
-        },
-        status,
-        users (limit: 4) {
+        name
+    },
+    status,
+    users (limit: 4) {
+        id,
+        name,
+        main_image
+    },
+    last_message {
+        text,
+        user {
             id,
             name,
             main_image
-        },
-        last_message {
-            text,
-            user {
-                id,
-                name,
-                main_image
-            }
         }
-    }`
-};
+    }
+}`;
 
 
 /**
@@ -43,7 +43,7 @@ export function findAll(params) {
     
     return `
         {chats ${ t(params) }
-            ${fragments.chat}
+            ${ fragments.chat }
     }`;
 }
 
@@ -52,13 +52,13 @@ export function findAll(params) {
  * 
  * @param {Object} params
  * @param {Object} options
- * @returns {Function} 
+ * @returns {String} 
  */
 export function findById(params, options = {}) {   
     let usersLimit = 'usersLimit' in options ? options.usersLimit : 20;
     
     return `
-        {chat ${t(params)} {
+        {chat ${ t(params) } {
             id, 
             label, 
             users(limit: ${ usersLimit }){
@@ -84,7 +84,7 @@ export function findById(params, options = {}) {
  * Создать чат
  * 
  * @param {Object} params
- * @returns {Function} 
+ * @returns {String} 
  */
 export function create(params) {
     return `
@@ -97,7 +97,7 @@ export function create(params) {
  * Создать чат
  * 
  * @param {Object} params
- * @returns {Function} 
+ * @returns {String} 
  */
 export function setRead(params) {
     return `mutation {readChat ${ t(params) }}`;

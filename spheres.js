@@ -1,62 +1,79 @@
-import { getConditions } from './_util';
+import { getConditions as t } from './_util';
+const fragments = {};
+
+
+fragments.accociatedProperties = `
+    accociated_properties {
+        label,
+        id,
+        sphere{
+            id,
+            name,
+            label,
+            description,
+            icon,
+            popular_criteria{
+               id
+               label
+            }
+        }
+    }`;
 
 /**
  * Поиск сфер по имени
  * 
  * @param {Object} params
- * @returns {Function}
+ * @returns {String}
  */
 export function search(params) {
-    return `{search(text:"${params.text}",type:"spheres"){id,data,text,subtitle}}`;
+    return `
+        {search(text:"${params.text}",type:"spheres") {
+            id,
+            data,
+            text,
+            subtitle
+        }
+    }`;
 }
 
 /**
  * Получение всех сфер
  * 
  * @param {Object} params
- * @returns {Function}
+ * @returns {String}
  */
 export function findAll(params) {
-    if (!('limit' in params)) {
-        params.limit = 20;
-    }
+    params.limit = params.limit || 20;
     params.hide = false;
     
     if (!('parent' in params) && !('type' in params)) {
         params.orderBy = 'popular';
     }
 
-    let conditions = getConditions(params);
-    return `{spheres${conditions}{name,id,icon,label,have_child,count_scores,count_criteria,subscribed,count_entities}}`;
+    return `
+        {spheres ${ t(params) } {
+            name,
+            id,
+            icon,
+            label,
+            have_child,
+            count_scores,
+            count_criteria,
+            subscribed,
+            count_entities
+        }
+    }`;
 }
+
 
 /**
  * Получение сферы по идентификатору
  * 
  * @param {Object} params
  * @param {Object} options
- * @returns {Function}
+ * @returns {String}
  */
 export function findById(params, options = {}) {
-
-    let sphere = {};
-    
-    sphere.accociatedProperties = `
-        accociated_properties{
-            label,
-            id,
-            sphere{
-                id,
-                name,
-                label,
-                description,
-                icon,
-                popular_criteria{
-                   id
-                   label
-                }
-            }
-        }`;
     return `
         {sphere(id: "${params.id}"){
             name,
@@ -73,7 +90,7 @@ export function findById(params, options = {}) {
                 id,
                 label
             },
-            ${'sections' in options ? options.sections.map(key => sphere[key]).join(',') : ''}      
+            ${'sections' in options ? options.sections.map(key => fragments[key]).join(',') : ''}      
         }
     }
 `;
@@ -84,20 +101,31 @@ export function findById(params, options = {}) {
  * Создание сферы
  * 
  * @param {Object} params
- * @returns {Function}
+ * @returns {String}
  */
 export function create(params) {
-    let conditions = getConditions(params);
-    return `mutation {createSphere${conditions}{id,name,label}}`;
+    return `
+        mutation { createSphere ${ t(params) } {
+            id,
+            name,
+            label
+        }
+    }`;
 }
+
 
 /**
  * Обновление сферы
  * 
  * @param {Object} params
- * @returns {Function}
+ * @returns {String}
  */
 export function update(params) {
-    let conditions = getConditions(params);
-    return `mutation {updateSphere${conditions}{id,name,label}}`;
+    return `
+        mutation {updateSphere ${ t(params) } { 
+            id,
+            name,
+            label
+        }
+    }`;
 }

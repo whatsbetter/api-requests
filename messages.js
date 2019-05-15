@@ -1,13 +1,8 @@
-import { getConditions } from './_util';
+import { getConditions as t } from './_util';
+const fragments = {};
 
-/**
- * Получение всех чатов
- * 
- * @param {Object} params
- * @returns {Function}
- */
 
-const message = `{
+fragments.message = `{
     id,
     text,
     user {
@@ -15,7 +10,7 @@ const message = `{
         name,
         main_image
     }, 
-    rating{
+    rating {
         id,
         label,
         name,
@@ -31,21 +26,31 @@ const message = `{
         }
     }, 
     created_at
-}}`;
+}`;
 
 
-export function findAll(params) {  
-    let conditions = getConditions(params);  
-    return `{messages${conditions}${message}`;
+/**
+ * Получение всех собщений в чате
+ * 
+ * @param {Object} params
+ * @returns {String}
+ */
+export function findAll(params) {   
+    return `
+        {messages ${ t(params) } 
+            ${fragments.message}
+        }`;
 }
 
 /**
- * Создать чат
+ * Создать сообщение
  * 
  * @param {Object} params
- * @returns {Function} 
+ * @returns {String} 
  */
 export function create(params) {
-    let conditions = getConditions(params);
-    return `mutation {sendMessage${conditions}${message}`;
+    return `
+        mutation {sendMessage ${ t(params) } 
+            ${fragments.message}
+        }`;
 }

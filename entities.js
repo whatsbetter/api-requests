@@ -1,16 +1,23 @@
-import { getConditions as gc } from './_util';
+import { getConditions as t } from './_util';
 
 
 /**
  * Поиск объектов по имени
  * 
  * @param {Object} params
- * @returns {Function}
+ * @returns {String}
  */
 export function search(params) {
     params.type = 'entities';
     
-    return `{search${gc(params)}{id,data,text,subtitle}}`;
+    return `
+        {search ${ t(params) } {
+            id,
+            data,
+            text,
+            subtitle
+        }
+    }`;
 }
 
 
@@ -18,16 +25,17 @@ export function search(params) {
  * Ранжирование объектов
  * 
  * @param {Object} params
- * @returns {Function}
+ * @param {Object} options
+ * @returns {String}
  */
-export function findAll(params, options, headers = null) {   
+export function findAll(params, options) {   
+    params.limit = params.limit || 10;
+    
     if (!options) {
         options = {
             section: null
         };
     }
-    
-    params.limit = params.limit || 10;
 
     if ('filter' in params) {
         if (Object.keys(params.filter).length > 0) {
@@ -35,8 +43,10 @@ export function findAll(params, options, headers = null) {
         }
     }
 
-    let fields = entityQL(options.sections);
-    return `{entities${gc(params)}${fields}}`;
+    return `
+        {entities ${ t(params) } 
+            ${ getFragments(options.sections) }
+        }`;
 }
 
 /**
@@ -44,54 +54,85 @@ export function findAll(params, options, headers = null) {
  * 
  * @param {Object} params
  * @param {Object} options
- * @param {Object} headers
- * @returns {Function}
+ * @returns {String}
  */
-export function findById(params, options, headers) {       
+export function findById(params, options) {       
     if ('filter' in params) {
         if (Object.keys(params.filter).length > 0) {
             params.filter = JSON.stringify(params.filter).replace(/"/g, '\'');  
         }
     }
 
-    let fields = entityQL(options.sections); 
-    return `{entity${gc(params)}${fields}}`;
+    return `
+        {entity ${ t(params) } 
+            ${ getFragments(options.sections) }
+        }`;
 }
 
 /**
  * Создание объекта
  * 
  * @param {Object} params
- * @returns {Function}
+ * @returns {String}
  */
 export function create(params) {
-    return `mutation {createEntity${gc(params)}{id,name,label}}`;
+    return `
+        mutation {createEntity ${ t(params) } {
+            id,
+            name,
+            label
+        }
+    }`;
 }
 
 /**
  * Обновление объекта
  * 
  * @param {Object} params
- * @returns {Function}
+ * @returns {String}
  */
 export function update(params) {
-    return `mutation {updateEntity${gc(params)}{id,name,label}}`;
+    return `
+        mutation {updateEntity ${ t(params) } {
+            id,
+            name,
+            label
+        }
+    }`;
 }
 
 export function compare(params, options) {
     let extra = [];
+
+    let properties = `
+        properties(group_property_id: "${params.groupPropertyId}") {
+            name,
+            label,
+            value,
+            id
+        }`;
+    
+    let criteria = `
+        avg_scores (criteria: "${options.criteria}") {
+            criteria{
+                id,
+                label
+            },
+            value
+        }`;
+    
     if (options.types.includes('properties')) {
-        extra.push(`properties(group_property_id: "${params.groupPropertyId}") {name,label,value,id}`);
+        extra.push(properties);
     };
     
     if (options.types.includes('criteria')) {
-        extra.push(`avg_scores(criteria: "${options.criteria}"){criteria{id,label},value}`);
+        extra.push(criteria);
     };
     
     params.typeCompare = "properties";
 
     return `{
-        compare_entities${gc(params)}{
+        compare_entities ${ t(params) }{
             id,
             label,
             main_image,
@@ -102,7 +143,7 @@ export function compare(params, options) {
 
 
 
-const entityQL = (extra = []) => {
+const getFragments = (extra = []) => {
     return `{
         id,
         name,
@@ -133,15 +174,15 @@ const entityQL = (extra = []) => {
             path,
             path_label
         }
-        ${extra.map(key => entity[key]).join(',')}
+        ${extra.map(key => fragments[key]).join(',')}
     }`;
 };
 
 
-const entity = {};
+const fragments = {};
 
 /** Свойства */
-entity.properties = `
+fragments.properties = `
     properties {
         id,
         kind,
@@ -151,7 +192,7 @@ entity.properties = `
     }`;
 
 /** Награды */
-entity.medals = `
+fragments.medals = `
     medals{
         place,
         value,
@@ -164,7 +205,7 @@ entity.medals = `
     }`;
 
 /** Лучшие оценки */
-entity.topAvgScores = `
+fragments.topAvgScores = `
     top_avg_scores(limit: 3) {
         value, 
         criteria {
@@ -174,7 +215,7 @@ entity.topAvgScores = `
     }`;
 
 /** Худшие оценки */
-entity.bottomAvgScores = `
+fragments.bottomAvgScores = `
     bottom_avg_scores(limit: 3) {
         value, 
         criteria {
@@ -184,7 +225,7 @@ entity.bottomAvgScores = `
     }`;
 
 /** Средние оценки */
-entity.avgScores = `
+fragments.avgScores = `
     avg_scores{
         value, 
         count_scores, 
@@ -192,7 +233,7 @@ entity.avgScores = `
     }`;
 
 /** Средние оценки с детализацией по критериям  */
-entity.avgEnrichedScores = `
+fragments.avgEnrichedScores = `
     avg_scores {
         value, 
         count_scores, 
@@ -203,20 +244,20 @@ entity.avgEnrichedScores = `
     }`;
 
 /** Медали по свойствам */
-entity.specialMedals = `
-    special_medals{
+fragments.specialMedals = `
+    special_medals {
         criteria{
             id,
             label
         }
         place,
         value,
-        property{
+        property {
             name,
             label
         }
-        property_value{
+        property_value {
             name, 
             label
         }
-  }`;
+    }`;

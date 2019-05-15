@@ -1,14 +1,19 @@
-import { getConditions } from './_util';
+import { getConditions as t } from './_util';
 
 
 /**
- * Получение всех чатов
+ * Поиск
  * 
  * @param {Object} params
- * @returns {Function}
+ * @returns {String}
  */
 export function execute(params) {  
-    let conditions = getConditions(params);  
-    return `{search${conditions}{text,data,subtitle}}`;
+    return `
+        {search ${ t(params) } { 
+            text,
+            data,
+            subtitle
+        }
+    }`;
 }
 

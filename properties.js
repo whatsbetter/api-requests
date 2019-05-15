@@ -1,37 +1,86 @@
-import { getConditions } from './_util';
+import { getConditions as t } from './_util';
+
 
 /**
  * Получение свойств сферы
  * 
  * @param {Object} params
- * @returns {Function}
+ * @returns {String}
  */
 export function findAll(params) {
     params.limit = 100;
-    let conditions = getConditions(params);
-    return `{properties${conditions}{id,name,label,kind,filterable,enriched,hide_on_entity,items{id,label,name}}}`;
+
+    return `
+        {properties ${ t(params) } {
+            id,
+            name,
+            label,
+            kind,
+            filterable,
+            enriched,
+            hide_on_entity,
+            items {
+                id,
+                label,
+                name
+            }
+        }
+    }`;
 }
+
 
 /**
  * Получение свойств объекта
  * 
  * @param {Object} params
- * @returns {Function}
+ * @returns {String}
  */
 export function findByEntity(params) {
     params.limit = 100;
-    let conditions = getConditions(params);
-    return `{properties_value${conditions}{property_id,kind,enriched,value}}`;
+    
+    return `
+        {properties_value ${ t(params) } { 
+            property_id,
+            kind,
+            enriched,
+            value
+        }
+    }`;
 }
 
+
+/**
+ * Получение свойств по типу
+ * 
+ * @param {String} type
+ * @param {Object} params
+ * @returns {String}
+ */
 export function findByType(type, params) {
-    let conditions = getConditions(params);
-    return `{property_${type}${conditions}{id,name,label}}`;
+    return `
+        {property_${type} ${ t(params) } { 
+            id,
+            name,
+            label
+        }
+    }`;
 }
 
+
+/**
+ * Получение групп свойств
+ * 
+ * @param {Object} params
+ * @returns {String}
+ */
 export function getGroups(params) {
-    let conditions = getConditions(params);
-    return `{groups_properties${conditions}{name,label,id}}`;
+    return `
+        {groups_properties ${ t(params) } {
+            name,
+            label,
+            id
+        }
+    }`;
 }
 
 
