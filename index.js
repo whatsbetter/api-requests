@@ -1,5 +1,8 @@
 import _ from 'lodash';
 import request from './_request';
+import { setHeader } from './_headers';
+import requestGroup from './_requestGroup';
+
 
 const chats = require('./chats');
 const criteria = require('./criteria');
@@ -17,24 +20,29 @@ const search = require('./search');
 const users = require('./users');
 
 module.exports = {
-    chats: wrap(chats),
-    comments: wrap(comments),
-    criteria: wrap(criteria),
-    entities: wrap(entities),
-    feed: wrap(feed),
-    gallery: wrap(gallery),
-    messages: wrap(messages),
-    notifications: wrap(notifications),
-    posts: wrap(posts),
-    properties: wrap(properties),
-    scores: wrap(scores),
-    search: wrap(search),
-    spheres: wrap(spheres),
-    users: wrap(users)
+    chats: wrap(chats, 'chats'),
+    comments: wrap(comments, 'comments'),
+    criteria: wrap(criteria, 'criteria'),
+    entities: wrap(entities, 'entities'),
+    feed: wrap(feed, 'feed'),
+    gallery: wrap(gallery, 'gallery'),
+    messages: wrap(messages, 'messages'),
+    notifications: wrap(notifications, 'notifications'),
+    posts: wrap(posts, 'posts'),
+    properties: wrap(properties, 'properties'),
+    scores: wrap(scores, 'scores'),
+    search: wrap(search, 'search'),
+    spheres: wrap(spheres, 'spheres'),
+    users: wrap(users, 'users'),
+    setHeader,
+    requestGroup
 };
 
-function wrap(collection) {
+function wrap(collection, name) {
     return _.mapValues(collection, value => {
-        return (...args) => request(value(...args));
+        return (...args) => {
+            let caller = name + '.' + value.name;
+            return request(value(...args), caller, ...args);
+        };
     });
 }

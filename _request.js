@@ -1,18 +1,28 @@
-import client from './_client';
 import camelize from 'camelize';
+import headers from './_headers';
 
-const request = (query, headers) => {
-    console.log('API | ', query);
 
-    if (headers) {
-        Object.keys(headers).map(key => {
-            client.setHeader(key, headers[key]);
-        });
-    }
+const request = (query, caller, params, options, extraHeaders) => {
+    
+    console.groupCollapsed('API', caller);
+    console.log(query);
+    console.log('params: ', params);
+    console.log('options: ', options);
+    console.log('extraHeaders: ', extraHeaders);
+    console.groupEnd();
 
-    return client
-        .request(query)
-        .then(body => camelize(body));
+    return fetch('https://api-v2m.whatsbetter.me/graphql', 
+        {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                ...headers,
+                ...extraHeaders
+            },
+            body: JSON.stringify({ query })
+        })
+        .then(res => res.json())
+        .then(res => camelize(res.data));
 };
 
 export default request;
