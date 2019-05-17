@@ -1,3 +1,4 @@
+import config from 'config';
 import camelize from 'camelize';
 import headers from './_headers';
 
@@ -11,8 +12,7 @@ const request = (query, caller, params, options, extraHeaders) => {
     console.log('extraHeaders: ', extraHeaders);
     console.groupEnd();
 
-    return fetch('https://api-v2m.whatsbetter.me/graphql', 
-        {
+    return fetch(config.apiServer, {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
