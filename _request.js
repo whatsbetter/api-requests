@@ -8,8 +8,8 @@ const request = (query, caller, params, options, extraHeaders) => {
     console.groupCollapsed('API', caller);
     console.log(query);
     console.log('params: ', params);
-    console.log('options: ', options);
-    console.log('extraHeaders: ', extraHeaders);
+    if (options) console.log('options: ', options);  
+    if (extraHeaders) console.log('extraHeaders: ', extraHeaders); 
     console.groupEnd();
 
     return fetch(config.apiServer, {
