@@ -9,6 +9,7 @@ const request = (query, caller, params, options, extraHeaders) => {
     console.log(query);
     console.log('params: ', params);
     if (options) console.log('options: ', options);  
+    console.log('headers: ', headers);
     if (extraHeaders) console.log('extraHeaders: ', extraHeaders); 
     console.groupEnd();
 

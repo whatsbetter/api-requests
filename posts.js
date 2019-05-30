@@ -103,7 +103,13 @@ export function findPresets(params) {
             id,
             title, 
             preamble, 
-            preamble_images{hash}, 
+            preamble_images{
+                hash
+            }, 
+            sphere {
+                id,
+                label
+            }, 
             metadata {
                 criteria {
                     id,
