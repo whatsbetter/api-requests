@@ -35,6 +35,7 @@ module.exports = {
     spheres: wrap(spheres, 'spheres'),
     users: wrap(users, 'users'),
     setHeader,
+    request,
     requestGroup
 };
 
