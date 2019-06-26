@@ -8,7 +8,6 @@ import { getConditions as t } from './_util';
  * @returns {String} 
  */
 export function findAll(params) { 
-    
     return `{
         jobRequests ${ t(params) }  {
             id
@@ -20,7 +19,8 @@ export function findAll(params) {
             }
             apprentice {
                 id
-                name
+                name,
+                main_image
             }
         }
     }`;

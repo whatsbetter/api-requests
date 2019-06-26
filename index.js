@@ -35,7 +35,7 @@ module.exports = {
     search: wrap(search, 'search'),
     spheres: wrap(spheres, 'spheres'),
     users: wrap(users, 'users'),
-    job: wrap(users, 'job'),
+    job: wrap(job, 'job'),
     setHeader,
     request,
     requestGroup
