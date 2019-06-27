@@ -20,7 +20,8 @@ export function findAll(params) {
             apprentice {
                 id
                 name,
-                main_image
+                main_image,
+                phone
             }
         }
     }`;
