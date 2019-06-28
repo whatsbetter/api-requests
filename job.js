@@ -12,6 +12,7 @@ export function findAll(params) {
         jobRequests ${ t(params) }  {
             id
             status,
+            comment,
             mentor {
                 id
                 name
@@ -21,7 +22,11 @@ export function findAll(params) {
                 id
                 name,
                 main_image,
-                phone
+                phone,
+                balance{
+                    value
+                    id
+                }
             }
         }
     }`;
