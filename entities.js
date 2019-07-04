@@ -57,7 +57,7 @@ export function findAll(params, options) {
  * @param {Object} options
  * @returns {String}
  */
-export function findById(params, options) {       
+export function findById(params, options = {}) {       
     if ('filter' in params) {
         if (Object.keys(params.filter).length > 0) {
             params.filter = JSON.stringify(params.filter).replace(/"/g, '\'');  
@@ -144,7 +144,8 @@ export function compare(params, options) {
 
 
 
-const getFragments = (extra = []) => {
+const getFragments = (sections = []) => {
+    console.log(sections)
     return `{
         id,
         name,
@@ -175,7 +176,7 @@ const getFragments = (extra = []) => {
             path,
             path_label
         }
-        ${extra.map(key => fragments[key]).join(',')}
+        ${sections.map(key => fragments[key]).join(',')}
     }`;
 };
 

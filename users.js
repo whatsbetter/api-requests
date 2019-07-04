@@ -19,9 +19,14 @@ fragments.userDetailed = `{
     second_name,
     main_image,
     karma,
-    providers{
+    providers {
         type
     }, 
+    roles {
+        id, 
+        name
+    },
+    phone,
     karma_details {
         sphere{
             id,
@@ -94,7 +99,7 @@ export function search(params) {
 export function findMe(params) {
     return `
         {user (token: "${params.token}")
-            ${fragments.user}
+            ${fragments.userDetailed}
         }
     `;
 }
