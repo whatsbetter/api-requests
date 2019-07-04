@@ -85,6 +85,7 @@ export function findById(params, options = {}) {
             have_map,
             sharing_description,
             count_scores,
+            job_request_access,
             popular_criteria{
                 name,
                 id,
