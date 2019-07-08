@@ -1,5 +1,37 @@
 import { getConditions as t } from './_util';
+const fragments = {};
 
+
+fragments.metadata = `
+    metadata {
+        criteria {
+            id,
+            label
+        }, 
+        rating {
+            id,
+            name,
+            main_image,
+            label,
+            avg,
+            video {
+                url
+            },
+            avg_scores{
+                value,
+                count_scores,
+                criteria_id
+            } 
+        }
+    }`;
+
+fragments.sphere = `
+    sphere {
+        label, 
+        name, 
+        id
+    }
+`;
 
 /**
  * Поиск всех постов
@@ -52,39 +84,14 @@ export function findByAlias(params) {
             preamble_images {
                 hash
             }, 
-            sphere {
-                id,
-                label
-            }, 
-            metadata {
-                criteria {
-                    id,
-                    label
-                }, 
-                scores {
-                    id,
-                    criterion {
-                        id,
-                        label
-                    }, 
-                    entity {
-                        id, 
-                        label,
-                        main_image
-                    }, 
-                    value,
-                    user {
-                        name,
-                        main_image
-                    }
-                }
-            },
             author {
                 id, 
                 name,
                 main_image
             }, 
-            updated_at
+            updated_at,
+            ${ fragments.sphere }, 
+            ${ fragments.metadata },
         }
     }`;
 }
@@ -103,34 +110,15 @@ export function findPresets(params) {
             id,
             title, 
             preamble, 
-            preamble_images{
+            preamble_images {
                 hash
             }, 
             sphere {
                 id,
                 label
             }, 
-            metadata {
-                criteria {
-                    id,
-                    label
-                }, 
-                rating {
-                    id,
-                    name,
-                    main_image,
-                    label,
-                    avg,
-                    video {
-                        url
-                    },
-                    avg_scores{
-                        value,
-                        count_scores,
-                        criteria_id
-                    } 
-                }
-            }
+            ${ fragments.sphere }, 
+            ${ fragments.metadata },
         }
     }`;
 }
