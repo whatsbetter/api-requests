@@ -23,9 +23,8 @@ export function findAll(params) {
                 name,
                 main_image,
                 phone,
-                balance{
-                    value
-                    id
+                balance {
+                    status
                 }
             }
         }
