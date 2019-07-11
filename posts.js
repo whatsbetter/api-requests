@@ -14,6 +14,15 @@ fragments.metadata = `
             main_image,
             label,
             avg,
+            prices {
+                id, 
+                value, 
+                marketplace { 
+                    id, 
+                    name, 
+                    label
+                }
+            }
             video {
                 url
             },
@@ -29,7 +38,11 @@ fragments.sphere = `
     sphere {
         label, 
         name, 
-        id
+        id,
+        count_entities
+        count_criteria,
+        count_scores,
+        job_request_access
     }
 `;
 
