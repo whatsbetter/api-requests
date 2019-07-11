@@ -14,6 +14,13 @@ fragments.metadata = `
             main_image,
             label,
             avg,
+            properties {
+                id,
+                kind,
+                popular,
+                value,
+                label
+            }
             prices {
                 id, 
                 value, 
@@ -23,6 +30,7 @@ fragments.metadata = `
                     label
                 }
             }
+            
             video {
                 url
             },
