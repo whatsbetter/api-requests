@@ -1,5 +1,39 @@
 import { getConditions as t } from './_util';
+const fragments = {};
 
+
+fragments.jobRequest = `
+    id
+    status,
+    comment,
+    mentor {
+        id
+        name
+        main_image
+    }
+    apprentice {
+        id
+        name,
+        main_image,
+        phone,
+        balance {
+            status
+        }
+    }
+`
+/**
+ * Найти все заявки на работу 
+ * 
+ * @param {Object} params
+ * @returns {String} 
+ */
+export function findById(params) { 
+    return `{
+        jobRequest ${ t(params) }  {
+            ${fragments.jobRequest}
+        }
+    }`;
+}
 
 /**
  * Найти все заявки на работу 
@@ -10,23 +44,7 @@ import { getConditions as t } from './_util';
 export function findAll(params) { 
     return `{
         jobRequests ${ t(params) }  {
-            id
-            status,
-            comment,
-            mentor {
-                id
-                name
-                main_image
-            }
-            apprentice {
-                id
-                name,
-                main_image,
-                phone,
-                balance {
-                    status
-                }
-            }
+            ${fragments.jobRequest}
         }
     }`;
 }
