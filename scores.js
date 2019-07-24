@@ -40,7 +40,9 @@ fragments.score = `{
             id, 
             items {
                 id,
-                hash
+                hash,
+                type,
+                url
             }
         }
         updated_at
