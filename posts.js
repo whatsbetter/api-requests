@@ -8,6 +8,23 @@ fragments.metadata = `
             id,
             label
         }, 
+        scores {
+            id, 
+            criterion {
+                id, 
+                label
+            }, 
+            entity{ 
+                id, 
+                label, 
+                main_image
+            }, 
+            value,
+            user {
+                name, 
+                main_image
+            }
+        }
         rating {
             id,
             name,
