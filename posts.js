@@ -29,8 +29,12 @@ fragments.metadata = `
             id,
             name,
             main_image,
+            description,
             label,
             avg,
+            video {
+                url
+            },
             properties {
                 id,
                 kind,
@@ -54,7 +58,10 @@ fragments.metadata = `
             avg_scores{
                 value,
                 count_scores,
-                criteria_id
+                criteria {
+                    id,
+                    label
+                }
             } 
         }
     }`;
