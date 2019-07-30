@@ -85,7 +85,7 @@ fragments.sphere = `
  * @returns {String}
  */
 export function findAll(params) {  
-    params.preset = false;
+    params.preset = params.preset || false;
     
     return `
         {posts ${ t(params) } {
@@ -106,6 +106,12 @@ export function findAll(params) {
                 name, 
                 main_image
             }, 
+            metadata {
+                criteria {
+                    id,
+                    label
+                }, 
+            }
             created_at
         }
     }`;
