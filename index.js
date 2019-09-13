@@ -19,6 +19,8 @@ const spheres = require('./spheres');
 const search = require('./search');
 const users = require('./users');
 const job = require('./job');
+const trainings = require('./trainings');
+
 
 module.exports = {
     chats: wrap(chats, 'chats'),
@@ -36,6 +38,7 @@ module.exports = {
     spheres: wrap(spheres, 'spheres'),
     users: wrap(users, 'users'),
     job: wrap(job, 'job'),
+    trainings: wrap(trainings, 'trainings'),
     setHeader,
     request,
     requestGroup
