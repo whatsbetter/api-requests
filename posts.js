@@ -8,12 +8,33 @@ fragments.metadata = `
             id,
             label
         }, 
+        scores {
+            id, 
+            criterion {
+                id, 
+                label
+            }, 
+            entity{ 
+                id, 
+                label, 
+                main_image
+            }, 
+            value,
+            user {
+                name, 
+                main_image
+            }
+        }
         rating {
             id,
             name,
             main_image,
+            description,
             label,
             avg,
+            video {
+                url
+            },
             properties {
                 id,
                 kind,
@@ -37,7 +58,10 @@ fragments.metadata = `
             avg_scores{
                 value,
                 count_scores,
-                criteria_id
+                criteria {
+                    id,
+                    label
+                }
             } 
         }
     }`;
@@ -61,7 +85,7 @@ fragments.sphere = `
  * @returns {String}
  */
 export function findAll(params) {  
-    params.preset = false;
+    params.preset = params.preset || false;
     
     return `
         {posts ${ t(params) } {
@@ -82,6 +106,12 @@ export function findAll(params) {
                 name, 
                 main_image
             }, 
+            metadata {
+                criteria {
+                    id,
+                    label
+                }, 
+            }
             created_at
         }
     }`;
