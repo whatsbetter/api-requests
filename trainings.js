@@ -55,3 +55,13 @@ export function findPrograms(params) {
         }
     }`;
 }
+
+export function findCourses(params) { 
+    return `{
+        trainingCourses ${ t(params) }  {
+            id, 
+            name, 
+            description
+        }
+    }`;
+}
