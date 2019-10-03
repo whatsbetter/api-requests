@@ -45,7 +45,7 @@ export function findAll(params, options) {
 
     return `
         {entities ${ t(params) } 
-            ${ getFragments(options.sections) }
+            ${ getFragments(options.fragments) }
         }`;
 }
 
@@ -66,7 +66,7 @@ export function findById(params, options = {}) {
 
     return `
         {entity ${ t(params) } 
-            ${ getFragments(options.sections) }
+            ${ getFragments(options.fragments) }
         }`;
 }
 
@@ -144,15 +144,14 @@ export function compare(params, options) {
 
 
 
-const getFragments = (sections = []) => {
-    console.log(sections)
+const getFragments = (chunk = []) => {
     return `{
         id,
         name,
         description,
         gallery{
             id,
-            items(limit: 3){
+            items (limit: 3){
                 id,
                 hash
             }
@@ -176,7 +175,7 @@ const getFragments = (sections = []) => {
             path,
             path_label
         }
-        ${sections.map(key => fragments[key]).join(',')}
+        ${chunk.map(key => fragments[key]).join(',')}
     }`;
 };
 
