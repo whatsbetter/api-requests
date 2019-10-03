@@ -61,7 +61,7 @@ export function findById(params) {
  * @param {Object} params
  * @returns {String} 
  */
-export function findAll(params) {
+export function findAll(params = {}) {
     params.limit = params.limit || 20;
     
     return `
