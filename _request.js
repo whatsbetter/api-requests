@@ -23,7 +23,14 @@ const request = (query, caller, params, options, extraHeaders) => {
             body: JSON.stringify({ query })
         })
         .then(res => res.json())
-        .then(res => camelize(res.data));
+        .then(res => {
+            if ("errors" in res) {
+                return false;
+            }
+            else {
+                return camelize(res.data);
+            } 
+        })
 };
 
 export default request;

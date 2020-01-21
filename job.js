@@ -16,6 +16,9 @@ fragments.jobRequest = `
         name,
         main_image,
         phone,
+        proff_card {
+            status
+        }
         balance {
             status
         }
@@ -63,7 +66,10 @@ export function create(params) {
             apprentice {
                 id
                 name
-                phone
+                phone,
+                proff_card {
+                    status
+                }
             }
         }
     }`;
