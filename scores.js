@@ -5,7 +5,11 @@ const fragments = {};
 fragments.score = `{
     id,
     value,
-    sphere_id,
+    sphere{
+        id,
+        name,
+        label
+    },
     criterion {
         id,
         label
