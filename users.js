@@ -27,6 +27,7 @@ fragments.userDetailed = `{
         name
     },
     phone,
+    created_at,
     karma_details {
         sphere{
             id,
