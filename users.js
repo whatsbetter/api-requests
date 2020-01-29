@@ -6,10 +6,7 @@ fragments.user =  `{
     id,
     name,
     main_image,
-    karma,
-    providers{
-        type
-    }
+    karma
 }`,
     
 fragments.userDetailed = `{
@@ -167,25 +164,61 @@ export function findFriends(params) {
     params.limit = params.limit || 20;
 
     return `
-        {friends ${ t(params) } {
-            id,
-            name,
-            phone,
-            first_name,
-            second_name,
-            main_image
-        }
-    }`;
+        {friends ${ t(params) } 
+            ${ fragments.user }
+        }`;
 }
 
+
+/**
+ * Поиск рефераллов
+ * 
+ * @returns {String} 
+ */
 export function getPartners() {
     return `
-        {get_partners_users {
-            id,
-            name,
-            phone,
-            main_image
+        {get_partners_users 
+            ${ fragments.user }
+        }`;
+}
+
+/**
+ * Поиск подписчиков
+ * 
+ * @param {Object} params
+ * @returns {String} 
+ */
+export function findSubscribes(params) {
+    return `
+        {subscribers ${ t(params) } 
+            ${ fragments.user }
+        }`;
+}
+
+/**
+ * Подписаться
+ * 
+ * @param {Object} params
+ * @returns {String} 
+ */
+export function addSubscriber(params) {
+    return `
+        mutation {addSubscriber ${ t(params) } {
+            id, name
         }
     }`;
 }
 
+/**
+ * Отписаться
+ * 
+ * @param {Object} params
+ * @returns {String} 
+ */
+export function removeSubscriber(params) {
+     return `
+        mutation {removeSubscriber ${ t(params) } {
+            id, name
+        }
+    }`;
+}
