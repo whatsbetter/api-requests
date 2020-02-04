@@ -188,6 +188,7 @@ fragments.properties = `
         id,
         kind,
         popular,
+        enriched,
         value,
         label
     }`;
