@@ -263,3 +263,14 @@ fragments.specialMedals = `
             label
         }
     }`;
+
+fragments.prices = `
+    prices {
+        id, 
+        value, 
+        marketplace {
+            id, 
+            name, 
+            label
+        }
+    }`;
