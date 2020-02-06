@@ -57,10 +57,11 @@ export function findAll(params) {
             icon,
             label,
             have_child,
+            main_image,
             count_scores,
             count_criteria,
-            subscribed,
             count_entities
+            subscribed
         }
     }`;
 }
@@ -80,9 +81,11 @@ export function findById(params, options = {}) {
             id,
             description,
             label,
+            main_image,
             count_criteria,
             count_entities,
             have_map,
+            icon,
             sharing_description,
             count_scores,
             roles {
