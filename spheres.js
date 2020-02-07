@@ -2,6 +2,13 @@ import { getConditions as t } from './_util';
 const fragments = {};
 
 
+fragments.parent = `
+    parent {
+        label,
+        id,
+        name
+    }`;
+
 fragments.accociatedProperties = `
     accociated_properties {
         label,
@@ -97,7 +104,7 @@ export function findById(params, options = {}) {
                 id,
                 label
             },
-            ${'sections' in options ? options.sections.map(key => fragments[key]).join(',') : ''}      
+            ${'fragments' in options ? options.fragments.map(key => fragments[key]).join(',') : ''}      
         }
     }
 `;
