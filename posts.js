@@ -1,82 +1,8 @@
 import { getConditions as t } from './_util';
-const fragments = {};
+import fragments from './_fragments';
 
 
-fragments.metadata = `
-    metadata {
-        criteria {
-            id,
-            label
-        }, 
-        scores {
-            id, 
-            criterion {
-                id, 
-                label
-            }, 
-            entity{ 
-                id, 
-                label, 
-                main_image
-            }, 
-            value,
-            user {
-                name, 
-                main_image
-            }
-        }
-        rating {
-            id,
-            name,
-            main_image,
-            description,
-            label,
-            avg,
-            video {
-                url
-            },
-            properties {
-                id,
-                kind,
-                popular,
-                value,
-                label
-            }
-            prices {
-                id, 
-                value, 
-                marketplace { 
-                    id, 
-                    name, 
-                    label
-                }
-            }
-            
-            video {
-                url
-            },
-            avg_scores{
-                value,
-                count_scores,
-                criteria {
-                    id,
-                    label
-                }
-            } 
-        }
-    }`;
 
-fragments.sphere = `
-    sphere {
-        label, 
-        name, 
-        id,
-        count_entities
-        count_criteria,
-        count_scores,
-        job_request_access
-    }
-`;
 
 /**
  * Поиск всех постов
@@ -141,8 +67,15 @@ export function findByAlias(params) {
                 main_image
             }, 
             updated_at,
-            ${ fragments.sphere }, 
-            ${ fragments.metadata },
+            sphere {
+                ${ fragments.sphere }
+            }
+            metadata {
+                criteria {
+                    id,
+                    label
+                }
+            }
         }
     }`;
 }
@@ -168,8 +101,10 @@ export function findPresets(params) {
                 id,
                 label
             }, 
-            ${ fragments.sphere }, 
-            ${ fragments.metadata },
+            sphere {
+                ${ fragments.sphere }, 
+            }
+            ${ fragments.presetMetadata },
         }
     }`;
 }

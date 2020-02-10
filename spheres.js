@@ -1,30 +1,6 @@
 import { getConditions as t } from './_util';
-const fragments = {};
+import fragments from './_fragments';
 
-
-fragments.parent = `
-    parent {
-        label,
-        id,
-        name
-    }`;
-
-fragments.accociatedProperties = `
-    accociated_properties {
-        label,
-        id,
-        sphere{
-            id,
-            name,
-            label,
-            description,
-            icon,
-            popular_criteria{
-               id
-               label
-            }
-        }
-    }`;
 
 /**
  * Поиск сфер по имени
@@ -84,26 +60,7 @@ export function findAll(params) {
 export function findById(params, options = {}) {
     return `
         {sphere(id: "${params.id}"){
-            name,
-            id,
-            description,
-            label,
-            main_image,
-            count_criteria,
-            count_entities,
-            have_map,
-            icon,
-            sharing_description,
-            count_scores,
-            roles {
-                id,
-                name
-            }
-            popular_criteria{
-                name,
-                id,
-                label
-            },
+            ${fragments.sphere}
             ${'fragments' in options ? options.fragments.map(key => fragments[key]).join(',') : ''}      
         }
     }
@@ -140,6 +97,27 @@ export function update(params) {
             id,
             name,
             label
+        }
+    }`;
+}
+
+
+/**
+ * Связанные сферы
+ * 
+ * @param {Object} params
+ * @returns {String}
+ */
+export function findLinkedSpheres(params) {
+    return `{
+        spheres_spheres ${ t(params) } {
+            id
+            kind
+            s_sphere {
+                id,
+                name,
+                label
+            }
         }
     }`;
 }
