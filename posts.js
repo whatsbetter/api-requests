@@ -11,7 +11,7 @@ import fragments from './_fragments';
  * @returns {String}
  */
 export function findAll(params) {  
-    params.preset = params.preset || false;
+    //params.preset = params.preset || false;
     
     return `
         {posts ${ t(params) } {
