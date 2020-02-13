@@ -115,8 +115,12 @@ export function findLinkedSpheres(params) {
             kind
             s_sphere {
                 id,
+                icon,
                 name,
-                label
+                label,
+                count_criteria,
+                count_entities,
+                count_scores,
             }
         }
     }`;
