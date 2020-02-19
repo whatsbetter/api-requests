@@ -26,6 +26,21 @@ fragments.sphere = `
         label
     }`;
 
+fragments.sphereChildren = `
+    children{
+        id,
+        name,
+        description,
+        label,
+        main_image,
+        have_child,
+        count_criteria,
+        count_entities,
+        count_scores,
+        icon
+    }`
+
+
 
 /**
  * Свойства

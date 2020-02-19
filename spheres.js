@@ -23,9 +23,10 @@ export function search(params) {
  * Получение всех сфер
  * 
  * @param {Object} params
+ * @param {Object} options
  * @returns {String}
  */
-export function findAll(params) {
+export function findAll(params, options={}) {
     params.limit = params.limit || 20;
     params.hide = false;
     
@@ -44,7 +45,8 @@ export function findAll(params) {
             count_scores,
             count_criteria,
             count_entities
-            subscribed
+            subscribed,
+            ${'fragments' in options ? options.fragments.map(key => fragments[key]).join(',') : ''} 
         }
     }`;
 }

@@ -66,6 +66,7 @@ export function findAll(params = {}) {
         {users ${ t(params) } {
             id,
             name,
+            karma,
             main_image
         }
     }`;
