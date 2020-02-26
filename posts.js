@@ -29,8 +29,10 @@ export function findAll(params) {
                 id
             }, 
             author {
+                id,
                 name, 
-                main_image
+                main_image,
+                karma
             }, 
             metadata {
                 criteria {
@@ -62,9 +64,10 @@ export function findByAlias(params) {
                 hash
             }, 
             author {
-                id, 
-                name,
-                main_image
+                id,
+                name, 
+                main_image,
+                karma
             }, 
             updated_at,
             sphere {
