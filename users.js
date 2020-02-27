@@ -174,11 +174,12 @@ export function findFriends(params) {
 /**
  * Поиск рефераллов
  * 
+ * @param {Object} params
  * @returns {String} 
  */
-export function getPartners() {
+export function getPartners(params) {
     return `
-        {get_partners_users 
+        {get_partners_users ${ t(params) }  
             ${ fragments.user }
         }`;
 }
