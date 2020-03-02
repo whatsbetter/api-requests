@@ -154,7 +154,9 @@ const getFragments = (chunk = []) => {
             id,
             items (limit: 3){
                 id,
-                hash
+                hash,
+                type,
+                url,
             }
         }
         main_image,
