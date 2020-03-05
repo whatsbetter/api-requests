@@ -78,6 +78,7 @@ fragments.medals = `
 fragments.topAvgScores = `
     top_avg_scores(limit: 3) {
         value, 
+        count_scores,
         criteria {
             name,
             label
@@ -91,6 +92,7 @@ fragments.topAvgScores = `
 fragments.bottomAvgScores = `
     bottom_avg_scores(limit: 3) {
         value, 
+        count_scores,
         criteria {
             name,
             label
