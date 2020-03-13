@@ -80,6 +80,7 @@ fragments.topAvgScores = `
         value, 
         count_scores,
         criteria {
+            id,
             name,
             label
         }
@@ -94,6 +95,7 @@ fragments.bottomAvgScores = `
         value, 
         count_scores,
         criteria {
+            id,
             name,
             label
         }
