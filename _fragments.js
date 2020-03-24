@@ -158,7 +158,9 @@ fragments.prices = `
         marketplace {
             id, 
             name, 
-            label
+            label,
+            unit_name, 
+            deal_name 
         }
     }`;
 
