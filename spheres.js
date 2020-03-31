@@ -120,6 +120,7 @@ export function findLinkedSpheres(params) {
                 icon,
                 name,
                 label,
+                main_image,
                 count_criteria,
                 count_entities,
                 count_scores,
