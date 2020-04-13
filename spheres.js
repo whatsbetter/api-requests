@@ -65,8 +65,7 @@ export function findById(params, options = {}) {
             ${fragments.sphere}
             ${'fragments' in options ? options.fragments.map(key => fragments[key]).join(',') : ''}      
         }
-    }
-`;
+    }`;
 }
 
 
@@ -79,13 +78,10 @@ export function findById(params, options = {}) {
 export function create(params) {
     return `
         mutation { createSphere ${ t(params) } {
-            id,
-            name,
-            label
+           ${fragments.sphere}
         }
     }`;
 }
-
 
 /**
  * Обновление сферы
@@ -95,13 +91,12 @@ export function create(params) {
  */
 export function update(params) {
     return `
-        mutation {updateSphere ${ t(params) } { 
-            id,
-            name,
-            label
+        mutation { updateSphere ${ t(params) } {
+           ${fragments.sphere}
         }
     }`;
 }
+
 
 
 /**

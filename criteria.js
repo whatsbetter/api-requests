@@ -20,6 +20,31 @@ export function search(params) {
 }
 
 
+
+/**
+ * Найти все критерии
+ * 
+ * @param {Object} params
+ * @returns {String} 
+ */
+export function findById(params) {
+    return `
+        {criterion ${ t(params) } {
+            id,
+            name,
+            label,
+            description,
+            hide,
+            criteria_group {
+                id,
+                name,
+                label
+            }
+        }
+    }`;
+}
+
+
 /**
  * Найти все критерии
  * 

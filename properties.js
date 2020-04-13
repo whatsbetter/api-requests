@@ -28,6 +28,32 @@ export function findAll(params) {
     }`;
 }
 
+/**
+ * Получение свойств сферы
+ * 
+ * @param {Object} params
+ * @returns {String}
+ */
+export function findById(params) {
+
+    return `
+        {property ${ t(params) } {
+            id,
+            name,
+            label,
+            kind,
+            filterable,
+            enriched,
+            hide_on_entity,
+            items {
+                id,
+                label,
+                name
+            }
+        }
+    }`;
+}
+
 
 /**
  * Получение свойств объекта
