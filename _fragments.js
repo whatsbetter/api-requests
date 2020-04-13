@@ -38,7 +38,7 @@ fragments.sphereChildren = `
         count_entities,
         count_scores,
         icon
-    }`
+    }`;
 
 
 

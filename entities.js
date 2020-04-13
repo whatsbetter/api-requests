@@ -79,12 +79,9 @@ export function findById(params, options = {}) {
  */
 export function create(params) {
     return `
-        mutation {createEntity ${ t(params) } {
-            id,
-            name,
-            label
-        }
-    }`;
+        mutation {createEntity ${ t(params) } 
+            ${ getFragments() }
+        }`;
 }
 
 /**
@@ -95,12 +92,9 @@ export function create(params) {
  */
 export function update(params) {
     return `
-        mutation {updateEntity ${ t(params) } {
-            id,
-            name,
-            label
-        }
-    }`;
+        mutation {updateEntity ${ t(params) } 
+            ${ getFragments() }
+        }`;
 }
 
 export function compare(params, options) {
