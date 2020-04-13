@@ -158,7 +158,10 @@ const getFragments = (chunk = []) => {
         avg,
         count_scores,
         video {
-            url
+            id,
+            hash,
+            type,
+            url,
         },
         lng,
         lat,
