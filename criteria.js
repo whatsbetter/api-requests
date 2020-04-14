@@ -22,7 +22,7 @@ export function search(params) {
 
 
 /**
- * Найти все критерии
+ * Найти критерий по идентификатору
  * 
  * @param {Object} params
  * @returns {String} 

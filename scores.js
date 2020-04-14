@@ -9,7 +9,8 @@ fragments.score = `{
     sphere{
         id,
         name,
-        label
+        label,
+        main_image
     },
     criterion {
         id,
