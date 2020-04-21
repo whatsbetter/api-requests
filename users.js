@@ -1,42 +1,5 @@
 import { getConditions as t } from './_util';
-const fragments = {};
-
-
-fragments.user =  `{
-    id,
-    name,
-    main_image,
-    karma
-}`,
-    
-fragments.userDetailed = `{
-    id,
-    name,
-    first_name,
-    second_name,
-    main_image,
-    karma,
-    providers {
-        type
-    }, 
-    roles {
-        id, 
-        name
-    },
-    phone,
-    created_at,
-    karma_details {
-        sphere{
-            id,
-            label,
-            name
-        },
-        value,
-        count_scores,
-        count_useless,
-        count_useful
-    }
-}`;
+import fragments from './_fragments';
 
 
 /**
@@ -145,11 +108,15 @@ export function findSubscriptionSpheres(params) {
         {subscription_spheres ${ t(params) } {
             id,
             name,
-            icon,
+            description,
             label,
-            count_scores,
+            main_image,
             count_criteria,
-            count_entities
+            count_entities,
+            count_scores,
+            have_map,
+            icon,
+            sharing_description,
         }
     }`;
 }

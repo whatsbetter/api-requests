@@ -234,4 +234,41 @@ fragments.presetMetadata = `
         }
     }`;
 
+fragments.user =  `{
+    id,
+    name,
+    main_image,
+    karma
+}`,
+    
+fragments.userDetailed = `{
+    id,
+    name,
+    first_name,
+    second_name,
+    main_image,
+    karma,
+    providers {
+        type
+    }, 
+    roles {
+        id, 
+        name
+    },
+    phone,
+    created_at,
+    karma_details {
+        sphere{
+            id,
+            label,
+            name
+        },
+        value,
+        count_scores,
+        count_useless,
+        count_useful
+    }
+}`;
+
+
 export default fragments;
