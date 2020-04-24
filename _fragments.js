@@ -16,6 +16,7 @@ fragments.sphere = `
     have_map,
     icon,
     sharing_description,
+    subscribed,
     roles {
         id,
         name

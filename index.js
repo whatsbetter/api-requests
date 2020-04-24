@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import request from './_request';
-import { setHeader } from './_headers';
+import { setHeader, removeHeader } from './_headers';
 import requestGroup from './_requestGroup';
 
 
@@ -40,6 +40,7 @@ module.exports = {
     job: wrap(job, 'job'),
     trainings: wrap(trainings, 'trainings'),
     setHeader,
+    removeHeader,
     request,
     requestGroup
 };
