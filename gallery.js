@@ -3,7 +3,13 @@ const fragments = {};
 
 
 fragments.gallery = `{
-    id
+    id,
+    items(limit: 100) {
+        id,
+        hash,
+        url,
+        type
+    }
 }`;
 
 
@@ -19,7 +25,9 @@ export function get(params) {
             id,
             items(limit: 100) {
                 id,
-                hash
+                hash,
+                url,
+                type
             }
         }
     }`;
