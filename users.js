@@ -35,6 +35,24 @@ export function findAll(params = {}) {
     }`;
 }
 
+/**
+ * Обновить пользователя
+ * 
+ * @param {Object} params
+ * @returns {String} 
+ */
+export function update(params = {}) {    
+    return `
+        mutation {updateUser ${ t(params) } {
+            id,
+            name,
+            main_image
+        }
+    }`;
+}
+
+
+
 
 /**
  * Поиск пользователей по имени
