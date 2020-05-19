@@ -209,3 +209,19 @@ export function removeSubscriber(params) {
         }
     }`;
 }
+
+/**
+ * Добавить в 
+ * 
+ * @param {Object} params
+ * @returns {String} 
+ */
+export function addFriend(params) {
+     return `
+        mutation {addFriend ${ t(params) } {
+            id, name
+        }
+    }`;
+}
+
+
