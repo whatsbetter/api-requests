@@ -1,4 +1,5 @@
 import { getConditions as t } from './_util';
+import fragments from './_fragments';
 
 /**
  *  Создать комментарий
@@ -65,4 +66,30 @@ export function changeUseful(params, options) {
             useless
         }
     }`;
+}
+
+/**
+ * Пользователи, которые положительно оценили комментарий 
+ * 
+ * @param {Object} params
+ * @returns {String} 
+ */
+export function getUsefulUsers(params) {
+    return `
+        {getUsefulUsersComment ${ t(params) } 
+            ${ fragments.user }
+        }`;
+}
+
+/**
+ * Пользователи, которые отрицательно оценили комментарий 
+ * 
+ * @param {Object} params
+ * @returns {String} 
+ */
+export function getUselessUsers(params) {
+    return `
+        {getUselessUsersComment ${ t(params) } 
+            ${ fragments.user }
+        }`;
 }
