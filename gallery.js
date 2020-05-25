@@ -22,13 +22,7 @@ fragments.gallery = `{
 export function get(params) {   
     return `
         {gallery ${ t(params) } { 
-            id,
-            items(limit: 100) {
-                id,
-                hash,
-                url,
-                type
-            }
+            ${ fragments.gallery }
         }
     }`;
 }

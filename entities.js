@@ -50,6 +50,26 @@ export function findAll(params, options) {
         }`;
 }
 
+/**
+ * Добавление галлереи к объекту
+ * 
+ * @param {Object} params
+ * @returns {String}
+ */
+export function addGallery(params) {
+    return `
+        mutation {addGalleryToEntity ${ t(params) } {
+            id,
+            items (limit: 3) {
+                id,
+                hash,
+                type,
+                url,
+            }
+        }
+    }`;
+}
+
 
 /**
  * Получение одного объекта по идентификатору
