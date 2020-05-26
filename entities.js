@@ -117,6 +117,20 @@ export function update(params) {
         }`;
 }
 
+/**
+ * Обновление объекта
+ * 
+ * @param {Object} params
+ * @returns {String}
+ */
+export function setProperty(params) {
+    return `
+        mutation {addPropertyToEntity ${ t(params) } {
+                id
+            }
+        }`;
+}
+
 export function compare(params, options) {
     let extra = [];
 
@@ -198,3 +212,5 @@ const getFragments = (chunk = []) => {
         ${chunk.map(key => fragments[key]).join(',')}
     }`;
 };
+
+
