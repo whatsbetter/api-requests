@@ -1,5 +1,19 @@
 import { getConditions as t } from './_util';
+const fragments = {};
 
+fragments.property = `
+    id,
+    name,
+    label,
+    kind,
+    filterable,
+    enriched,
+    hide_on_entity,
+    items {
+        id,
+        label,
+        name
+    }`;
 
 /**
  * Получение свойств сферы
@@ -12,18 +26,7 @@ export function findAll(params) {
 
     return `
         {properties ${ t(params) } {
-            id,
-            name,
-            label,
-            kind,
-            filterable,
-            enriched,
-            hide_on_entity,
-            items {
-                id,
-                label,
-                name
-            }
+            ${ fragments.property }
         }
     }`;
 }
@@ -38,18 +41,7 @@ export function findById(params) {
 
     return `
         {property ${ t(params) } {
-            id,
-            name,
-            label,
-            kind,
-            filterable,
-            enriched,
-            hide_on_entity,
-            items {
-                id,
-                label,
-                name
-            }
+            ${ fragments.property }
         }
     }`;
 }
@@ -105,6 +97,20 @@ export function getGroups(params) {
             name,
             label,
             id
+        }
+    }`;
+}
+
+/**
+ * Создать свойство
+ * 
+ * @param {Object} params
+ * @returns {String}
+ */
+export function create(params) {
+    return `
+        mutation {createProperty ${ t(params) } {
+             ${ fragments.property }
         }
     }`;
 }
