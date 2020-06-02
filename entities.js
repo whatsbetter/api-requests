@@ -87,7 +87,7 @@ export function findById(params, options = {}) {
 
     return `
         {entity ${ t(params) } 
-            ${ getFragments(options.fragments) }
+            ${ getFragments(options.fragments, options) }
         }`;
 }
 
@@ -173,14 +173,16 @@ export function compare(params, options) {
 
 
 
-const getFragments = (chunk = []) => {
+const getFragments = (chunk = [], options = {}) => {    
+    let galleryLimit = options.galleryLimit || 3;
+    
     return `{
         id,
         name,
         description,
-        gallery{
+        gallery {
             id,
-            items (limit: 3){
+            items (limit: ${ galleryLimit }){
                 id,
                 hash,
                 type,

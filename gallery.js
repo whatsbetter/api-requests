@@ -21,10 +21,9 @@ fragments.gallery = `{
  */
 export function get(params) {   
     return `
-        {gallery ${ t(params) } { 
+        {gallery ${ t(params) } 
             ${ fragments.gallery }
-        }
-    }`;
+        }`;
 }
 
 /**
