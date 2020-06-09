@@ -72,11 +72,17 @@ export function findByAlias(params) {
             updated_at,
             sphere {
                 ${ fragments.sphere }
-            }
+            },
             metadata {
                 criteria {
                     id,
                     label
+                },
+                users {
+                    id,
+                    name,
+                    main_image,
+                    karma
                 }
             }
         }
@@ -101,13 +107,20 @@ export function findPresets(params) {
                 hash
             }, 
             sphere {
-                id,
-                label
-            }, 
-            sphere {
-                ${ fragments.sphere }, 
+                ${ fragments.sphere }
+            },
+            metadata {
+                criteria {
+                    id,
+                    label
+                },
+                users {
+                    id,
+                    name,
+                    main_image,
+                    karma
+                }
             }
-            ${ fragments.presetMetadata },
         }
     }`;
 }
@@ -124,7 +137,10 @@ export function create(params) {
    
     return `
         mutation {createPost ${ t(params) } {
-            id
+            id,
+            sphere {
+                ${ fragments.sphere }
+            }
         }
     }`;
 }
@@ -136,12 +152,49 @@ export function create(params) {
  * @returns {String}
  */
 export function update(params) {
-    params.title = params.title.replace(/\\([\s\S])|(")/g,'\\$1$2');
+    if ('title' in params) {
+        params.title = params.title.replace(/\\([\s\S])|(")/g,'\\$1$2');
+    };
     
     return `
         mutation {updatePost ${ t(params) } {
             id, 
-            title
+            title,
+            sphere {
+                ${ fragments.sphere }
+            }
         }
     }`;
 }
+
+
+/**
+ * Добавить критери к посту
+ * 
+ * @param {Object} params
+ * @returns {String}
+ */
+export function addCriteria(params) { 
+    return `
+        mutation {addCriteriaToPosts ${ t(params) } {
+            id, 
+        }
+    }`;
+}
+
+/**
+ * Удалить критерии к посту
+ * 
+ * @param {Object} params
+ * @returns {String}
+ */
+export function removeCriteria(params) { 
+    return `
+        mutation {removeCriteriaFromPosts ${ t(params) } {
+            id, 
+        }
+    }`;
+}
+    
+    
+    
