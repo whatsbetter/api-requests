@@ -115,6 +115,20 @@ export function create(params) {
     }`;
 }
 
+/**
+ * Обновить свойство
+ * 
+ * @param {Object} params
+ * @returns {String}
+ */
+export function update(params) {
+    return `
+        mutation {updateProperty ${ t(params) } {
+             ${ fragments.property }
+        }
+    }`;
+}
+
 
 
 

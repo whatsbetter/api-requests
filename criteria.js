@@ -59,6 +59,7 @@ export function findAll(params) {
             id,
             name,
             label,
+            description,
             criteria_group {
                 id,
                 name,
@@ -119,7 +120,8 @@ export function create(params) {
         mutation {createCriteria ${ t(params) } {
             id,
             name,
-            label
+            label,
+            description
         }
     }`;
 }
@@ -136,7 +138,8 @@ export function update(params) {
         mutation {updateCriteria ${ t(params) } {
             id,
             name,
-            label
+            label,
+            description
         }
     }`;
 }
