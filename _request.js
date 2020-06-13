@@ -28,7 +28,12 @@ const request = (query, caller, params, options, extraHeaders) => {
                 return false;
             }
             else {
-                return camelize(res.data);
+                let root;
+                for (root in res.data) {
+                    break;
+                };
+                
+                return camelize(res.data[root]);
             } 
         })
 };
