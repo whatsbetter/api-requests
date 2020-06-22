@@ -101,7 +101,8 @@ export function findPresets(params) {
     return `
         {posts ${ t(params) } {
             id,
-            title, 
+            title,
+            alias,
             preamble, 
             preamble_images {
                 hash
