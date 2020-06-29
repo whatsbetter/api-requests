@@ -72,6 +72,9 @@ export function addMedia(params) {
  * @returns {String} 
  */
 export function removeMedia(params) {
+    if (!params.id) {
+        throw new Error('Set ID to remove items in gallery');
+    }
     return `
         mutation {removeMediaFromGallery ${ t(params) } 
             ${ fragments.gallery }
