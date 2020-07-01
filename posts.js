@@ -135,6 +135,12 @@ export function findPresets(params) {
 export function create(params) {
     params.alias = params.alias || '';
     params.title = params.title.replace(/\\([\s\S])|(")/g,'\\$1$2');
+    
+    if ('filters' in params) {
+        if (Object.keys(params.filters).length > 0) {
+            params.filters = JSON.stringify(params.filters).replace(/"/g, '\'');  
+        }
+    }
    
     return `
         mutation {createPost ${ t(params) } {
