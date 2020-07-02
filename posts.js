@@ -78,6 +78,7 @@ export function findByAlias(params) {
                     id,
                     label
                 },
+                filters,
                 users {
                     id,
                     name,
