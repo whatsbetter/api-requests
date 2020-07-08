@@ -203,6 +203,22 @@ export function removeCriteria(params) {
         }
     }`;
 }
+
+/**
+ * Удалить пользователей к посту
+ * 
+ * @param {Object} params
+ * @returns {String}
+ */
+export function removeUser(params) { 
+    return `
+        mutation {removeUserFromPosts ${ t(params) } {
+            id, 
+        }
+    }`;
+}
+
+
     
     
     
