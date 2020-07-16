@@ -2,6 +2,7 @@ import _ from 'lodash';
 import request from './_request';
 import { setHeader, removeHeader } from './_headers';
 import requestGroup from './_requestGroup';
+import queue from './_queue';
 
 
 const chats = require('./chats');
@@ -42,7 +43,8 @@ module.exports = {
     setHeader,
     removeHeader,
     request,
-    requestGroup
+    requestGroup,
+    queue
 };
 
 function wrap(collection, name) {
