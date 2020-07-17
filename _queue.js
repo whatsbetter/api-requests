@@ -1,5 +1,5 @@
 
-const queue = (pool) => {
+const queue = (pool, callback) => {
     
     let i = 0;
     let length = pool.length;
@@ -11,11 +11,13 @@ const queue = (pool) => {
         i++;
         if (i >= length) {
             clearInterval(interval);
+            
+            if (callback) {
+                callback();
+            }
         }
-        
-      
     }, 300); 
-}
+};
 
 
 export default queue;
