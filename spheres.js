@@ -10,7 +10,7 @@ import fragments from './_fragments';
  */
 export function search(params) {
     return `
-        {search(text:"${params.text}",type:"spheres") {
+        {search (text:"${params.text}", type:"spheres") {
             id,
             data,
             text,
