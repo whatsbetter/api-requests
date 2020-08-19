@@ -1,4 +1,4 @@
-import { getConditions as t } from './_util';
+import t from 'api-helpers/toGqlParams';
 
 /**
  * Найти все заявки на работу 

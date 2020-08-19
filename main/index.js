@@ -1,8 +1,11 @@
-import _ from 'lodash';
-import request from './_request';
-import { setHeader, removeHeader } from './_headers';
-import requestGroup from './_requestGroup';
-import queue from './_queue';
+import config from 'config';
+
+import request from 'api-helpers/request';
+import requestGroup from 'api-helpers/requestGroup';
+import queue from 'api-helpers/queue';
+import toGqlRequest from 'api-helpers/toGqlRequest';
+
+import headers, { setHeader, removeHeader } from './_headers';
 
 
 const chats = require('./chats');
@@ -21,6 +24,8 @@ const search = require('./search');
 const users = require('./users');
 const job = require('./job');
 const trainings = require('./trainings');
+
+const wrap = toGqlRequest.bind(null, config.apiServer, headers);
 
 
 module.exports = {
@@ -47,11 +52,3 @@ module.exports = {
     queue
 };
 
-function wrap(collection, name) {
-    return _.mapValues(collection, value => {
-        return (...args) => {
-            let caller = name + '.' + value.name;
-            return request(value(...args), caller, ...args);
-        };
-    });
-}
