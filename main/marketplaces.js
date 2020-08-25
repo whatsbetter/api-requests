@@ -1,7 +1,7 @@
 import t from 'api-helpers/toGqlParams';
 const fragments = {};
 
-
+   
 
 /**
  * Получение всех магазинов
@@ -31,9 +31,16 @@ export function findById(params, options = {}) {
     
     return `
         {marketplace ${ t(params) } {
-            id,
-            name,
+            id
+            name
             label
+            address
+            phone
+            entity_id
+            author_id
+            delivery
+            delivery_description
+            url
         }  
     }`;
 }
@@ -51,6 +58,20 @@ export function create(params) {
             id,
             name,
             label
+        }
+    }`;
+}
+
+/**
+ * Создать магазин
+ * 
+ * @param {Object} params
+ * @returns {String} 
+ */
+export function update(params) {
+    return `
+        mutation {updateMarketplace ${ t(params) } {
+            id
         }
     }`;
 }
