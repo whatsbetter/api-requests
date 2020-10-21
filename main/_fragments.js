@@ -156,6 +156,7 @@ fragments.prices = `
     prices {
         id, 
         value, 
+        link,
         marketplace {
             id, 
             name, 
