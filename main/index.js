@@ -7,7 +7,6 @@ import toGqlRequest from 'api-helpers/toGqlRequest';
 
 import headers, { setHeader, removeHeader } from './_headers';
 
-
 const chats = require('./chats');
 const criteria = require('./criteria');
 const comments = require('./comments');
@@ -23,7 +22,9 @@ const spheres = require('./spheres');
 const search = require('./search');
 const users = require('./users');
 const job = require('./job');
+const marketplaces = require('./marketplaces');
 const trainings = require('./trainings');
+
 
 const wrap = toGqlRequest.bind(null, config.apiServer, headers);
 
@@ -35,6 +36,7 @@ module.exports = {
     entities: wrap(entities, 'entities'),
     feed: wrap(feed, 'feed'),
     gallery: wrap(gallery, 'gallery'),
+    marketplaces: wrap(marketplaces, 'marketplaces'),
     messages: wrap(messages, 'messages'),
     notifications: wrap(notifications, 'notifications'),
     posts: wrap(posts, 'posts'),
@@ -45,10 +47,11 @@ module.exports = {
     users: wrap(users, 'users'),
     job: wrap(job, 'job'),
     trainings: wrap(trainings, 'trainings'),
+    request: (str) => request({url: config.apiServer, query: str, caller: 'request'}),
     setHeader,
     removeHeader,
-    request,
     requestGroup,
     queue
 };
 
+ 
