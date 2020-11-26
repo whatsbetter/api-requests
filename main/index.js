@@ -47,8 +47,8 @@ module.exports = {
     users: wrap(users, 'users'),
     job: wrap(job, 'job'),
     trainings: wrap(trainings, 'trainings'),
-    request: (str) => request({url: config.apiServer, query: str, caller: 'request'}),
-    requestGroup: (str) => requestGroup(str, headers),
+    request: (str) => request({url: config.apiServer, query: str, caller: 'request', headers}),
+    requestGroup: (str) => request({url: config.apiServer, query: requestGroup(str), isGroup: true, caller: 'request', headers}),
     setHeader,
     removeHeader,
     queue
