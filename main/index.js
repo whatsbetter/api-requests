@@ -5,7 +5,7 @@ import requestGroup from 'api-helpers/requestGroup';
 import queue from 'api-helpers/queue';
 import toGqlRequest from 'api-helpers/toGqlRequest';
 
-import headers, { setHeader, removeHeader } from './_headers';
+import headers, { setHeader, removeHeader, getHeader } from './_headers';
 
 const chats = require('./chats');
 const criteria = require('./criteria');
@@ -50,6 +50,7 @@ module.exports = {
     request: (str) => request({url: config.apiServer, query: str, caller: 'request', headers}),
     requestGroup: (str) => request({url: config.apiServer, query: requestGroup(str), isGroup: true, caller: 'request', headers}),
     setHeader,
+    getHeader,
     removeHeader,
     queue
 };
