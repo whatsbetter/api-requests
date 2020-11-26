@@ -48,9 +48,9 @@ module.exports = {
     job: wrap(job, 'job'),
     trainings: wrap(trainings, 'trainings'),
     request: (str) => request({url: config.apiServer, query: str, caller: 'request'}),
+    requestGroup: (str) => requestGroup(str, headers),
     setHeader,
     removeHeader,
-    requestGroup,
     queue
 };
 
