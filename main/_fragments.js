@@ -53,7 +53,8 @@ fragments.properties = `
         popular,
         enriched,
         value,
-        label
+        label,
+        units
     }`;
 
 

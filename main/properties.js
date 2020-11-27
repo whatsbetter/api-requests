@@ -9,6 +9,7 @@ fragments.property = `
     filterable,
     enriched,
     hide_on_entity,
+    units,
     items {
         id,
         label,
