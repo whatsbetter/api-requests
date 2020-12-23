@@ -107,10 +107,9 @@ export function update(params) {
  */
 export function findLinkedSpheres(params) {
     return `{
-        spheres_spheres ${ t(params) } {
+        linkedSpheres ${ t(params) } {
             id
-            kind
-            s_sphere {
+            child_sphere {
                 id,
                 icon,
                 name,

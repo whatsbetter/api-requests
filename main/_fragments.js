@@ -13,7 +13,6 @@ fragments.sphere = `
     count_criteria,
     count_entities,
     count_scores,
-    have_map,
     icon,
     sharing_description,
     subscribed,
