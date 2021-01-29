@@ -21,6 +21,34 @@ export function search(params) {
     }`;
 }
 
+/**
+ * Ранжирование объектов
+ * 
+ * @param {Object} params
+ * @param {Object} options
+ * @returns {String}
+ */
+export function getRanking(params, options) {   
+    params.limit = params.limit || 10;
+    
+    if (!options) {
+        options = {
+            section: null
+        };
+    }
+
+    if ('filter' in params) {
+        if (Object.keys(params.filter).length > 0) {
+            params.filter = JSON.stringify(params.filter).replace(/"/g, '\'');  
+        }
+    }
+
+    return `
+        {ranking ${ t(params) } 
+            ${ getFragments(options.fragments) }
+        }`;
+}
+
 
 /**
  * Ранжирование объектов
@@ -191,7 +219,7 @@ const getFragments = (chunk = [], options = {}) => {
         }
         main_image,
         label,
-        avg,
+        avg_score,
         count_scores,
         video {
             id,
@@ -201,15 +229,9 @@ const getFragments = (chunk = [], options = {}) => {
         },
         lng,
         lat,
-        current_user_scores{
-            criteria_id,
+        my_scores{
+            criterion_id,
             value
-        }
-        city {
-            name,
-            label,
-            path,
-            path_label
         }
         ${chunk.map(key => fragments[key]).join(',')}
     }`;

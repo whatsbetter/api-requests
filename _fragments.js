@@ -50,7 +50,6 @@ fragments.properties = `
         id,
         kind,
         popular,
-        enriched,
         value,
         label,
         units
@@ -108,9 +107,13 @@ fragments.bottomAvgScores = `
  */
 fragments.avgScores = `
     avg_scores{
-        value, 
+        avg_value, 
         count_scores, 
-        criterion_id
+        criterion {
+            id,
+            name,
+            label
+        }
     }`;
 
 
