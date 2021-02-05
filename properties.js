@@ -7,7 +7,6 @@ fragments.property = `
     label,
     kind,
     filterable,
-    enriched,
     hide_on_entity,
     units,
     items {
@@ -61,7 +60,6 @@ export function findByEntity(params) {
         {properties_value ${ t(params) } { 
             property_id,
             kind,
-            enriched,
             value
         }
     }`;

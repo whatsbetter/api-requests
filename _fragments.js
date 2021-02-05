@@ -118,20 +118,6 @@ fragments.avgScores = `
 
 
 /** 
- * Средние оценки с детализацией по критериям 
- */
-fragments.avgEnrichedScores = `
-    avg_scores {
-        value, 
-        count_scores, 
-        criteria{
-            id,
-            label
-        }
-    }`;
-
-
-/** 
  * Медали по свойствам
  */
 fragments.specialMedals = `

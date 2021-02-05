@@ -14,6 +14,16 @@ const fragments = {};
 // }
 // updated_at
 //count_sub_comments,
+
+// replies {
+//     text,
+//     autor {
+//         id,
+//         name,
+//         main_image,
+//         karma
+//     }
+// },
 fragments.score = `{
     id,
     value,
@@ -39,15 +49,7 @@ fragments.score = `{
         main_image,
         karma
     },
-    replies {
-        text,
-        autor {
-            id,
-            name,
-            main_image,
-            karma
-        }
-    },
+
     argument 
 }`;
 

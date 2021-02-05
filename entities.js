@@ -37,16 +37,12 @@ export function getRanking(params, options) {
         };
     }
 
-    if ('filter' in params) {
-        if (Object.keys(params.filter).length > 0) {
-            params.filter = JSON.stringify(params.filter).replace(/"/g, '\'');  
-        }
-    }
-
     return `
-        {ranking ${ t(params) } 
-            ${ getFragments(options.fragments) }
-        }`;
+        {ranking ${ t(params) } {
+            count,
+            entities ${ getFragments(options.fragments) }
+        }
+    }`;
 }
 
 
