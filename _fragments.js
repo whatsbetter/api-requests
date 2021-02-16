@@ -77,9 +77,9 @@ fragments.medals = `
  */
 fragments.topAvgScores = `
     top_avg_scores(limit: 3) {
-        value, 
+        avg_value, 
         count_scores,
-        criteria {
+        criterion {
             id,
             name,
             label
@@ -92,9 +92,9 @@ fragments.topAvgScores = `
  */
 fragments.bottomAvgScores = `
     bottom_avg_scores(limit: 3) {
-        value, 
+        avg_value, 
         count_scores,
-        criteria {
+        criterion {
             id,
             name,
             label
@@ -248,18 +248,20 @@ fragments.userDetailed = `{
     },
     phone,
     created_at,
-    karma_details {
-        sphere{
-            id,
-            label,
-            name
-        },
-        value,
-        count_scores,
-        count_useless,
-        count_useful
-    }
+    
 }`;
+
+// karma_details {
+//     sphere{
+//         id,
+//         label,
+//         name
+//     },
+//     value,
+//     count_scores,
+//     count_useless,
+//     count_useful
+// }
 
 
 export default fragments;
