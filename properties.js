@@ -25,7 +25,7 @@ export function findAll(params) {
     params.limit = 100;
 
     return `
-        {properties ${ t(params) } {
+        {sphereProperties ${ t(params) } {
             ${ fragments.property }
         }
     }`;
