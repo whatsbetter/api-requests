@@ -13,10 +13,12 @@ export function search(params) {
     
     return `
         {search ${ t(params) } {
-            id,
-            data,
-            text,
-            subtitle
+            count,
+            entities {
+                id,
+                label,
+                main_image,
+            }
         }
     }`;
 }

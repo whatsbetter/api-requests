@@ -9,12 +9,20 @@ import fragments from './_fragments';
  * @returns {String}
  */
 export function search(params) {
+    params.type = 'spheres';
+
     return `
-        {search (text:"${params.text}", type:"spheres") {
-            id,
-            data,
-            text,
-            subtitle
+        {search ${ t(params) } {
+            count,
+            spheres {
+                id,
+                name,
+                label,
+                count_entities,
+                count_criteria,
+                count_scores,
+                main_image,
+            }
         }
     }`;
 }
