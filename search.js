@@ -10,9 +10,7 @@ import t from 'api-helpers/toGqlParams';
 export function execute(params) {  
     return `
         {search ${ t(params) } { 
-            text,
-            data,
-            subtitle
+            count
         }
     }`;
 }
