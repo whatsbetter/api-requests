@@ -3,7 +3,6 @@ const fragments = {};
 
 fragments.property = `
     id,
-    name,
     label,
     kind,
     filterable,
@@ -21,7 +20,7 @@ fragments.property = `
  * @param {Object} params
  * @returns {String}
  */
-export function findAll(params) {
+export function getBySphere(params) {
     params.limit = 100;
 
     return `
