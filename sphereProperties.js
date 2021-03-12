@@ -1,12 +1,12 @@
 import t from 'api-helpers/toGqlParams';
 const fragments = {};
 
-fragments.property = `
+fragments.sphereProperty = `
     id,
     label,
     kind,
-    filterable,
-    hide_on_entity,
+    associated_sphere_id
+    items_type
     units,
     items {
         id,
@@ -20,68 +20,15 @@ fragments.property = `
  * @param {Object} params
  * @returns {String}
  */
-export function getBySphere(params) {
+export function get(params) {
     params.limit = 100;
 
     return `
         {sphereProperties ${ t(params) } {
-            ${ fragments.property }
+            ${ fragments.sphereProperty }
         }
     }`;
 }
-
-/**
- * Получение свойств сферы
- * 
- * @param {Object} params
- * @returns {String}
- */
-export function findById(params) {
-
-    return `
-        {property ${ t(params) } {
-            ${ fragments.property }
-        }
-    }`;
-}
-
-
-/**
- * Получение свойств объекта
- * 
- * @param {Object} params
- * @returns {String}
- */
-export function findByEntity(params) {
-    params.limit = 100;
-    
-    return `
-        {properties_value ${ t(params) } { 
-            property_id,
-            kind,
-            value
-        }
-    }`;
-}
-
-
-/**
- * Получение свойств по типу
- * 
- * @param {String} type
- * @param {Object} params
- * @returns {String}
- */
-export function findByType(type, params) {
-    return `
-        {property_${type} ${ t(params) } { 
-            id,
-            name,
-            label
-        }
-    }`;
-}
-
 
 /**
  * Получение групп свойств
