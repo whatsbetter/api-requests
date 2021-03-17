@@ -12,9 +12,11 @@ export function search(params) {
 
     return `{
         search ${ t(params) } {
-            id,
-            data,
-            text
+            count,
+            criteria {
+                id,
+                label
+            }
         }
     }`;
 }
