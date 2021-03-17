@@ -52,7 +52,13 @@ fragments.properties = `
         popular,
         value,
         label,
-        units
+        units,
+        items_type,
+        items {
+          id,
+          label
+        }
+        associated_sphere_id 
     }`;
 
 
