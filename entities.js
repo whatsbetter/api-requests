@@ -130,6 +130,10 @@ export function create(params) {
         }`;
 }
 
+function escapeDoubleQuotes(str) {
+	return str.replace(/\\([\s\S])|(")/g,"\\$1$2"); // thanks @slevithan!
+}
+
 /**
  * Обновление объекта
  * 
@@ -137,6 +141,11 @@ export function create(params) {
  * @returns {String}
  */
 export function update(params) {
+    if ('description' in params) {
+        //params.description = JSON.stringify(params.description)
+        params.description = escapeDoubleQuotes(params.description)
+    }
+
     return `
         mutation {updateEntity ${ t(params) } 
             ${ getFragments() }
@@ -208,6 +217,7 @@ const getFragments = (chunk = [], options = {}) => {
         description,
         gallery {
             id,
+            count_media,
             items (limit: ${ galleryLimit }){
                 id,
                 hash,

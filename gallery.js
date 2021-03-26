@@ -4,6 +4,7 @@ const fragments = {};
 
 fragments.gallery = `{
     id,
+    count_media,
     items(limit: 100) {
         id,
         hash,
