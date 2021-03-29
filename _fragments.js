@@ -69,7 +69,7 @@ fragments.medals = `
     medals {
         place,
         value,
-        criteria{
+        criterion{
             id, 
             label
         },
@@ -122,27 +122,6 @@ fragments.avgScores = `
         }
     }`;
 
-
-/** 
- * Медали по свойствам
- */
-fragments.specialMedals = `
-    special_medals {
-        criteria{
-            id,
-            label
-        }
-        place,
-        value,
-        property {
-            name,
-            label
-        }
-        property_value {
-            name, 
-            label
-        }
-    }`;
 
 /** 
  * Цены
