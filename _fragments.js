@@ -69,12 +69,11 @@ fragments.medals = `
     medals {
         place,
         value,
+        location_type,
         criterion{
             id, 
             label
         },
-        start_date,
-        end_date
     }`;
 
 
