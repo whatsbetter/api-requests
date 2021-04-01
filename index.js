@@ -16,6 +16,7 @@ const gallery = require('./gallery');
 const messages = require('./messages');
 const notifications = require('./notifications');
 const posts = require('./posts');
+const presets = require('./presets');
 const filters = require('./filters');
 const sphereProperties = require('./sphereProperties');
 const scores = require('./scores');
@@ -41,6 +42,7 @@ module.exports = {
     messages: wrap(messages, 'messages'),
     notifications: wrap(notifications, 'notifications'),
     posts: wrap(posts, 'posts'),
+    presets: wrap(presets, 'presets'),
     filters: wrap(filters, 'filters'),
     sphereProperties: wrap(sphereProperties, 'sphereProperties'),
     scores: wrap(scores, 'scores'),

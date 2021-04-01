@@ -1,5 +1,6 @@
 import t from 'api-helpers/toGqlParams';
 import fragments from './_fragments';
+import { escape } from 'helpers';
 
 
 /**
@@ -64,12 +65,6 @@ export function findAll(params, options) {
         };
     }
 
-    if ('filter' in params) {
-        if (Object.keys(params.filter).length > 0) {
-            params.filter = JSON.stringify(params.filter).replace(/"/g, '\'');  
-        }
-    }
-
     return `
         {entities ${ t(params) } 
             ${ getFragments(options.fragments) }
@@ -130,10 +125,6 @@ export function create(params) {
         }`;
 }
 
-function escapeDoubleQuotes(str) {
-	return str.replace(/\\([\s\S])|(")/g,"\\$1$2"); // thanks @slevithan!
-}
-
 /**
  * Обновление объекта
  * 
@@ -142,8 +133,7 @@ function escapeDoubleQuotes(str) {
  */
 export function update(params) {
     if ('description' in params) {
-        //params.description = JSON.stringify(params.description)
-        params.description = escapeDoubleQuotes(params.description)
+        params.description = escape(params.description)
     }
 
     return `
