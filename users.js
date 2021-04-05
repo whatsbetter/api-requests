@@ -63,9 +63,12 @@ export function update(params = {}) {
 export function search(params) {
     return `
         {search (text:"${params.text}", type:"users") {
-            id,
-            data,
-            text
+            users{
+                id,
+                name,
+                main_image
+                karma
+            }
         }
     }`;
 }
