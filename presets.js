@@ -96,7 +96,7 @@ export function create(params) {
 }
 
 /**
- * Обновление поста
+ * Обновление персета
  * 
  * @param {type} params
  * @returns {String}
@@ -162,8 +162,3 @@ export function removeUser(params) {
         }
     }`;
 }
-
-
-    
-    
-    
