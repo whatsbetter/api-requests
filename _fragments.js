@@ -16,10 +16,6 @@ fragments.sphere = `
     icon,
     sharing_description,
     subscribed,
-    roles {
-        id,
-        name
-    }
     popular_criteria{
         name,
         id,
