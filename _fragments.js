@@ -209,14 +209,14 @@ fragments.user =  `{
     id,
     name,
     main_image,
-    is_friend,
+    relation,
     karma
 }`,
     
 fragments.userDetailed = `{
     id,
     name,
-    is_friend,
+    relation,
     first_name,
     second_name,
     main_image,

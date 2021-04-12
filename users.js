@@ -213,7 +213,7 @@ export function removeSubscriber(params) {
 }
 
 /**
- * Добавить в 
+ * Добавить в друзья
  * 
  * @param {Object} params
  * @returns {String} 
@@ -224,6 +224,20 @@ export function addFriend(params) {
             id, name
         }
     }`;
+}
+
+/**
+ * Добавить в друзья
+ * 
+ * @param {Object} params
+ * @returns {String} 
+ */
+ export function confirmFriend(params) {
+    return `
+       mutation {confirmFriend ${ t(params) } {
+           id, name
+       }
+   }`;
 }
 
 

@@ -49,7 +49,14 @@ fragments.score = `{
         main_image,
         karma
     },
-
+    gallery {
+        id,
+        count_media,
+        items {
+            type
+            hash,
+        }
+    },
     argument 
 }`;
 
