@@ -96,10 +96,7 @@ export function findMe(params) {
 export function addSubscriptionToSphere(params) {
     return `
         mutation {addSubscriptionForSpheres ${ t(params) } {
-            id,
-            name,
-            label,
-            icon
+            id
         }
     }`;
 }
@@ -235,9 +232,23 @@ export function addFriend(params) {
  export function confirmFriend(params) {
     return `
        mutation {confirmFriend ${ t(params) } {
-           id, name
+           id, 
+           name
        }
    }`;
 }
+
+export function findSphereSubscribers(params) {
+    return `
+        {sphereSubscribers ${ t(params) } {
+            id,
+            name,
+            main_image
+            karma
+       }
+   }`;
+}
+
+
 
 
