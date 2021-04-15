@@ -1,5 +1,6 @@
 import t from 'api-helpers/toGqlParams';
 import fragments from './_fragments';
+import _ from 'lodash';
 
 
 /**
@@ -8,10 +9,15 @@ import fragments from './_fragments';
  * @param {Object} params
  * @returns {String} 
  */
-export function findById(params) {
+export function findById(params, options) {
+    let uf = 'fragments' in options ? options.fragments : []
+    uf.push("user")
+    uf = _.uniq(uf)
+
     return `
-        {user ${ t(params)} 
-            ${ fragments.userDetailed }
+        {user ${ t(params)}  {
+                ${ uf.map(key => fragments[key]).join(',') }
+            }
         }`;
 }
 
@@ -81,8 +87,10 @@ export function search(params) {
  */
 export function findMe(params) {
     return `
-        {user (token: "${params.token}")
-            ${fragments.userDetailed}
+        {user (token: "${params.token}") {
+                ${ fragments.user }
+                ${ fragments.roles }
+            }
         }
     `;
 }
@@ -149,8 +157,9 @@ export function findFriends(params) {
     params.limit = params.limit || 20;
 
     return `
-        {friends ${ t(params) } 
-            ${ fragments.user }
+        {friends ${ t(params) } {
+                ${ fragments.user }
+            }
         }`;
 }
 
@@ -163,8 +172,9 @@ export function findFriends(params) {
  */
 export function getPartners(params) {
     return `
-        {get_partners_users ${ t(params) }  
-            ${ fragments.user }
+        {get_partners_users ${ t(params) }  { 
+                ${ fragments.user }
+            }
         }`;
 }
 
@@ -176,8 +186,9 @@ export function getPartners(params) {
  */
 export function findSubscribes(params) {
     return `
-        {subscribers ${ t(params) } 
-            ${ fragments.user }
+        {subscribers ${ t(params) }  {
+                ${ fragments.user }
+            }
         }`;
 }
 
@@ -248,7 +259,3 @@ export function findSphereSubscribers(params) {
        }
    }`;
 }
-
-
-
-

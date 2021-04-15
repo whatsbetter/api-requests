@@ -163,87 +163,45 @@ fragments.accociatedProperties = `
         }
     }`;
 
-/** 
- * Метаданные для пресета
- */
-fragments.presetMetadata = `
-    metadata {
-        criteria {
-            id,
-            label
-        }, 
-        scores {
-            id, 
-            criterion {
-                id, 
-                label
-            }, 
-            entity{ 
-                id, 
-                label, 
-                main_image
-            }, 
-            value,
-            user {
-                name, 
-                main_image
-            }
-        }
-        rating {
-            id,
-            name,
-            label,
-            main_image,
-            description,
-            avg,
-            video {
-                url
-            },
-            ${fragments.properties}
-            ${fragments.prices}            
-            ${fragments.avgScores}  
-        }
-    }`;
 
-fragments.user =  `{
-    id,
-    name,
-    main_image,
-    relation,
+
+fragments.user =  `
+    id
+    name
+    main_image
+    relation
     karma
-}`,
-    
-fragments.userDetailed = `{
-    id,
-    name,
-    relation,
-    first_name,
-    second_name,
-    main_image,
-    karma,
-    providers {
-        type
-    }, 
+    created_at
+`;
+
+fragments.userCounters = `
+    count_friends
+    count_spheres
+    count_posts
+    count_presets
+    count_follows
+    count_following
+`
+
+fragments.roles = `
     roles {
         id, 
         name
     },
-    phone,
-    created_at,
-    
-}`;
+`;
 
-// karma_details {
-//     sphere{
-//         id,
-//         label,
-//         name
-//     },
-//     value,
-//     count_scores,
-//     count_useless,
-//     count_useful
-// }
-
+fragments.karmaDetails = `
+    karma_details {
+        count_scores,
+        count_spheres,
+        items {
+            sphere {
+                id,
+                name
+            },
+            count_scores
+        }
+    },
+`
 
 export default fragments;
