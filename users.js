@@ -184,9 +184,37 @@ export function getPartners(params) {
  * @param {Object} params
  * @returns {String} 
  */
-export function findSubscribes(params) {
+export function findFollowers(params) {
     return `
-        {subscribers ${ t(params) }  {
+        {followers ${ t(params) }  {
+                ${ fragments.user }
+            }
+        }`;
+}
+
+/**
+ * Поиск подписок
+ * 
+ * @param {Object} params
+ * @returns {String} 
+ */
+ export function findFollowing(params) {
+    return `
+        {following ${ t(params) }  {
+                ${ fragments.user }
+            }
+        }`;
+}
+
+/**
+ * Поиск рефералов
+ * 
+ * @param {Object} params
+ * @returns {String} 
+ */
+ export function findReferrals(params) {
+    return `
+        {referrals ${ t(params) }  {
                 ${ fragments.user }
             }
         }`;
@@ -201,7 +229,8 @@ export function findSubscribes(params) {
 export function addSubscriber(params) {
     return `
         mutation {addSubscriber ${ t(params) } {
-            id, name
+            id, 
+            name
         }
     }`;
 }

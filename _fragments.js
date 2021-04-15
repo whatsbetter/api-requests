@@ -179,8 +179,9 @@ fragments.userCounters = `
     count_spheres
     count_posts
     count_presets
-    count_follows
+    count_followers
     count_following
+    count_referrals
 `
 
 fragments.roles = `
