@@ -288,3 +288,37 @@ export function findSphereSubscribers(params) {
        }
    }`;
 }
+
+export function friendsOfFriends(params) {
+    return `
+        {friendsOfFriends ${ t(params) } {
+            id,
+            name,
+            main_image
+            karma
+       }
+   }`;
+}
+
+
+export function friendsWithScores(params) {
+    return `
+        {friendsWithScores ${ t(params) } {
+            id,
+            name,
+            main_image
+            count_scores
+       }
+   }`;
+}
+
+export function findExperts(params) {
+    return `
+        {experts ${ t(params) } {
+            id,
+            name,
+            main_image
+            count_scores
+       }
+   }`;
+}
