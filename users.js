@@ -301,9 +301,9 @@ export function friendsOfFriends(params) {
 }
 
 
-export function friendsWithScores(params) {
+export function whoRated(params) {
     return `
-        {friendsWithScores ${ t(params) } {
+        {whoRated ${ t(params) } {
             id,
             name,
             main_image
