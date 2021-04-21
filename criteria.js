@@ -144,3 +144,15 @@ export function update(params) {
         }
     }`;
 }
+
+export function getFriendsCriteria(params) {
+    return `
+        {friendsCriteria ${ t(params) } {
+            id,
+            name,
+            label,
+        }
+    }`;
+}
+
+
