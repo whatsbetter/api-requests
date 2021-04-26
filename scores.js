@@ -108,6 +108,40 @@ export function findById(params) {
         }`; 
 }
 
+export function findTops(params) {
+    return `
+        {topScores ${ t(params) } { 
+            value
+            place
+            argument
+            entity {
+                id
+                main_image
+                label
+            }
+            criterion {
+                id
+                label
+            }
+            sphere {
+                id
+                label
+            }
+        }
+    }`; 
+}
+
+export function getStatistic(params) {
+    return ` 
+        {scoresStatictic ${ t(params) } {
+            rounded_value
+            count
+        }
+    }`; 
+}
+
+  
+
 
 
 

@@ -182,6 +182,7 @@ fragments.userCounters = `
     count_followers
     count_following
     count_referrals
+    count_scores
 `
 
 fragments.roles = `
@@ -193,11 +194,13 @@ fragments.roles = `
 
 fragments.karmaDetails = `
     karma_details {
-        count_scores,
-        count_spheres,
+        count_scores
+        count_spheres
         items {
             sphere {
                 id,
+                label
+                main_image
                 name
             },
             count_scores

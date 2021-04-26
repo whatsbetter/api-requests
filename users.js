@@ -90,6 +90,7 @@ export function findMe(params) {
         {user (token: "${params.token}") {
                 ${ fragments.user }
                 ${ fragments.roles }
+                count_scores
             }
         }
     `;
@@ -322,3 +323,44 @@ export function findExperts(params) {
        }
    }`;
 }
+
+export function getSimilarity(params) {
+    let fragment = `
+        difference
+        entity {
+            id
+            label
+            main_image
+        }
+        criterion {
+            id,
+            label
+        }
+        sphere {
+            id
+            label
+        }
+        scores {
+            user_id,
+            value
+        }
+    `
+
+
+    return `{
+        similarity ${ t(params) } { 
+            value
+            count_general_scores
+            count_agree 
+            count_disagree 
+            agree {
+                ${ fragment }
+            }     
+            disagree {
+                ${ fragment }
+            }
+        }
+   }`;
+}
+
+
