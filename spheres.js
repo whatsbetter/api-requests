@@ -130,3 +130,42 @@ export function findLinkedSpheres(params) {
         }
     }`;
 }
+
+/**
+ * Связанные сферы
+ * 
+ * @param {Object} params
+ * @returns {String}
+ */
+ export function findRatedSpheres(params) {
+    return `{
+        ratedSpheres ${ t(params) } {
+            id
+            name,
+            label,
+            main_image,
+            count_scores,
+        }
+    }`;
+}
+
+/**
+ * Получить сферы, на которые подписан пользователь
+ * 
+ * @param {Object} params
+ * @returns {String} 
+ */
+ export function findSubscriptionSpheres(params) {
+    return `
+        {subscription_spheres ${ t(params) } {
+            id,
+            name,
+            description,
+            label,
+            main_image,
+            count_criteria,
+            count_entities,
+            count_scores
+        }
+    }`;
+}

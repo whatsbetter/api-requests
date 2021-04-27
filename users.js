@@ -125,30 +125,6 @@ export function removeSubscriptionToSphere(params) {
 }
 
 /**
- * Получить сферы, на которые подписан пользователь
- * 
- * @param {Object} params
- * @returns {String} 
- */
-export function findSubscriptionSpheres(params) {
-    return `
-        {subscription_spheres ${ t(params) } {
-            id,
-            name,
-            description,
-            label,
-            main_image,
-            count_criteria,
-            count_entities,
-            count_scores,
-            icon,
-            sharing_description,
-        }
-    }`;
-}
-
-
-/**
  * Поиск друзей
  * 
  * @param {Object} params
@@ -353,6 +329,12 @@ export function getSimilarity(params) {
             count_general_scores
             count_agree 
             count_disagree 
+            users {
+                id,
+                name
+                main_image
+                count_scores
+            }
             agree {
                 ${ fragment }
             }     
