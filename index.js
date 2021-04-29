@@ -25,6 +25,7 @@ const search = require('./search');
 const users = require('./users');
 const job = require('./job');
 const marketplaces = require('./marketplaces');
+const media = require('./media');
 const trainings = require('./trainings');
 
 
@@ -39,6 +40,7 @@ module.exports = {
     feed: wrap(feed, 'feed'),
     gallery: wrap(gallery, 'gallery'),
     marketplaces: wrap(marketplaces, 'marketplaces'),
+    media: wrap(media, 'media'),
     messages: wrap(messages, 'messages'),
     notifications: wrap(notifications, 'notifications'),
     posts: wrap(posts, 'posts'),
