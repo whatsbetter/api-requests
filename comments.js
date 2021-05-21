@@ -18,7 +18,7 @@ export function create(params) {
             autor {
                 id,
                 name, 
-                main_image, 
+                mainImage, 
                 karma
             }
         }
@@ -41,7 +41,7 @@ export function getByScore(params) {
             autor {
                 id,
                 name,
-                main_image,
+                mainImage,
                 karma
             }
         }

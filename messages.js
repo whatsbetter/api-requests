@@ -8,24 +8,24 @@ fragments.message = `{
     user {
         id,
         name,
-        main_image
+        mainImage
     }, 
     rating {
         id,
         label,
         name,
         avg,
-        main_image,
-        avg_scores {
+        mainImage,
+        avgScores {
             value,
-            count_scores,
+            countScores,
             criteria {
                 label,
                 id
             }
         }
     }, 
-    created_at
+    createdAt
 }`;
 
 

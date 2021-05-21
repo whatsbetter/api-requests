@@ -7,7 +7,7 @@ fragments.post = `
     alias, 
     published, 
     preamble, 
-    preamble_images {
+    preambleImages {
         hash
     }, 
     sphere {
@@ -18,10 +18,10 @@ fragments.post = `
     author {
         id,
         name, 
-        main_image,
+        mainImage,
         karma
     }, 
-    created_at
+    createdAt
     `;
 
 

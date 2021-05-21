@@ -36,7 +36,7 @@ export function findById(params) {
             label,
             description,
             hide,
-            criteria_group {
+            criteriaGroup {
                 id,
                 name,
                 label
@@ -61,7 +61,7 @@ export function findAll(params) {
             name,
             label,
             description,
-            criteria_group {
+            criteriaGroup {
                 id,
                 name,
                 label
@@ -79,7 +79,7 @@ export function findAll(params) {
  */
 export function findGroups (params) {
     return `
-        {criteria_groups ${ t(params) } {
+        {criteriaGroups ${ t(params) } {
             id,
             name,
             label
@@ -96,7 +96,7 @@ export function findGroups (params) {
  */
 export function findFromGroups(params) {
     return `
-        {criteria_group ${ t(params) } {
+        {criteriaGroup ${ t(params) } {
             id,
             name,
             label,

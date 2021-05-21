@@ -18,10 +18,10 @@ export function search(params) {
                 id,
                 name,
                 label,
-                count_entities,
-                count_criteria,
-                count_scores,
-                main_image,
+                countEntities,
+                countCriteria,
+                countScores,
+                mainImage,
             }
         }
     }`;
@@ -48,11 +48,10 @@ export function findAll(params, options={}) {
             id,
             icon,
             label,
-            have_child,
-            main_image,
-            count_scores,
-            count_criteria,
-            count_entities
+            mainImage,
+            countScores,
+            countCriteria,
+            countEntities
             subscribed,
             ${'fragments' in options ? options.fragments.map(key => fragments[key]).join(',') : ''} 
         }
@@ -117,15 +116,15 @@ export function findLinkedSpheres(params) {
     return `{
         linkedSpheres ${ t(params) } {
             id
-            child_sphere {
+            childSphere {
                 id,
                 icon,
                 name,
                 label,
-                main_image,
-                count_criteria,
-                count_entities,
-                count_scores,
+                mainImage,
+                countCriteria,
+                countEntities,
+                countScores,
             }
         }
     }`;
@@ -143,8 +142,8 @@ export function findLinkedSpheres(params) {
             id
             name,
             label,
-            main_image,
-            count_scores,
+            mainImage,
+            countScores,
         }
     }`;
 }
@@ -157,15 +156,15 @@ export function findLinkedSpheres(params) {
  */
  export function findSubscriptionSpheres(params) {
     return `
-        {subscription_spheres ${ t(params) } {
+        {subscriptionSpheres ${ t(params) } {
             id,
             name,
             description,
             label,
-            main_image,
-            count_criteria,
-            count_entities,
-            count_scores
+            mainImage,
+            countCriteria,
+            countEntities,
+            countScores
         }
     }`;
 }

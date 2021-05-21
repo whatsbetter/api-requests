@@ -18,7 +18,7 @@ export function search(params) {
             entities {
                 id,
                 label,
-                main_image,
+                mainImage,
             }
         }
     }`;
@@ -156,47 +156,6 @@ export function setProperty(params) {
         }`;
 }
 
-export function compare(params, options) {
-    let extra = [];
-
-    let properties = `
-        properties(group_property_id: "${params.groupPropertyId}") {
-            name,
-            label,
-            value,
-            id
-        }`;
-    
-    let criteria = `
-        avg_scores (criteria: "${options.criteria}") {
-            criteria{
-                id,
-                label
-            },
-            value
-        }`;
-    
-    if (options.types.includes('properties')) {
-        extra.push(properties);
-    };
-    
-    if (options.types.includes('criteria')) {
-        extra.push(criteria);
-    };
-    
-    params.typeCompare = "properties";
-
-    return `{
-        compare_entities ${ t(params) }{
-            id,
-            label,
-            main_image,
-            ${extra.join(',')}
-        }
-    }`;
-}
-
-
 
 const getFragments = (chunk = [], options = {}) => {    
     let galleryLimit = options.galleryLimit || 3;
@@ -207,7 +166,7 @@ const getFragments = (chunk = [], options = {}) => {
         description,
         gallery {
             id,
-            count_media,
+            countMedia,
             items (limit: ${ galleryLimit }){
                 id,
                 hash,
@@ -215,10 +174,10 @@ const getFragments = (chunk = [], options = {}) => {
                 url,
             }
         }
-        main_image,
+        mainImage,
         label,
-        avg_score,
-        count_scores,
+        avgScore,
+        countScores,
         video {
             id,
             hash,
@@ -227,8 +186,8 @@ const getFragments = (chunk = [], options = {}) => {
         },
         lng,
         lat,
-        my_scores{
-            criterion_id,
+        myScores{
+            criterionID,
             value
         }
         ${chunk.map(key => fragments[key]).join(',')}

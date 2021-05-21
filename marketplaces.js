@@ -36,10 +36,10 @@ export function findById(params, options = {}) {
             label
             address
             phone
-            entity_id
-            author_id
+            entityID
+            authorID
             delivery
-            delivery_description
+            deliveryDescription
             url
         }  
     }`;

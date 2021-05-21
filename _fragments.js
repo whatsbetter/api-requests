@@ -9,14 +9,14 @@ fragments.sphere = `
     name,
     description,
     label,
-    main_image,
-    count_criteria,
-    count_entities,
-    count_scores,
+    mainImage,
+    countCriteria,
+    countEntities,
+    countScores,
     icon,
-    sharing_description,
+    sharingDescription,
     subscribed,
-    popular_criteria{
+    popularCriteria{
         name,
         id,
         label
@@ -28,11 +28,11 @@ fragments.sphereChildren = `
         name,
         description,
         label,
-        main_image,
+        mainImage,
         have_child,
-        count_criteria,
-        count_entities,
-        count_scores,
+        countCriteria,
+        countEntities,
+        countScores,
         icon
     }`;
 
@@ -49,12 +49,12 @@ fragments.properties = `
         value,
         label,
         units,
-        items_type,
+        itemsType,
         items {
           id,
           label
         }
-        associated_sphere_id 
+        associatedSphereID 
     }`;
 
 
@@ -65,7 +65,7 @@ fragments.medals = `
     medals {
         place,
         value,
-        location_type,
+        locationType,
         criterion{
             id, 
             label
@@ -77,9 +77,9 @@ fragments.medals = `
  * Лучшие оценки
  */
 fragments.topAvgScores = `
-    top_avg_scores(limit: 3) {
-        avg_value, 
-        count_scores,
+    topAvgScores(limit: 3) {
+        avgValue, 
+        countScores,
         criterion {
             id,
             name,
@@ -92,9 +92,9 @@ fragments.topAvgScores = `
  * Худшие оценки 
  */
 fragments.bottomAvgScores = `
-    bottom_avg_scores(limit: 3) {
-        avg_value, 
-        count_scores,
+    bottomAvgScores(limit: 3) {
+        avgValue, 
+        countScores,
         criterion {
             id,
             name,
@@ -107,9 +107,9 @@ fragments.bottomAvgScores = `
  * Средние оценки 
  */
 fragments.avgScores = `
-    avg_scores{
-        avg_value, 
-        count_scores, 
+    avgScores{
+        avgValue, 
+        countScores, 
         criterion {
             id,
             name,
@@ -130,8 +130,8 @@ fragments.prices = `
             id, 
             name, 
             label,
-            unit_name, 
-            deal_name 
+            unitName, 
+            dealName 
         }
     }`;
 
@@ -147,7 +147,7 @@ fragments.parent = `
     }`;
 
 fragments.accociatedProperties = `
-    accociated_properties {
+    accociatedProperties {
         label,
         id,
         sphere{
@@ -156,7 +156,7 @@ fragments.accociatedProperties = `
             label,
             description,
             icon,
-            popular_criteria{
+            popularCriteria{
                id
                label
             }
@@ -168,21 +168,21 @@ fragments.accociatedProperties = `
 fragments.user =  `
     id
     name
-    main_image
+    mainImage
     relation
     karma
-    created_at
+    createdAt
 `;
 
 fragments.userCounters = `
-    count_friends
-    count_spheres
-    count_posts
-    count_presets
-    count_followers
-    count_following
-    count_referrals
-    count_scores
+    countFriends
+    countSpheres
+    countPosts
+    countPresets
+    countFollowers
+    countFollowing
+    countReferrals
+    countScores
 `
 
 fragments.roles = `
@@ -193,17 +193,17 @@ fragments.roles = `
 `;
 
 fragments.karmaDetails = `
-    karma_details {
-        count_scores
-        count_spheres
+    karmaDetails {
+        countScores
+        countSpheres
         items {
             sphere {
                 id,
                 label
-                main_image
+                mainImage
                 name
             },
-            count_scores
+            countScores
         }
     },
 `

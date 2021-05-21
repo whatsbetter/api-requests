@@ -36,7 +36,7 @@ export function findAll(params = {}) {
             id,
             name,
             karma,
-            main_image
+            mainImage
         }
     }`;
 }
@@ -52,7 +52,7 @@ export function update(params = {}) {
         mutation {updateUser ${ t(params) } {
             id,
             name,
-            main_image
+            mainImage
         }
     }`;
 }
@@ -72,7 +72,7 @@ export function search(params) {
             users{
                 id,
                 name,
-                main_image
+                mainImage
                 karma
             }
         }
@@ -90,7 +90,7 @@ export function findMe(params) {
         {user (token: "${params.token}") {
                 ${ fragments.user }
                 ${ fragments.roles }
-                count_scores
+                countScores
             }
         }
     `;
@@ -260,7 +260,7 @@ export function findSphereSubscribers(params) {
         {sphereSubscribers ${ t(params) } {
             id,
             name,
-            main_image
+            mainImage
             karma
        }
    }`;
@@ -271,7 +271,7 @@ export function friendsOfFriends(params) {
         {friendsOfFriends ${ t(params) } {
             id,
             name,
-            main_image
+            mainImage
             karma
        }
    }`;
@@ -283,8 +283,8 @@ export function whoRated(params) {
         {whoRated ${ t(params) } {
             id,
             name,
-            main_image
-            count_scores
+            mainImage
+            countScores
        }
    }`;
 }
@@ -294,8 +294,8 @@ export function findExperts(params) {
         {experts ${ t(params) } {
             id,
             name,
-            main_image
-            count_scores
+            mainImage
+            countScores
        }
    }`;
 }
@@ -306,7 +306,7 @@ export function getSimilarity(params) {
         entity {
             id
             label
-            main_image
+            mainImage
         }
         criterion {
             id,
@@ -317,7 +317,7 @@ export function getSimilarity(params) {
             label
         }
         scores {
-            user_id,
+            userID,
             value
         }
     `
@@ -326,14 +326,14 @@ export function getSimilarity(params) {
     return `{
         similarity ${ t(params) } { 
             value
-            count_general_scores
-            count_agree 
-            count_disagree 
+            countGeneralScores
+            countAgree 
+            countDisagree 
             users {
                 id,
                 name
-                main_image
-                count_scores
+                mainImage
+                countScores
             }
             agree {
                 ${ fragment }

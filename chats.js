@@ -5,7 +5,7 @@ const fragments = {};
 fragments.chat = `{
     id,
     label,
-    main_image,
+    mainImage,
     read,
     criteria {
         id, 
@@ -19,14 +19,14 @@ fragments.chat = `{
     users (limit: 4) {
         id,
         name,
-        main_image
+        mainImage
     },
     last_message {
         text,
         user {
             id,
             name,
-            main_image
+            mainImage
         }
     }
 }`;
@@ -64,7 +64,7 @@ export function findById(params, options = {}) {
             users(limit: ${ usersLimit }){
                 id,
                 name,
-                main_image
+                mainImage
             },
             sphere{
                 id, 

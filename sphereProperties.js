@@ -5,8 +5,8 @@ fragments.sphereProperty = `
     id,
     label,
     kind,
-    associated_sphere_id
-    items_type
+    associatedSphereID
+    itemsType
     units,
     items {
         id,
@@ -38,7 +38,7 @@ export function get(params) {
  */
 export function getGroups(params) {
     return `
-        {groups_properties ${ t(params) } {
+        {propertiesGroups ${ t(params) } {
             name,
             label,
             id

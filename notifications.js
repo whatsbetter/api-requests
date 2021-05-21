@@ -12,7 +12,7 @@ export function get(params) {
         notifications ${ t(params) } {
             status,
             comment {
-                parent_score {
+                parentScore {
                     id, 
                     comment {
                         text, 
@@ -24,12 +24,12 @@ export function get(params) {
                 entity {
                     id,
                     label,
-                    main_image
+                    mainImage
                 },
                 autor {
                     id,
                     name,
-                    main_image,
+                    mainImage,
                     karma
                 }, 
                 criteria {

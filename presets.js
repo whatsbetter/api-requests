@@ -6,7 +6,7 @@ fragments.preset = `
     name, 
     label, 
     description, 
-    main_image, 
+    mainImage, 
     criteria {
         id,
         label
@@ -14,7 +14,7 @@ fragments.preset = `
     users {
         id,
         name
-        main_image
+        mainImage
     }, 
     filters{
         id
@@ -34,10 +34,10 @@ fragments.preset = `
     author {
         id,
         name, 
-        main_image,
+        mainImage,
         karma
     }, 
-    created_at
+    createdAt
 `;
 
 
@@ -87,7 +87,7 @@ export function create(params) {
             name,
             label,
             description,
-            main_image,
+            mainImage,
             sphere {
                 id
             }
@@ -112,7 +112,7 @@ export function update(params) {
             name,
             label,
             description,
-            main_image,
+            mainImage,
             sphere {
                 id
             }

@@ -10,7 +10,7 @@ import t from 'api-helpers/toGqlParams';
 export function findAll(params) {   
     return `
         {media ${ t(params) } {
-            count_media
+            countMedia
             items {
                 id
                 hash

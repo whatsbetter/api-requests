@@ -11,7 +11,7 @@ import t from 'api-helpers/toGqlParams';
 export function get(params) {        
     return `{
         feed ${ t(params) }{
-            created_at,
+            createdAt,
             end,
             start,
             sphere {
@@ -43,14 +43,14 @@ export function get(params) {
                 entity {
                     id,
                     label,
-                    main_image
+                    mainImage
                 },
                 value
             },
             user {
                 id,
                 name,
-                main_image,
+                mainImage,
                 karma
             }
         }

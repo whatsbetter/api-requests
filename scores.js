@@ -20,19 +20,19 @@ const fragments = {};
 //     autor {
 //         id,
 //         name,
-//         main_image,
+//         mainImage,
 //         karma
 //     }
 // },
 fragments.score = `{
     id,
     value,
-    created_at,
+    createdAt,
     sphere{
         id,
         name,
         label,
-        main_image
+        mainImage
     },
     criterion {
         id,
@@ -41,17 +41,17 @@ fragments.score = `{
     entity {
         id,
         label,
-        main_image
+        mainImage
     },
     user {
         id,
         name,
-        main_image,
+        mainImage,
         karma
     },
     gallery {
         id,
-        count_media,
+        countMedia,
         items {
             type
             hash,
@@ -116,7 +116,7 @@ export function findTops(params) {
             argument
             entity {
                 id
-                main_image
+                mainImage
                 label
             }
             criterion {
@@ -134,14 +134,8 @@ export function findTops(params) {
 export function getStatistic(params) {
     return ` 
         {scoresStatictic ${ t(params) } {
-            rounded_value
+            roundedValue
             count
         }
     }`; 
 }
-
-  
-
-
-
-

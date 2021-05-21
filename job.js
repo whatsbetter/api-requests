@@ -9,12 +9,12 @@ fragments.jobRequest = `
     mentor {
         id
         name
-        main_image
+        mainImage
     }
     apprentice {
         id
         name,
-        main_image,
+        mainImage,
         phone,
         proff_card {
             status

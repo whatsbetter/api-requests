@@ -50,7 +50,7 @@ export function findPrograms(params) {
                 label
             },
             level,
-            section_id,
+            sectionID,
             section_name
         }
     }`;
