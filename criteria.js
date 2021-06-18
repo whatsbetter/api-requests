@@ -36,7 +36,7 @@ export function findById(params) {
             label,
             description,
             hide,
-            criteriaGroup {
+            criterionGroups {
                 id,
                 name,
                 label
@@ -61,7 +61,7 @@ export function findAll(params) {
             name,
             label,
             description,
-            criteriaGroup {
+            criterionGroups {
                 id,
                 name,
                 label
@@ -145,14 +145,12 @@ export function update(params) {
     }`;
 }
 
-export function getFriendsCriteria(params) {
+export function getUsersCriteria(params) {
     return `
-        {friendsCriteria ${ t(params) } {
-            id,
-            name,
-            label,
+        {usersCriteria ${ t(params) } {
+            id
+            name
+            label
         }
     }`;
 }
-
-

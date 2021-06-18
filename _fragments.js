@@ -22,7 +22,7 @@ fragments.sphere = `
         label
     }`;
 
-fragments.sphereChildren = `
+fragments.childSpheres = `
     children{
         id,
         name,
@@ -34,6 +34,16 @@ fragments.sphereChildren = `
         countEntities,
         countScores,
         icon
+    }`;
+
+    /** 
+ * Родитель сферы
+ */
+fragments.parentSpheres = `
+    parentSpheres {
+        id
+        name
+        label
     }`;
 
 
@@ -136,15 +146,7 @@ fragments.prices = `
     }`;
 
 
-/** 
- * Родитель сферы
- */
-fragments.parent = `
-    parent {
-        label,
-        id,
-        name
-    }`;
+
 
 fragments.accociatedProperties = `
     accociatedProperties {

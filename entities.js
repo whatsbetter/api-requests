@@ -42,7 +42,7 @@ export function getRanking(params, options) {
 
     return `
         {ranking ${ t(params) } {
-            count,
+            countEntities,
             entities ${ getFragments(options.fragments) }
         }
     }`;
