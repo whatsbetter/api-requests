@@ -85,9 +85,9 @@ export function search(params) {
  * @param {Object} params
  * @returns {String} 
  */
-export function findMe(params) {
+export function findMe() {
     return `
-        {user (token: "${params.token}") {
+        {me {
                 ${ fragments.user }
                 ${ fragments.roles }
                 countScores
