@@ -23,20 +23,20 @@ fragments.sphere = `
     }`;
 
 fragments.childSpheres = `
-    children{
-        id,
-        name,
-        description,
-        label,
-        mainImage,
-        have_child,
-        countCriteria,
-        countEntities,
-        countScores,
+    childSpheres{
+        id
+        name
+        description
+        label
+        mainImage
+        countCriteria
+        countEntities
+        countSpheres
+        countScores
         icon
     }`;
 
-    /** 
+/** 
  * Родитель сферы
  */
 fragments.parentSpheres = `

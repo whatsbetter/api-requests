@@ -38,21 +38,22 @@ export function findAll(params, options={}) {
     params.limit = params.limit || 20;
     params.hide = false;
     
-    if (!('parent' in params) && !('type' in params)) {
+    if (!('parentSphereID' in params) && !('type' in params)) {
         params.orderBy = 'popular';
     }
 
     return `
         {spheres ${ t(params) } {
-            name,
-            id,
-            icon,
-            label,
-            mainImage,
-            countScores,
-            countCriteria,
+            name
+            id
+            icon
+            label
+            mainImage
+            countScores
+            countCriteria
+            countSpheres
             countEntities
-            subscribed,
+            subscribed
             ${'fragments' in options ? options.fragments.map(key => fragments[key]).join(',') : ''} 
         }
     }`;
