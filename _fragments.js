@@ -13,6 +13,9 @@ fragments.sphere = `
     countCriteria,
     countEntities,
     countScores,
+    countSubscribers
+    countPresets
+    countPosts
     icon,
     sharingDescription,
     subscribed,
