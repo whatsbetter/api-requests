@@ -10,6 +10,7 @@ fragments.sphere = `
     description,
     label,
     mainImage,
+    countSpheres,
     countCriteria,
     countEntities,
     countScores,
