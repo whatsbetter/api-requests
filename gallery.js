@@ -1,17 +1,7 @@
 import t from 'api-helpers/toGqlParams';
-const fragments = {};
+import fragments from './_fragments';
 
 
-fragments.gallery = `{
-    id,
-    countMedia,
-    items(limit: 100) {
-        id,
-        hash,
-        url,
-        type
-    }
-}`;
 
 
 /**

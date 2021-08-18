@@ -1,6 +1,4 @@
 import t from 'api-helpers/toGqlParams';
-const fragments = {};
-
    
 
 /**
@@ -27,7 +25,7 @@ export function findAll(params) {
  * @param {Object} options
  * @returns {String} 
  */
-export function findById(params, options = {}) {   
+export function findById(params) {   
     
     return `
         {marketplace ${ t(params) } {

@@ -3,33 +3,21 @@ import t from 'api-helpers/toGqlParams';
 /** Свойства */
 const fragments = {};
 
-/**
- * Сфера с полной детализацией
- */
-fragments.sphere = `
-    id,
-    name,
-    description,
-    label,
-    mainImage,
-    countSpheres,
-    countCriteria,
-    countEntities,
-    countScores,
-    countSubscribers
-    countPresets
-    countPosts
-    icon,
-    sharingDescription,
-    subscribed,
-    popularCriteria{
-        name,
+fragments.gallery = (params) =>  `
+    gallery {
         id,
-        label
-    }`;
+        countMedia,
+        items ${ t(params) } {
+            id,
+            hash,
+            url,
+            type
+        }
+}`;
 
-fragments.childSpheres = `
-    childSpheres{
+
+fragments.childSpheres  = (params) =>  `
+    childSpheres ${ t(params) } {
         id
         name
         description
@@ -45,8 +33,8 @@ fragments.childSpheres = `
 /** 
  * Родитель сферы
  */
-fragments.parentSpheres = `
-    parentSpheres {
+fragments.parentSpheres = (params) =>  `
+    parentSpheres ${ t(params) } {
         id
         name
         label
@@ -57,30 +45,29 @@ fragments.parentSpheres = `
 /**
  * Свойства
  */
-fragments.properties = (params) => {
-    return `
-        properties ${ t(params) } {
+fragments.properties = (params) =>  `
+    properties ${ t(params) } {
+        id,
+        kind,
+        popular,
+        value,
+        label,
+        units,
+        itemsType,
+        items {
             id,
-            kind,
-            popular,
-            value,
-            label,
-            units,
-            itemsType,
-            items {
-                id,
-                label
-            }
-            associatedSphereID 
-        }`;
-} 
+            label
+        }
+        associatedSphereID 
+    }`;
+
 
 
 /**
  * Награды
  */
-fragments.medals = `
-    medals {
+fragments.medals = (params) => `
+    medals ${ t(params) } {
         place,
         value,
         locationType,
@@ -94,25 +81,23 @@ fragments.medals = `
 /**
  * Лучшие оценки
  */
-fragments.topAvgScores = (params) => {
-    return `
-        topAvgScores(limit: 3) {
-            avgValue, 
-            countScores,
-            criterion {
-                id,
-                name,
-                label
-            }
-        }`
-};
+fragments.topAvgScores = (params) => `
+    topAvgScores ${ t(params) } {
+        avgValue, 
+        countScores,
+        criterion {
+            id,
+            name,
+            label
+        }
+    }`;
 
 
 /**
  * Худшие оценки 
  */
-fragments.bottomAvgScores = `
-    bottomAvgScores(limit: 3) {
+fragments.bottomAvgScores = (params) => `
+    bottomAvgScores ${ t(params) } {
         avgValue, 
         countScores,
         criterion {
@@ -126,8 +111,8 @@ fragments.bottomAvgScores = `
 /**
  * Средние оценки 
  */
-fragments.avgScores = `
-    avgScores{
+fragments.avgScores = (params) => `
+    avgScores ${ t(params) } {
         avgValue, 
         countScores, 
         criterion {
@@ -141,8 +126,8 @@ fragments.avgScores = `
 /** 
  * Цены
  */
-fragments.prices = `
-    prices {
+fragments.prices = (params) => `
+    prices ${ t(params) }  {
         id, 
         value, 
         link,
@@ -156,37 +141,7 @@ fragments.prices = `
     }`;
 
 
-
-
-fragments.accociatedProperties = `
-    accociatedProperties {
-        label,
-        id,
-        sphere{
-            id,
-            name,
-            label,
-            description,
-            icon,
-            popularCriteria{
-               id
-               label
-            }
-        }
-    }`;
-
-
-
-fragments.user =  `
-    id
-    name
-    mainImage
-    relation
-    karma
-    createdAt
-`;
-
-fragments.userCounters = `
+fragments.userCounters = () => `
     countFriends
     countSpheres
     countPosts
@@ -195,17 +150,17 @@ fragments.userCounters = `
     countFollowing
     countReferrals
     countScores
-`
+`;
 
-fragments.roles = `
-    roles {
+fragments.roles = (params) => `
+    roles ${ t(params) } {
         id, 
         name
     },
 `;
 
-fragments.karmaDetails = `
-    karmaDetails {
+fragments.karmaDetails = (params) => `
+    karmaDetails ${ t(params) }  {
         countScores
         countSpheres
         items {
@@ -218,6 +173,27 @@ fragments.karmaDetails = `
             countScores
         }
     },
-`
+`;
 
-export default fragments;
+const renderFragments = (items) => {
+    if (!items) {
+        return '';
+    }
+
+    let keys = Object.keys(items);
+    let parts = [];
+
+    for (let key of keys) {
+        if (typeof fragments[key] === 'function') {
+            let part = fragments[key](items[key]);
+            parts.push(part);
+        }
+    }
+
+    return parts.join(' ');
+};
+
+export {
+    fragments,
+    renderFragments
+};

@@ -22,7 +22,7 @@ fragments.post = `
         karma
     }, 
     createdAt
-    `;
+`;
 
 
 /**

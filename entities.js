@@ -1,8 +1,18 @@
 import t from 'api-helpers/toGqlParams';
-import fragments from './_fragments';
+import { renderFragments } from './_fragments';
 import { escape } from 'helpers';
 import _ from 'lodash';
 
+
+const entityFields =  `
+    id
+    name
+    label
+    description
+    mainImage
+    avgScore
+    countScores
+`;
 
 /**
  * Поиск объектов по имени
@@ -32,19 +42,16 @@ export function search(params) {
  * @param {Object} options
  * @returns {String}
  */
-export function getRanking(params, options) {   
+export function getRanking(params, fragments) {   
     params.limit = params.limit || 10;
-    
-    if (!options) {
-        options = {
-            section: null
-        };
-    }
 
     return `
         {ranking ${ t(params) } {
             countEntities,
-            entities ${ getFragments(options.fragments) }
+            entities {
+                ${ entityFields } 
+                ${ renderFragments(fragments) }
+            }
         }
     }`;
 }
@@ -57,34 +64,13 @@ export function getRanking(params, options) {
  * @param {Object} options
  * @returns {String}
  */
-export function findAll(params) {   
+export function findAll(params, fragments) {   
     params.limit = params.limit || 10;
-    
-    // if (!options) {
-    //     options = {
-    //         section: null
-    //     };
-    // }
-
-    let sections = {
-        avgScore: {},
-        properties: {
-            limit: 1,
-            includes: 'cost'
-        }
-    }
-
-    let keys = Objects.keys(sections) 
-    let parts
-
-    for (let key of keys) {
-        let part = fragments[key](sections[key])
-        parts.push(part)
-    }
 
     return `
         {entities ${ t(params) } 
-            ${ getFragments(options.fragments) }
+            ${ entityFields } 
+            ${ renderFragments(fragments) }
         }`;
 }
 
@@ -116,16 +102,11 @@ export function addGallery(params) {
  * @param {Object} options
  * @returns {String}
  */
-export function findById(params, options = {}) {       
-    if ('filter' in params) {
-        if (Object.keys(params.filter).length > 0) {
-            params.filter = JSON.stringify(params.filter).replace(/"/g, '\'');  
-        }
-    }
-
+export function findById(params, fragments) {       
     return `
         {entity ${ t(params) } 
-            ${ getFragments(options.fragments, options) }
+            ${ entityFields } 
+            ${ renderFragments(fragments) }
         }`;
 }
 
@@ -138,7 +119,7 @@ export function findById(params, options = {}) {
 export function create(params) {
     return `
         mutation {createEntity ${ t(params) } 
-            ${ getFragments() }
+            ${ entityFields } 
         }`;
 }
 
@@ -150,12 +131,12 @@ export function create(params) {
  */
 export function update(params) {
     if ('description' in params) {
-        params.description = escape(params.description)
+        params.description = escape(params.description);
     }
 
     return `
         mutation {updateEntity ${ t(params) } 
-            ${ getFragments() }
+            ${ entityFields } 
         }`;
 }
 
@@ -172,43 +153,3 @@ export function setProperty(params) {
             }
         }`;
 }
-
-
-const getFragments = (chunk = [], options = {}) => {    
-    let galleryLimit = options.galleryLimit || 3;
-    
-    return `{
-        id,
-        name,
-        description,
-        gallery {
-            id,
-            countMedia,
-            items (limit: ${ galleryLimit }){
-                id,
-                hash,
-                type,
-                url,
-            }
-        }
-        mainImage,
-        label,
-        avgScore,
-        countScores,
-        video {
-            id,
-            hash,
-            type,
-            url,
-        },
-        lng,
-        lat,
-        myScores{
-            criterionID,
-            value
-        }
-        ${chunk.map(key => fragments[key]).join(',')}
-    }`;
-};
-
-

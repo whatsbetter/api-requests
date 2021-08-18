@@ -1,7 +1,15 @@
 import t from 'api-helpers/toGqlParams';
-import fragments from './_fragments';
+import { renderFragments } from './_fragments';
 import _ from 'lodash';
 
+const userFields =  `
+    id
+    name
+    mainImage
+    relation
+    karma
+    createdAt
+`;
 
 /**
  * Найти текущего пользователя по токену
@@ -9,14 +17,12 @@ import _ from 'lodash';
  * @param {Object} params
  * @returns {String} 
  */
-export function findById(params, options) {
-    let uf = 'fragments' in options ? options.fragments : []
-    uf.push("user")
-    uf = _.uniq(uf)
+export function findById(params, fragments ) {
 
     return `
         {user ${ t(params)}  {
-                ${ uf.map(key => fragments[key]).join(',') }
+                ${ userFields }
+                ${ renderFragments(fragments) }
             }
         }`;
 }
@@ -85,15 +91,14 @@ export function search(params) {
  * @param {Object} params
  * @returns {String} 
  */
-export function findMe() {
+export function findMe(fragments) {
     return `
-        {me {
-                ${ fragments.user }
-                ${ fragments.roles }
-                countScores
-            }
+        { me {
+            ${ userFields }
+            ${ renderFragments(fragments) }
+            countScores
         }
-    `;
+    }`;
 }
 
 /**
@@ -135,7 +140,7 @@ export function findFriends(params) {
 
     return `
         {friends ${ t(params) } {
-                ${ fragments.user }
+                ${ userFields }
             }
         }`;
 }
@@ -150,7 +155,7 @@ export function findFriends(params) {
 export function getPartners(params) {
     return `
         {get_partners_users ${ t(params) }  { 
-                ${ fragments.user }
+                ${ userFields }
             }
         }`;
 }
@@ -164,7 +169,7 @@ export function getPartners(params) {
 export function findFollowers(params) {
     return `
         {followers ${ t(params) }  {
-                ${ fragments.user }
+                ${ userFields }
             }
         }`;
 }
@@ -178,7 +183,7 @@ export function findFollowers(params) {
  export function findFollowing(params) {
     return `
         {following ${ t(params) }  {
-                ${ fragments.user }
+                ${ userFields }
             }
         }`;
 }
@@ -192,7 +197,7 @@ export function findFollowers(params) {
  export function findReferrals(params) {
     return `
         {referrals ${ t(params) }  {
-                ${ fragments.user }
+                ${ userFields }
             }
         }`;
 }
@@ -219,9 +224,10 @@ export function addSubscriber(params) {
  * @returns {String} 
  */
 export function removeSubscriber(params) {
-     return `
+    return `
         mutation {removeSubscriber ${ t(params) } {
-            id, name
+            id, 
+            name
         }
     }`;
 }
@@ -233,9 +239,10 @@ export function removeSubscriber(params) {
  * @returns {String} 
  */
 export function addFriend(params) {
-     return `
+    return `
         mutation {addFriend ${ t(params) } {
-            id, name
+            id, 
+            name
         }
     }`;
 }
@@ -246,7 +253,7 @@ export function addFriend(params) {
  * @param {Object} params
  * @returns {String} 
  */
- export function confirmFriend(params) {
+export function confirmFriend(params) {
     return `
        mutation {confirmFriend ${ t(params) } {
            id, 
@@ -320,8 +327,7 @@ export function getSimilarity(params) {
             userID,
             value
         }
-    `
-
+    `;
 
     return `{
         similarity ${ t(params) } { 
@@ -344,5 +350,3 @@ export function getSimilarity(params) {
         }
    }`;
 }
-
-

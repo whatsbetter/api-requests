@@ -1,6 +1,30 @@
 import t from 'api-helpers/toGqlParams';
-import fragments from './_fragments';
+import { renderFragments } from './_fragments';
 
+/**
+ * Сфера с полной детализацией
+ */
+const sphereFields = `
+    id,
+    name,
+    description,
+    label,
+    mainImage,
+    countSpheres,
+    countCriteria,
+    countEntities,
+    countScores,
+    countSubscribers
+    countPresets
+    countPosts
+    icon,
+    sharingDescription,
+    subscribed,
+    popularCriteria{
+        name,
+        id,
+        label
+    }`;
 
 /**
  * Поиск сфер по имени
@@ -34,13 +58,10 @@ export function search(params) {
  * @param {Object} options
  * @returns {String}
  */
-export function findAll(params, options={}) {
+export function findAll(params, fragments) {
     params.limit = params.limit || 20;
     params.hide = false;
     
-    if (!('parentSphereID' in params) && !('type' in params)) {
-        params.orderBy = 'popular';
-    }
 
     return `
         {spheres ${ t(params) } {
@@ -54,7 +75,7 @@ export function findAll(params, options={}) {
             countSpheres
             countEntities
             subscribed
-            ${'fragments' in options ? options.fragments.map(key => fragments[key]).join(',') : ''} 
+            ${ renderFragments(fragments) }
         }
     }`;
 }
@@ -66,7 +87,7 @@ export function findAll(params, options={}) {
  * @param {Object} options
  * @returns {String}
  */
- export function findRoot(params) {
+export function findRoot(params) {
     params.limit = params.limit || 20;
 
     return `
@@ -89,11 +110,11 @@ export function findAll(params, options={}) {
  * @param {Object} options
  * @returns {String}
  */
-export function findById(params, options = {}) {
+export function findById(params, fragments) {
     return `
         {sphere(id: "${params.id}"){
-            ${fragments.sphere}
-            ${'fragments' in options ? options.fragments.map(key => fragments[key]).join(',') : ''}      
+            ${ sphereFields }
+            ${ renderFragments(fragments) }
         }
     }`;
 }
@@ -108,7 +129,7 @@ export function findById(params, options = {}) {
 export function create(params) {
     return `
         mutation { createSphere ${ t(params) } {
-           ${fragments.sphere}
+            ${ sphereFields }
         }
     }`;
 }
@@ -122,7 +143,7 @@ export function create(params) {
 export function update(params) {
     return `
         mutation { updateSphere ${ t(params) } {
-           ${fragments.sphere}
+            ${ sphereFields }
         }
     }`;
 }

@@ -23,10 +23,8 @@ const scores = require('./scores');
 const spheres = require('./spheres');
 const search = require('./search');
 const users = require('./users');
-const job = require('./job');
 const marketplaces = require('./marketplaces');
 const media = require('./media');
-const trainings = require('./trainings');
 
 
 const wrap = toGqlRequest.bind(null, config.apiServer, headers);
@@ -51,8 +49,6 @@ module.exports = {
     search: wrap(search, 'search'),
     spheres: wrap(spheres, 'spheres'),
     users: wrap(users, 'users'),
-    job: wrap(job, 'job'),
-    trainings: wrap(trainings, 'trainings'),
     request: (str) => request({url: config.apiServer, query: str, caller: 'request', headers}),
     requestGroup: (str) => request({url: config.apiServer, query: requestGroup(str), isGroup: true, caller: 'request', headers}),
     setHeader,
