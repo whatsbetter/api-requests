@@ -59,6 +59,28 @@ export function findAll(params, options={}) {
     }`;
 }
 
+/**
+ * Получение всех сфер
+ * 
+ * @param {Object} params
+ * @param {Object} options
+ * @returns {String}
+ */
+ export function findRoot(params) {
+    params.limit = params.limit || 20;
+
+    return `
+        {rootSpheres ${ t(params) } {
+            name
+            id
+            label
+            mainImage
+            countSpheres
+            countEntities
+        }
+    }`;
+}
+
 
 /**
  * Получение сферы по идентификатору

@@ -1,3 +1,5 @@
+import t from 'api-helpers/toGqlParams';
+
 /** Свойства */
 const fragments = {};
 
@@ -55,21 +57,23 @@ fragments.parentSpheres = `
 /**
  * Свойства
  */
-fragments.properties = `
-    properties {
-        id,
-        kind,
-        popular,
-        value,
-        label,
-        units,
-        itemsType,
-        items {
-          id,
-          label
-        }
-        associatedSphereID 
-    }`;
+fragments.properties = (params) => {
+    return `
+        properties ${ t(params) } {
+            id,
+            kind,
+            popular,
+            value,
+            label,
+            units,
+            itemsType,
+            items {
+                id,
+                label
+            }
+            associatedSphereID 
+        }`;
+} 
 
 
 /**
@@ -90,16 +94,18 @@ fragments.medals = `
 /**
  * Лучшие оценки
  */
-fragments.topAvgScores = `
-    topAvgScores(limit: 3) {
-        avgValue, 
-        countScores,
-        criterion {
-            id,
-            name,
-            label
-        }
-    }`;
+fragments.topAvgScores = (params) => {
+    return `
+        topAvgScores(limit: 3) {
+            avgValue, 
+            countScores,
+            criterion {
+                id,
+                name,
+                label
+            }
+        }`
+};
 
 
 /**

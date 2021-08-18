@@ -1,6 +1,7 @@
 import t from 'api-helpers/toGqlParams';
 import fragments from './_fragments';
 import { escape } from 'helpers';
+import _ from 'lodash';
 
 
 /**
@@ -56,13 +57,29 @@ export function getRanking(params, options) {
  * @param {Object} options
  * @returns {String}
  */
-export function findAll(params, options) {   
+export function findAll(params) {   
     params.limit = params.limit || 10;
     
-    if (!options) {
-        options = {
-            section: null
-        };
+    // if (!options) {
+    //     options = {
+    //         section: null
+    //     };
+    // }
+
+    let sections = {
+        avgScore: {},
+        properties: {
+            limit: 1,
+            includes: 'cost'
+        }
+    }
+
+    let keys = Objects.keys(sections) 
+    let parts
+
+    for (let key of keys) {
+        let part = fragments[key](sections[key])
+        parts.push(part)
     }
 
     return `
