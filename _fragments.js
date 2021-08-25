@@ -52,6 +52,7 @@ fragments.properties = (params) =>  `
         popular,
         value,
         label,
+        name,
         units,
         itemsType,
         items {

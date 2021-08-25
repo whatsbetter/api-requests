@@ -104,10 +104,11 @@ export function addGallery(params) {
  */
 export function findById(params, fragments) {       
     return `
-        {entity ${ t(params) } 
+        {entity ${ t(params) } {
             ${ entityFields } 
             ${ renderFragments(fragments) }
-        }`;
+        }
+    }`;
 }
 
 /**
