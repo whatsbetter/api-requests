@@ -49,7 +49,7 @@ module.exports = {
     search: wrap(search, 'search'),
     spheres: wrap(spheres, 'spheres'),
     users: wrap(users, 'users'),
-    request: (str) => request({url: config.apiServer, query: str, caller: 'request', headers}),
+    request: (str, variables) => request({url: config.apiServer, query: str, caller: 'request', headers, variables: variables}),
     requestGroup: (str) => request({url: config.apiServer, query: requestGroup(str), isGroup: true, caller: 'request', headers}),
     setHeader,
     getHeader,
