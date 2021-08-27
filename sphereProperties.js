@@ -2,15 +2,17 @@ import t from 'api-helpers/toGqlParams';
 const fragments = {};
 
 fragments.sphereProperty = `
-    id,
-    label,
-    kind,
+    id
+    label
+    kind
     associatedSphereID
     itemsType
-    units,
+    units
+    min
+    max
     items {
         id,
-        label,
+        label
         name
     }`;
 
