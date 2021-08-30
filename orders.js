@@ -13,6 +13,7 @@ export function findAll(params) {
             id
             amount
             status
+            statusLabel
             deliveryAddress
             paymentURL
             failURL
