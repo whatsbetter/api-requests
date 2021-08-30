@@ -15,6 +15,7 @@ const feed = require('./feed');
 const gallery = require('./gallery');
 const messages = require('./messages');
 const notifications = require('./notifications');
+const orders = require('./orders');
 const posts = require('./posts');
 const presets = require('./presets');
 const filters = require('./filters');
@@ -41,6 +42,7 @@ module.exports = {
     media: wrap(media, 'media'),
     messages: wrap(messages, 'messages'),
     notifications: wrap(notifications, 'notifications'),
+    orders: wrap(orders, 'orders'),
     posts: wrap(posts, 'posts'),
     presets: wrap(presets, 'presets'),
     filters: wrap(filters, 'filters'),
