@@ -54,7 +54,8 @@ fragments.properties = (params) =>  `
         label,
         name,
         units,
-        itemsType,
+        hideOnEntity
+        itemsType
         items {
             id,
             label
