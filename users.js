@@ -97,6 +97,8 @@ export function findMe(fragments) {
             ${ userFields }
             ${ renderFragments(fragments) }
             countScores
+            phone
+            email
         }
     }`;
 }
