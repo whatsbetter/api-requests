@@ -1,4 +1,7 @@
 import t from 'api-helpers/toGqlParams';
+import { renderFragments } from './_fragments';
+
+
 
 
 /**
@@ -31,14 +34,14 @@ export function search(params) {
 export function findById(params) {
     return `
         {criterion ${ t(params) } {
-            id,
-            name,
-            label,
-            description,
-            hide,
+            id
+            name
+            label
+            description
+            hide
             criterionGroups {
-                id,
-                name,
+                id
+                name
                 label
             }
         }
@@ -57,13 +60,14 @@ export function findAll(params) {
     
     return `
         {criteria ${ t(params) } {
-            id,
-            name,
-            label,
-            description,
+            id
+            name
+            label
+            description
+            countScores
             criterionGroups {
-                id,
-                name,
+                id
+                name
                 label
             }
         }
@@ -77,12 +81,14 @@ export function findAll(params) {
  * @param {Object} params
  * @returns {String} 
  */
-export function findGroups (params) {
+export function findGroups (params, fragments) {
     return `
         {criteriaGroups ${ t(params) } {
-            id,
-            name,
+            id
+            name
             label
+            countCriteria
+            ${ renderFragments(fragments) }
         }
     }`;
 }
@@ -97,12 +103,13 @@ export function findGroups (params) {
 export function findFromGroups(params) {
     return `
         {criteriaGroup ${ t(params) } {
-            id,
-            name,
-            label,
-            criteria{
-                id,
-                name,
+            id
+            name
+            label
+            countCriteria
+            criteria {
+                id
+                name
                 label
             } 
         }

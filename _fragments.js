@@ -177,6 +177,14 @@ fragments.karmaDetails = (params) => `
     },
 `;
 
+fragments.criteria  = (params) =>  `
+    criteria ${ t(params) } {
+        id
+        name
+        label
+        countScores
+    }`;
+
 const renderFragments = (items) => {
     if (!items) {
         return '';
