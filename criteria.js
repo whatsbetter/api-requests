@@ -158,6 +158,7 @@ export function getUsersCriteria(params) {
             id
             name
             label
+            countScores
         }
     }`;
 }
