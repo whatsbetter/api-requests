@@ -18,6 +18,7 @@ const notifications = require('./notifications');
 const orders = require('./orders');
 const posts = require('./posts');
 const presets = require('./presets');
+const properties = require('./properties');
 const filters = require('./filters');
 const sphereProperties = require('./sphereProperties');
 const scores = require('./scores');
@@ -46,6 +47,7 @@ module.exports = {
     orders: wrap(orders, 'orders'),
     posts: wrap(posts, 'posts'),
     presets: wrap(presets, 'presets'),
+    properties: wrap(properties, 'properties'),
     filters: wrap(filters, 'filters'),
     sphereProperties: wrap(sphereProperties, 'sphereProperties'),
     scores: wrap(scores, 'scores'),

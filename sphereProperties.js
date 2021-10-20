@@ -3,6 +3,7 @@ const fragments = {};
 
 fragments.sphereProperty = `
     id
+    propertyID
     label
     kind
     associatedSphereID
@@ -11,7 +12,7 @@ fragments.sphereProperty = `
     min
     max
     items {
-        id,
+        id
         label
         name
     }`;
