@@ -1,21 +1,5 @@
 import t from 'api-helpers/toGqlParams';
-const fragments = {};
-
-fragments.sphereProperty = `
-    id
-    propertyID
-    label
-    kind
-    associatedSphereID
-    itemsType
-    units
-    min
-    max
-    items {
-        id
-        label
-        name
-    }`;
+import { renderFragments } from './_fragments';
 
 /**
  * Получение свойств сферы
@@ -23,12 +7,21 @@ fragments.sphereProperty = `
  * @param {Object} params
  * @returns {String}
  */
-export function get(params) {
+export function findAll(params, fragments) {
     params.limit = 100;
 
     return `
         {sphereProperties ${ t(params) } {
-            ${ fragments.sphereProperty }
+            id
+            propertyID
+            label
+            kind
+            associatedSphereID
+            itemsType
+            units
+            min
+            max
+            ${ renderFragments(fragments) }
         }
     }`;
 }
@@ -42,9 +35,9 @@ export function get(params) {
 export function getGroups(params) {
     return `
         {propertiesGroups ${ t(params) } {
-            name,
-            label,
             id
+            name
+            label
         }
     }`;
 }
@@ -58,7 +51,10 @@ export function getGroups(params) {
 export function create(params) {
     return `
         mutation {createProperty ${ t(params) } {
-             ${ fragments.property }
+            id
+            name
+            kind
+            label
         }
     }`;
 }
@@ -72,7 +68,10 @@ export function create(params) {
 export function update(params) {
     return `
         mutation {updateProperty ${ t(params) } {
-             ${ fragments.property }
+            id
+            name
+            kind
+            label
         }
     }`;
 }

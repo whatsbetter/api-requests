@@ -185,6 +185,14 @@ fragments.criteria  = (params) =>  `
         countScores
     }`;
 
+fragments.propertyItems  = (params) =>  `
+    items ${ t(params) } {
+        id
+        label
+        name
+    }`;
+
+
 const renderFragments = (items) => {
     if (!items) {
         return '';
