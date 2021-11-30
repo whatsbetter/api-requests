@@ -68,10 +68,11 @@ export function findAll(params, fragments) {
     params.limit = params.limit || 10;
 
     return `
-        {entities ${ t(params) } 
+        {entities ${ t(params) }  {
             ${ entityFields } 
             ${ renderFragments(fragments) }
-        }`;
+        }
+    }`;
 }
 
 /**

@@ -1,8 +1,16 @@
 import t from 'api-helpers/toGqlParams';
-import fragments from './_fragments';
 
+let fragments = {};
 
-
+fragments.gallery = (params) =>  `
+    id
+    countMedia
+    items ${ t(params) } {
+        id
+        hash
+        url
+        type
+    }`;
 
 /**
  * Получить галлерею
@@ -10,11 +18,12 @@ import fragments from './_fragments';
  * @param {Object} params
  * @returns {String}
  */
-export function get(params) {   
+export function get(params, limit = 10) {   
     return `
-        {gallery ${ t(params) } 
-            ${ fragments.gallery }
-        }`;
+        {gallery ${ t(params) } {
+            ${ fragments.gallery({limit}) }
+        }
+    }`;
 }
 
 /**
@@ -23,10 +32,10 @@ export function get(params) {
  * @param {Object} params
  * @returns {String}
  */
-export function create(params) {   
+export function create(params, ) {   
     return `
         mutation {createGallery ${ t(params) } 
-            ${ fragments.gallery }
+            ${ fragments.gallery({}) }
         }`;
 }
 
@@ -39,7 +48,7 @@ export function create(params) {
 export function update(params) {
     return `
         mutation {updateGallery ${ t(params) } 
-            ${ fragments.gallery }
+            ${ fragments.gallery({}) }
         }`;
 }
 
@@ -52,8 +61,9 @@ export function update(params) {
 export function addMedia(params) {
     return `
         mutation {addMediaToGallery ${ t(params) } 
-            ${ fragments.gallery }
-        }`;
+            result
+        }   
+    }`;
 }
 
 /**
@@ -68,6 +78,7 @@ export function removeMedia(params) {
     }
     return `
         mutation {removeMediaFromGallery ${ t(params) } 
-            ${ fragments.gallery }
-        }`;
+            result
+        }
+    }`;
 }

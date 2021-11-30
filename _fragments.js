@@ -5,8 +5,8 @@ const fragments = {};
 
 fragments.gallery = (params) =>  `
     gallery {
-        id,
-        countMedia,
+        id
+        countMedia
         items ${ t(params) } {
             id,
             hash,
