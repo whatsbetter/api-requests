@@ -10,17 +10,18 @@ const sphereFields = `
     description,
     label,
     mainImage,
-    countSpheres,
-    countCriteria,
-    countEntities,
-    countScores,
+    countSpheres
+    countCriteria
+    countProperties
+    countEntities
+    countScores
     countSubscribers
     countPresets
     countPosts
     icon,
     sharingDescription,
-    subscribed,
-    popularCriteria{
+    subscribed
+    popularCriteria {
         name,
         id,
         label

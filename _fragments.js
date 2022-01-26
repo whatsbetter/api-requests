@@ -41,6 +41,15 @@ fragments.parentSpheres = (params) =>  `
     }`;
 
 
+/** 
+ * Родитель сферы
+ */
+fragments.path = (params) =>  ` 
+    path ${ t(params) } {
+        id
+        label
+    }`;
+
 
 /**
  * Свойства
