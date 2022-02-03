@@ -107,7 +107,7 @@ export function findFromGroups(params) {
             name
             label
             countCriteria
-            criteria {
+            criteria (limit: 50) {
                 id
                 name
                 label
