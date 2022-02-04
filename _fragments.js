@@ -201,6 +201,13 @@ fragments.propertyItems  = (params) =>  `
         name
     }`;
 
+fragments.criterionGroups  = () =>  `
+    criterionGroups  {
+        id
+        name
+        label
+    }`;
+
 
 const renderFragments = (items) => {
     if (!items) {

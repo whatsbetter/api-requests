@@ -55,7 +55,7 @@ export function findById(params) {
  * @param {Object} params
  * @returns {String} 
  */
-export function findAll(params) {
+export function findAll(params, fragments) {
     params.hide = false;
     
     return `
@@ -65,11 +65,7 @@ export function findAll(params) {
             label
             description
             countScores
-            criterionGroups {
-                id
-                name
-                label
-            }
+            ${ renderFragments(fragments) }
         }
     }`;
 }
