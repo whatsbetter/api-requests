@@ -2,17 +2,18 @@ import t from 'api-helpers/toGqlParams';
 const fragments = {};
 
 fragments.preset = `
-    id,
-    name, 
-    label, 
-    description, 
-    mainImage, 
+    id
+    name
+    label
+    description 
+    mainImage
+    withGivenEntities
     criteria {
-        id,
+        id
         label
     }, 
     users {
-        id,
+        id
         name
         mainImage
     }, 
@@ -20,23 +21,23 @@ fragments.preset = `
         id
         label
         value
-        op,
+        op
         items {
-          id
-          label
+            id
+            label
         }
     }
     sphere {
-        label, 
-        name, 
+        label
+        name 
         id
     }, 
     author {
-        id,
-        name, 
-        mainImage,
+        id
+        name 
+        mainImage
         karma
-    }, 
+    }
     createdAt
 `;
 
@@ -122,7 +123,7 @@ export function update(params) {
 
 
 /**
- * Добавить критери к посту
+ * Добавить критерии к пресету
  * 
  * @param {Object} params
  * @returns {String}
@@ -130,13 +131,13 @@ export function update(params) {
 export function addCriteria(params) { 
     return `
         mutation {addCriteriaToPreset ${ t(params) } {
-            id, 
+            id
         }
     }`;
 }
 
 /**
- * Удалить критерии к посту
+ * Удалить критерии из поста
  * 
  * @param {Object} params
  * @returns {String}
@@ -144,13 +145,41 @@ export function addCriteria(params) {
 export function removeCriteria(params) { 
     return `
         mutation {removeCriteriaFromPreset ${ t(params) } {
-            id, 
+            id
         }
     }`;
 }
 
 /**
- * Удалить пользователей к посту
+ * Добавить критерии к пресету
+ * 
+ * @param {Object} params
+ * @returns {String}
+ */
+export function addEntities(params) { 
+    return `
+        mutation {addEntitiesToPreset ${ t(params) } {
+            id
+        }
+    }`;
+}
+
+/**
+ * Удалить критерии из поста
+ * 
+ * @param {Object} params
+ * @returns {String}
+ */
+export function removeEntities(params) { 
+    return `
+        mutation {removeEntitiesFromPreset ${ t(params) } {
+            id
+        }
+    }`;
+}
+
+/**
+ * Удалить пользователей из поста
  * 
  * @param {Object} params
  * @returns {String}
