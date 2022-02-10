@@ -96,18 +96,14 @@ export function findGroups (params, fragments) {
  * @param {Object} params
  * @returns {String} 
  */
-export function findFromGroups(params) {
+export function findFromGroups(params, fragments) {
     return `
         {criteriaGroup ${ t(params) } {
             id
             name
             label
             countCriteria
-            criteria (limit: 50) {
-                id
-                name
-                label
-            } 
+            ${ renderFragments(fragments) }
         }
     }`;
 }
