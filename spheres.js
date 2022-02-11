@@ -202,13 +202,14 @@ export function findLinkedSpheres(params) {
  export function findSubscriptionSpheres(params) {
     return `
         {subscriptionSpheres ${ t(params) } {
-            id,
-            name,
-            description,
-            label,
-            mainImage,
-            countCriteria,
-            countEntities,
+            id
+            name
+            description
+            label
+            mainImage
+            countCriteria
+            countSpheres
+            countEntities
             countScores
         }
     }`;
