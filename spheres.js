@@ -162,14 +162,14 @@ export function findLinkedSpheres(params) {
         linkedSpheres ${ t(params) } {
             id
             childSphere {
-                id,
-                icon,
-                name,
-                label,
-                mainImage,
-                countCriteria,
-                countEntities,
-                countScores,
+                id
+                icon
+                name
+                label
+                mainImage
+                countCriteria
+                countEntities
+                countScores
             }
         }
     }`;
@@ -181,14 +181,14 @@ export function findLinkedSpheres(params) {
  * @param {Object} params
  * @returns {String}
  */
- export function findRatedSpheres(params) {
+export function findRatedSpheres(params) {
     return `{
         ratedSpheres ${ t(params) } {
             id
-            name,
-            label,
-            mainImage,
-            countScores,
+            name
+            label
+            mainImage
+            countScores
         }
     }`;
 }
@@ -199,7 +199,7 @@ export function findLinkedSpheres(params) {
  * @param {Object} params
  * @returns {String} 
  */
- export function findSubscriptionSpheres(params) {
+export function findSubscriptionSpheres(params) {
     return `
         {subscriptionSpheres ${ t(params) } {
             id
