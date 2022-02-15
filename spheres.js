@@ -199,9 +199,9 @@ export function findRatedSpheres(params) {
  * @param {Object} params
  * @returns {String} 
  */
-export function findSubscriptionSpheres(params) {
+export function findMySpheres(params) {
     return `
-        {subscriptionSpheres ${ t(params) } {
+        {mySpheres ${ t(params) } {
             id
             name
             description
