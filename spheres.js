@@ -37,15 +37,16 @@ export function search(params) {
 
     return `
         {search ${ t(params) } {
-            count,
+            count
             spheres {
-                id,
-                name,
-                label,
-                countEntities,
-                countCriteria,
-                countScores,
-                mainImage,
+                id
+                name
+                label
+                countEntities
+                countCriteria
+                countSpheres
+                countScores
+                mainImage
             }
         }
     }`;
