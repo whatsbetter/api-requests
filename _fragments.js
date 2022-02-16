@@ -27,7 +27,6 @@ fragments.childSpheres  = (params) =>  `
         countEntities
         countSpheres
         countScores
-        icon
     }`;
 
 /** 

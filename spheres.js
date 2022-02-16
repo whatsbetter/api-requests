@@ -5,11 +5,11 @@ import { renderFragments } from './_fragments';
  * Сфера с полной детализацией
  */
 const sphereFields = `
-    id,
-    name,
-    description,
-    label,
-    mainImage,
+    id
+    name
+    description
+    label
+    mainImage
     countSpheres
     countCriteria
     countProperties
@@ -18,12 +18,11 @@ const sphereFields = `
     countSubscribers
     countPresets
     countPosts
-    icon,
-    sharingDescription,
+    sharingDescription
     subscribed
     popularCriteria {
-        name,
-        id,
+        name
+        id
         label
     }`;
 
@@ -68,7 +67,6 @@ export function findAll(params, fragments) {
         {spheres ${ t(params) } {
             name
             id
-            icon
             label
             mainImage
             countScores
@@ -163,7 +161,6 @@ export function findLinkedSpheres(params) {
             id
             childSphere {
                 id
-                icon
                 name
                 label
                 mainImage
@@ -211,6 +208,7 @@ export function findMySpheres(params) {
             countSpheres
             countEntities
             countScores
+            subscribed
         }
     }`;
 }
