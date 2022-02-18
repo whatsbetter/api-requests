@@ -74,6 +74,7 @@ export function findAll(params, fragments) {
             countCriteria
             countSpheres
             countEntities
+            countSubscribers
             subscribed
             ${ renderFragments(fragments) }
         }
